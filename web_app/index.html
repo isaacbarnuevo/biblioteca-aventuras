@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Biblioteca Fantástica de Aventuras - Libros-Juego Interactivos</title>
+  <link rel="icon" type="image/x-icon" href="Biblioteca_Fantastica.ico">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ====================================================================
+       VISTA 1: LA BIBLIOTECA FANTÁSTICA (PANTALLA DE ENTRADA CON 5 LIBROS)
+       ==================================================================== -->
+  <section id="library-view" class="library-screen">
+    <div class="library-container">
+      <header class="library-header">
+        <div class="library-banner">
+          <span class="banner-icon">✨🏛️✨</span>
+          <h1 class="library-title">BIBLIOTECA FANTÁSTICA DE AVENTURAS</h1>
+          <p class="library-subtitle">Elige tu libro-juego, resuelve los enigmas ilustrados y decide tu propio destino</p>
+        </div>
+      </header>
+
+      <main class="library-shelf-container">
+        <div id="books-grid" class="library-books-grid">
+          <!-- Renderizado dinámico desde app.js con los 5 libros -->
+        </div>
+      </main>
+
+      <footer class="library-footer">
+        <p>💡 <em>Para los pequeños aventureros:</em> Cada libro cuenta con sus propias ilustraciones exclusivas, enigmas visuales, pruebas interactivas y compañeros de viaje.</p>
+      </footer>
+    </div>
+  </section>
+
+  <!-- ====================================================================
+       VISTA 2: EL LECTOR DE LIBRO ABIERTO (ESCENARIO INTERACTIVO)
+       ==================================================================== -->
+  <section id="reader-view" class="reader-screen" style="display: none;">
+    
+    <!-- Barra Superior de Control y Estado -->
+    <header class="app-header">
+      <div class="title-section">
+        <button id="btn-back-to-library" class="tool-btn" onclick="if(window.gameEngine) window.gameEngine.showLibraryView();" style="background:#4a2311; border-color:var(--accent-gold); font-weight:700;" title="Volver a la selección de libros">
+          🏛️ Biblioteca (5 Libros)
+        </button>
+        <div>
+          <h1 id="book-header-title">🏰 EL CASTILLO DE LOS HORRORES</h1>
+          <div id="spread-title" class="spread-title">Cargando aventura...</div>
+        </div>
+      </div>
+
+      <!-- Estadísticas de Aventura: Compañero, Amigos, Llaves y Anillo -->
+      <div class="stats-bar">
+        <div class="stat-item" title="Compañero de aventura">
+          <span id="companion-icon-label">🐕 Compañero:</span>
+          <strong id="companion-name" style="color:#f7ecd7;">Rufo</strong>
+        </div>
+        <div class="stat-item" title="Amigos Liberados de las mazmorras u Objetivos">
+          <span id="friends-label">👥 Amigos:</span>
+          <strong id="friends-count">0 / 5</strong>
+        </div>
+        <div class="stat-item" id="stat-keys-box" title="Llaves encontradas para los candados">
+          <span id="keys-label">🗝️ Llaves:</span>
+          <strong id="keys-count">0 / 5</strong>
+        </div>
+        <button id="btn-ring" class="btn-wish" title="Anillo Mágico de Salvación: te salva de un final fatal (1 solo uso)">
+          💍 Anillo Mágico (1)
+        </button>
+      </div>
+
+      <!-- Herramientas y Navegación -->
+      <div class="controls-bar">
+        <button id="btn-map" class="tool-btn" title="Ver camino recorrido">
+          🗺️ Diario / Mapa
+        </button>
+        <button id="btn-audio" class="tool-btn" title="Activar / Desactivar efectos">
+          🔊 Sonido
+        </button>
+        <button id="btn-restart" class="tool-btn" title="Reiniciar desde la portada">
+          🔄 Reiniciar
+        </button>
+      </div>
+    </header>
+
+    <!-- Pestañas para Pantallas Pequeñas / Móviles -->
+    <div class="mobile-spread-nav">
+      <button class="mobile-nav-btn active" data-tab="both">📖 Pliego Completo</button>
+      <button class="mobile-nav-btn" data-tab="left">📄 Pág. Izquierda</button>
+      <button class="mobile-nav-btn" data-tab="right">📄 Pág. Derecha</button>
+    </div>
+
+    <!-- Escenario Principal del Libro Abierto -->
+    <main class="book-stage">
+      <div class="book-wrapper">
+        <div id="book-spread" class="book-spread">
+          
+          <!-- Sombra del pliegue central del libro -->
+          <div class="book-spine-crease"></div>
+
+          <!-- Visor Panorámico de la Ilustración Doble -->
+          <div id="spread-viewport" class="spread-viewport" title="¡Haz clic en la imagen para explorar!">
+            <div id="spread-image-container" class="spread-image-container">
+              <img id="spread-image" class="spread-image" src="" alt="Ilustración de la escena">
+              <canvas id="maze-canvas" class="maze-canvas"></canvas>
+              <div id="hotspots-overlay"></div>
+            </div>
+            <!-- Toast informativo del compañero -->
+            <div id="rufo-toast" class="rufo-toast">
+              <span class="toast-icon">🐕</span>
+              <span id="rufo-toast-text" class="toast-text">Explorando con atención...</span>
+            </div>
+          </div>
+
+          <!-- Narrativa y Decisiones (Diseño de Doble Página) -->
+          <div class="spread-narrative">
+            <!-- Página Izquierda (Historia, contexto y pistas) -->
+            <article id="narrative-left" class="narrative-page page-left">
+              <!-- Rellenado dinámicamente -->
+            </article>
+
+            <!-- Página Derecha (Resolución y bifurcaciones de página) -->
+            <article class="narrative-page page-right">
+              <div id="narrative-right">
+                <!-- Rellenado dinámicamente -->
+              </div>
+              
+              <!-- Botones de Salto de Página -->
+              <div id="choices-container" class="choices-container">
+                <!-- Rellenado dinámicamente -->
+              </div>
+            </article>
+          </div>
+
+        </div>
+      </div>
+    </main>
+
+  </section>
+
+  <!-- Modal de Diario y Mapa de Decisiones -->
+  <div id="modal-map" class="modal-overlay">
+    <div class="modal-card">
+      <button id="btn-close-map" class="modal-close-btn">&times;</button>
+      <h2>🗺️ Diario de la Incursión</h2>
+      <p>Aquí tienes el registro de las salas que has explorado. Puedes rebobinar a cualquier sala previa si deseas probar un camino diferente:</p>
+      <ul id="history-list" class="history-list"></ul>
+    </div>
+  </div>
+
+  <!-- Carga de Scripts en Orden Universal -->
+  <script src="sound.js"></script>
+  <script src="story.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
