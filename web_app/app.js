@@ -270,6 +270,18 @@ class GameEngine {
       this.setupMonsterDice();
       return;
     }
+
+    // 10. RETO GENÉRICO DE DADOS (COMBATES Y PRUEBAS)
+    if (scene.isDiceChallenge) {
+      this.setupGenericDiceChallenge(scene);
+      return;
+    }
+
+    // 11. SUELO DE PINCHOS INVISIBLES
+    if (scene.isSpikesGrid) {
+      this.setupSpikesGrid(scene);
+      return;
+    }
   }
 
   // ===========================================================================
@@ -308,6 +320,12 @@ class GameEngine {
     }
     if (scene.id === 'scene_monster') {
       return this.monsterDefeated === true;
+    }
+    if (scene.isDiceChallenge) {
+      return (this.solvedDiceChallenges && this.solvedDiceChallenges[scene.id]) === true;
+    }
+    if (scene.isSpikesGrid) {
+      return (this.solvedSpikesGrids && this.solvedSpikesGrids[scene.id]) === true;
     }
     return true;
   }
@@ -1239,6 +1257,192 @@ class GameEngine {
   }
 
   // ===========================================================================
+  // 8B. SISTEMA UNIVERSAL DE RETO CON DADOS (COMBATES Y PRUEBAS)
+  // ===========================================================================
+  setupGenericDiceChallenge(scene) {
+    const diceBox = document.getElementById('generic-dice-box');
+    if (!diceBox) return;
+
+    const challenge = scene.diceChallenge || {
+      target: 7,
+      name: "Prueba de Valor",
+      buttonText: "🎲 ¡TIRAR LOS DADOS!",
+      successTitle: "¡Prueba superada con éxito!",
+      failureTitle: "¡Tirada insuficiente!"
+    };
+
+    const isAlreadySolved = (this.solvedDiceChallenges && this.solvedDiceChallenges[scene.id]) === true;
+
+    diceBox.innerHTML = `
+      <div style="background: rgba(35, 27, 20, 0.9); border: 2px solid var(--accent-gold); border-radius: 8px; padding: 16px; margin: 15px 0; text-align: center;">
+        <h4 style="color: var(--accent-gold); font-family: 'Cinzel', serif; margin-bottom: 8px;">⚔️ ${challenge.name}</h4>
+        <p style="font-size: 0.95rem; margin-bottom: 12px; color: #ecd8be;">Necesitas obtener una tirada de <strong>${challenge.target} o más</strong> con dos dados para avanzar.</p>
+        <div style="display: flex; justify-content: center; gap: 20px; font-size: 3.5rem; margin: 12px 0;">
+          <div id="gen-die-1" class="dice-face" style="display:inline-block; transition: transform 0.5s;">⚀</div>
+          <div id="gen-die-2" class="dice-face" style="display:inline-block; transition: transform 0.5s;">⚀</div>
+        </div>
+        <div id="gen-dice-result" style="min-height: 28px; font-weight: 700; margin: 10px 0; color: #f5eedc;">
+          ${isAlreadySolved ? `✅ ¡Desafío superado con éxito!` : `Esperando tu tirada...`}
+        </div>
+        <button id="btn-gen-roll" class="choice-btn" style="width: 100%; justify-content: center; background: #8f5028; border-color: var(--accent-gold); color: #fff; font-size: 1.05rem;" ${isAlreadySolved ? 'disabled' : ''}>
+          ${isAlreadySolved ? '✅ ¡DESAFÍO COMPLETADO!' : challenge.buttonText}
+        </button>
+        <div id="gen-failure-actions"></div>
+      </div>
+    `;
+
+    const btnRoll = document.getElementById('btn-gen-roll');
+    const die1 = document.getElementById('gen-die-1');
+    const die2 = document.getElementById('gen-die-2');
+    const resultEl = document.getElementById('gen-dice-result');
+    const failureBox = document.getElementById('gen-failure-actions');
+
+    if (!isAlreadySolved) {
+      btnRoll.onclick = () => {
+        btnRoll.disabled = true;
+        failureBox.innerHTML = '';
+        if (this.sound) this.sound.playDiceRoll();
+
+        die1.classList.add('rolling');
+        die2.classList.add('rolling');
+        resultEl.textContent = "Los dados ruedan sobre la piedra...";
+
+        setTimeout(() => {
+          die1.classList.remove('rolling');
+          die2.classList.remove('rolling');
+
+          const val1 = Math.floor(Math.random() * 6) + 1;
+          const val2 = Math.floor(Math.random() * 6) + 1;
+          const total = val1 + val2;
+          const diceEmojis = ["⚀", "⚁", "⚂", "⚃", "⚄", "⚅"];
+          die1.textContent = diceEmojis[val1 - 1];
+          die2.textContent = diceEmojis[val2 - 1];
+
+          if (total >= challenge.target || (val1 === 6 && val2 === 6)) {
+            if (!this.solvedDiceChallenges) this.solvedDiceChallenges = {};
+            this.solvedDiceChallenges[scene.id] = true;
+            if (this.sound) {
+              this.sound.playVictoryFanfare();
+            }
+            resultEl.innerHTML = `🎉 <strong>¡TIRADA DE ${total}!</strong> ${challenge.successTitle}`;
+            btnRoll.textContent = "✅ ¡DESAFÍO SUPERADO!";
+            btnRoll.disabled = true;
+            this.renderChoices(scene);
+          } else {
+            resultEl.innerHTML = `⚠️ <strong>¡TIRADA DE ${total} (necesitabas ${challenge.target}+)!</strong> ${challenge.failureTitle}`;
+            if (this.sound) this.sound.playTrapAlarm();
+
+            failureBox.innerHTML = `
+              <div style="margin-top: 12px; padding: 10px; background: rgba(143,40,40,0.25); border: 1px solid #8f2828; border-radius: 6px;">
+                <p style="font-size: 0.9rem; margin-bottom: 8px;">¡No te rindas! Puedes concentrar tus fuerzas o usar el comodín de salvación para volver a tirar.</p>
+                <button id="btn-retry-gen-dice" class="choice-btn" style="width: 100%; justify-content: center; background: #6b2222; color: #fff;">
+                  🔄 VOLVER A TIRAR LOS DADOS
+                </button>
+              </div>
+            `;
+            const retryBtn = document.getElementById('btn-retry-gen-dice');
+            if (retryBtn) {
+              retryBtn.onclick = () => {
+                btnRoll.disabled = false;
+                failureBox.innerHTML = '';
+                resultEl.textContent = "Preparado para una nueva tirada...";
+              };
+            }
+          }
+        }, 700);
+      };
+    }
+  }
+
+  // ===========================================================================
+  // 8C. SISTEMA DEL SUELO DE PINCHOS INVISIBLES (DAVID)
+  // ===========================================================================
+  setupSpikesGrid(scene) {
+    const gridContainer = document.getElementById('spikes-grid-container');
+    if (!gridContainer) return;
+
+    const isAlreadySolved = (this.solvedSpikesGrids && this.solvedSpikesGrids[scene.id]) === true;
+    if (isAlreadySolved) {
+      gridContainer.innerHTML = `
+        <div style="padding: 14px; background: rgba(44,110,73,0.3); border: 2px solid #52b788; border-radius: 8px; text-align: center; color: #d8f3dc; font-weight: 700;">
+          🛡️ ¡Camino seguro memorizado! Los pinchos de acero están desactivados bajo las losas.
+        </div>
+      `;
+      return;
+    }
+
+    const config = scene.spikesConfig || {
+      path: [0, 3, 4, 7],
+      tiles: [
+        { id: 0, rune: "🌙", name: "Luna Llena" },
+        { id: 1, rune: "💀", name: "Calavera" },
+        { id: 2, rune: "⚡", name: "Rayo" },
+        { id: 3, rune: "💧", name: "Gota de Agua" },
+        { id: 4, rune: "🛡️", name: "Escudo Azul" },
+        { id: 5, rune: "🔥", name: "Fuego" },
+        { id: 6, rune: "🕷️", name: "Telaraña" },
+        { id: 7, rune: "🗝️", name: "Piedra Segura" },
+        { id: 8, rune: "🦂", name: "Escorpión" }
+      ]
+    };
+
+    let step = 0;
+    gridContainer.innerHTML = `
+      <div style="background: rgba(25, 20, 16, 0.95); border: 2px solid #a87932; border-radius: 8px; padding: 14px; margin: 12px 0;">
+        <p style="font-size: 0.9rem; color: #ecd8be; text-align: center; margin-bottom: 10px;">
+          👣 <em>Pisa en orden las losas mágicas:</em> <strong>🌙 Luna ➔ 💧 Agua ➔ 🛡️ Escudo ➔ 🗝️ Salida</strong>
+        </p>
+        <div id="spikes-tiles-box" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px;"></div>
+        <div id="spikes-status-msg" style="margin-top: 10px; font-size: 0.9rem; text-align: center; min-height: 24px; color: #f5eedc;">
+          Da el primer paso con cuidado...
+        </div>
+      </div>
+    `;
+
+    const tilesBox = document.getElementById('spikes-tiles-box');
+    const statusMsg = document.getElementById('spikes-status-msg');
+
+    config.tiles.forEach(tile => {
+      const btn = document.createElement('button');
+      btn.className = 'choice-btn';
+      btn.style.cssText = 'height: 64px; flex-direction: column; justify-content: center; align-items: center; background: #2f2319; border: 2px solid #5a422a; border-radius: 6px; color: #f5eedc; font-size: 1.4rem; cursor: pointer; transition: all 0.2s;';
+      btn.innerHTML = `<span>${tile.rune}</span><span style="font-size: 0.7rem; color: #c4b5a5;">${tile.name}</span>`;
+
+      btn.onclick = () => {
+        const expected = config.path[step];
+        if (tile.id === expected) {
+          btn.style.background = '#1e5c3a';
+          btn.style.borderColor = '#52b788';
+          btn.disabled = true;
+          if (this.sound) this.sound.playDiscovery();
+          step++;
+
+          if (step >= config.path.length) {
+            if (!this.solvedSpikesGrids) this.solvedSpikesGrids = {};
+            this.solvedSpikesGrids[scene.id] = true;
+            statusMsg.innerHTML = "🎉 <strong>¡PERFECTO!</strong> Has cruzado el salón sin rozar ningún pincho.";
+            statusMsg.style.color = "#52b788";
+            if (this.sound) setTimeout(() => this.sound.playVictoryFanfare(), 300);
+            this.renderChoices(scene);
+          } else {
+            statusMsg.innerHTML = `👣 ¡Paso seguro! Llevas ${step} de ${config.path.length} losas.`;
+          }
+        } else {
+          btn.style.background = '#801818';
+          btn.style.borderColor = '#ff4d4d';
+          if (this.sound) this.sound.playTrapAlarm();
+          statusMsg.innerHTML = `💥 <strong>¡CLANG!</strong> ¡Pinchos metálicos emergen del suelo! Vuelve a empezar.`;
+          statusMsg.style.color = "#ff6b6b";
+          setTimeout(() => {
+            this.setupSpikesGrid(scene);
+          }, 800);
+        }
+      };
+      tilesBox.appendChild(btn);
+    });
+  }
+
+  // ===========================================================================
   // 9. PANTALLAS DE FRACASO (GAME OVER) Y ANILLO MÁGICO DE SALVACIÓN
   // ===========================================================================
   setupGameOverUI(scene) {
@@ -1444,12 +1648,15 @@ class GameEngine {
   }
 
   updateStats() {
-    this.friendsCountEl.textContent = `${this.rescuedFriends.length} / ${this.story.totalFriends}`;
+    const maxFriends = (this.story && this.story.totalFriends !== undefined) ? this.story.totalFriends : 5;
+    const maxKeys = (this.story && this.story.totalKeys !== undefined) ? this.story.totalKeys : 5;
+    this.friendsCountEl.textContent = `${this.rescuedFriends.length} / ${maxFriends}`;
     if (this.keysCountEl) {
-      this.keysCountEl.textContent = `${this.collectedKeys.length} / ${this.story.totalKeys}`;
+      this.keysCountEl.textContent = `${this.collectedKeys.length} / ${maxKeys}`;
     }
     if (this.btnRing) {
-      this.btnRing.textContent = this.magicRingAvailable ? '💍 Anillo Mágico (1)' : '💍 Anillo (0)';
+      const ringName = (this.story && this.story.salvationItemShort) || 'Anillo Mágico';
+      this.btnRing.textContent = this.magicRingAvailable ? `💍 ${ringName} (1)` : `💍 ${ringName} (0)`;
       this.btnRing.disabled = !this.magicRingAvailable;
     }
   }
@@ -1509,7 +1716,7 @@ class GameEngine {
       this.libraryViewEl.style.display = 'flex';
       this.readerViewEl.style.display = 'none';
     }
-    document.title = "Biblioteca Fantástica de Aventuras - 5 Libros-Juego";
+    document.title = "Biblioteca Fantástica de Aventuras - 10 Libros-Juego";
     this.renderLibraryGrid();
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
@@ -1543,6 +1750,12 @@ class GameEngine {
     if (this.companionIconLabelEl) {
       const icon = this.story.companionIcon || '🐕';
       this.companionIconLabelEl.textContent = `${icon} Compañero:`;
+    }
+    if (this.friendsLabelEl) {
+      this.friendsLabelEl.textContent = this.story.objectiveName || '👥 Amigos:';
+    }
+    if (this.keysLabelEl) {
+      this.keysLabelEl.textContent = this.story.keyName || '🗝️ Llaves:';
     }
     document.title = `${this.story.title} - Biblioteca Fantástica`;
   }
@@ -1601,6 +1814,8 @@ class GameEngine {
     this.clockworkSolved = false;
     this.monsterDefeated = false;
     this.magicRingAvailable = true;
+    this.solvedDiceChallenges = {};
+    this.solvedSpikesGrids = {};
     this.history = [];
     this.mazeCompletedExit = null;
     this.clearMazeCanvas();

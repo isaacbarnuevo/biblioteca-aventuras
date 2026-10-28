@@ -3282,10 +3282,1659 @@ const MUNDO_DATA = {
   }
 };
 
+// =============================================================================
+// LIBRO 6: EL TESORO DE LOS DOS DRAGONES: JAULIS Y OJO (PARA DAVID)
+// =============================================================================
+const DAVID_DATA = {
+  id: "david_dragones",
+  title: "El Tesoro de los Dos Dragones: Jaulis y Ojo",
+  subtitle: "Un libro-juego de dragones gemelos, puertas vivas armadas y suelos de pinchos invisibles",
+  tagline: "¡Adéntrate con tu espada en la guarida volcánica, engaña a las puertas armadas y vence a Jaulis y Ojo!",
+  cover: "assets/images/cover_david_dragons.jpg",
+  difficulty: "⭐⭐⭐",
+  category: "Dragones & Espadas",
+  themeColor: "#c0392b",
+  badgeIcon: "🐲",
+  companionName: "Chispita la Salamandra",
+  companionIcon: "🦎",
+  salvationItemName: "Gema de Fuego de Chispita / Anillo Mágico",
+  salvationItemShort: "Gema de Fuego",
+  objectiveName: "🗡️ Misiones:",
+  keyName: "🗝️ Llaves Dragón:",
+  companionDesc: "Una simpática salamandra de lava inmune a las llamas con un olfato especial para detectar trampas ocultas.",
+  mechanics: ["🗡️ Espada de Luz de David", "🚪 Puertas con Ojos y Pistolas", "📌 Suelo de Pinchos Invisibles", "🎲 Combate de Dados", "💎 Gran Tesoro"],
+  totalFriends: 3,
+  totalKeys: 3,
+
+  nodes: {
+    "cover": {
+      id: "cover",
+      type: "cover",
+      pageNumbers: [1, 2],
+      title: "El Tesoro de los Dos Dragones: Jaulis y Ojo",
+      image: "assets/images/cover_david_dragons.jpg",
+      isSpread: false,
+      textLeft: `
+        <span class="page-badge">Portada & Prólogo</span>
+        <h3 style="margin-top:10px; font-family:'Cinzel',serif; font-size:1.4rem; color:#c0392b;">¡LA MISIÓN DEL ESPADACHÍN DAVID!</h3>
+        <p>En lo más profundo del volcán Monte Calavera habitan dos dragones gemelos legendarios: <strong>Jaulis</strong>, una bestia carmesí de escamas ardientes con aliento de magma, y <strong>Ojo</strong>, un dragón púrpura con un gran tercer ojo místico en la frente que dispara rayos fulgurantes.</p>
+        <p>Ambos custodian el mayor tesoro jamás reunido en el reino. David, armado con su fiel <strong>Espada Forjada de Acero Azul</strong> y acompañado por <strong>Chispita</strong>, decide aceptar el reto supremo.</p>
+        <ul style="margin: 8px 0 8px 20px; font-size: 0.95rem; line-height: 1.6;">
+          <li>🚪🔫 <strong>Las Dos Puertas Vivas:</strong> Dos portales con ojos saltones y pistolas mágicas que custodian el desfiladero.</li>
+          <li>📌 <strong>El Suelo de Pinchos Invisibles:</strong> Un laberinto de losas donde un paso en falso activa trampas metálicas mortales.</li>
+          <li>⚔️ <strong>La Fragua de Armas:</strong> Mejora tu espada para resistir las llamas volcánicas.</li>
+          <li>🎲 <strong>Duelo contra Jaulis y Ojo:</strong> Lanza tus dados para desviar llamaradas y rayos.</li>
+        </ul>
+      `,
+      textRight: `
+        <span class="page-badge">Instrucciones & Consejos</span>
+        <h3 style="margin-top:10px; font-family:'Cinzel',serif; font-size:1.4rem; color:#d4af37;">CONSEJOS DE CHISPITA</h3>
+        <p>🦎 <strong>Tu Aliada Ígnea:</strong> Chispita detecta las fuentes de calor y los mecanismos de metal escondidos bajo la roca.</p>
+        <p>🗡️ <strong>La Espada de David:</strong> Tu espada no solo corta, ¡también puede reflejar rayos mágicos si la empuñas con valentía!</p>
+        <p>💍 <strong>Comodín de Salvación:</strong> Si caes en una trampa de pinchos o recibes un disparo, el Anillo / Gema te rescatará <strong>una sola vez</strong>.</p>
+      `,
+      choices: [
+        {
+          text: "⚔️ Desenvainar la espada y adentrarse en la Garganta Volcánica",
+          target: "david_entrance",
+          pageDisplay: "Págs. 3 - 4"
+        }
+      ]
+    },
+
+    "david_entrance": {
+      id: "david_entrance",
+      pageNumbers: [3, 4],
+      title: "La Garganta de Obsidiana",
+      image: "assets/images/scene_maze.jpg",
+      isSpread: true,
+      textLeft: `
+        <span class="page-badge">Página 3</span>
+        <p>Avanzas entre paredes de roca negra que desprenden un calor sofocante. El suelo de obsidiana vibra con cada rugido subterráneo de los dragones.</p>
+        <p>De pronto, el camino se corta ante una colosal muralla de piedra tallada. Al fondo, la luz de las antorchas revela una silueta insólita: ¡dos portones de madera encantada que parecen estar completamente despiertos!</p>
+        <p><em>—¡Cuidado, David! —chilla Chispita encaramándose a tu hombro—. Esas puertas no son de madera común... ¡tienen ojos y cañones de pólvora mágica apuntando hacia nosotros!</em></p>
+      `,
+      textRight: `
+        <span class="page-badge">Página 4</span>
+        <p>Frente a ti se alzan las dos puertas guardianas:</p>
+        <p>🔴 <strong>La Puerta Carmesí (Griselda):</strong> Tiene un ojo llameante y un trabuco de bronce pulido.</p>
+        <p>🟣 <strong>La Puerta Violeta (Mardoqueo):</strong> Parpadea con un ojo místico y sostiene una pistola de plasma encantado.</p>
+        <p class="decision-prompt">Acércate con la espada en alto para afrontar su desafío.</p>
+      `,
+      choices: [
+        {
+          text: "🚪 Enfrentar a las Dos Puertas Vivas y desviar sus disparos",
+          target: "david_doors",
+          pageDisplay: "Págs. 5 - 6"
+        }
+      ]
+    },
+
+    "david_doors": {
+      id: "david_doors",
+      pageNumbers: [5, 6],
+      title: "Las Dos Puertas Vivas con Ojos y Pistolas",
+      image: "assets/images/scene_armory.jpg",
+      isSpread: true,
+      isDiceChallenge: true,
+      diceChallenge: {
+        target: 6,
+        name: "Duelo de Reflejos contra las Puertas Armadas",
+        buttonText: "🎲 ¡DESVIAR LOS DISPAROS CON LA ESPADA DE DAVID!",
+        successTitle: "¡Tirada asombrosa! David hace girar su espada como un torbellino, desviando las balas mágicas. Las puertas, asombradas por tu destreza, chasquean sus cerrojos y se abren de par en par.",
+        failureTitle: "¡Un proyectil roza la pared de roca! Concéntrate y vuelve a intentar la parada."
+      },
+      textLeft: `
+        <span class="page-badge">Página 5</span>
+        <p><em>—¡Alto ahí, renacuajo con espada! —gruñe la Puerta Carmesí abriendo su ojo desmesuradamente—. ¡Nadie cruza hacia la guarida de Jaulis y Ojo sin recibir plomo caliente!</em></p>
+        <p><em>—¡Pum, pam, fuego! —añade la Puerta Violeta apuntando su trabuco reluciente—. A menos que demuestres reflejos legendarios desviando nuestra salva de bienvenida.</em></p>
+        <div style="padding:10px; background:rgba(192,57,43,0.2); border:1px solid #c0392b; border-radius:6px; margin-top:8px;">
+          <strong>🎯 RETO DE DADOS (Necesitas 6+):</strong> Lanza los dados para que David ejecute un remolino defensivo con su espada y obligue a las puertas a rendirse.
+        </div>
+      `,
+      textRight: `
+        <span class="page-badge">Página 6</span>
+        <div id="generic-dice-box"></div>
+        <p class="decision-prompt">Cuando superes el disparo de las puertas, cruza hacia el siguiente salón.</p>
+      `,
+      choices: [
+        {
+          text: "👣 Cruzar el umbral hacia el Salón de los Pinchos Invisibles",
+          target: "david_spikes",
+          pageDisplay: "Págs. 7 - 8"
+        }
+      ]
+    },
+
+    "david_spikes": {
+      id: "david_spikes",
+      pageNumbers: [7, 8],
+      title: "El Suelo de Pinchos Invisibles",
+      image: "assets/images/scene_riddle.jpg",
+      isSpread: true,
+      isSpikesGrid: true,
+      spikesConfig: {
+        path: [0, 3, 4, 7],
+        tiles: [
+          { id: 0, rune: "🌙", name: "Luna Llena" },
+          { id: 1, rune: "💀", name: "Calavera Trampa" },
+          { id: 2, rune: "⚡", name: "Rayo Oculto" },
+          { id: 3, rune: "💧", name: "Gota de Agua" },
+          { id: 4, rune: "🛡️", name: "Escudo Protector" },
+          { id: 5, rune: "🔥", name: "Fuego Volcánico" },
+          { id: 6, rune: "🕷️", name: "Telaraña Falsa" },
+          { id: 7, rune: "🗝️", name: "Losa de Salida" },
+          { id: 8, rune: "🦂", name: "Escorpión" }
+        ]
+      },
+      textLeft: `
+        <span class="page-badge">Página 7</span>
+        <p>Al cruzar las puertas llegas a una vasta cámara abovedada. El suelo está formado por una cuadrícula de grandes losas de granito que parecen completamente normales.</p>
+        <p>Sin embargo, Chispita pega un respingo: <em>—¡David, no des un paso en falso! Debajo de casi todas las losas hay resortes de pinchos de acero invisibles desde arriba. Si pisas la incorrecta, ¡los pinchos emergen del suelo al instante!</em></p>
+        <p>En el muro de la derecha hay una inscripción rúnica dejada por un antiguo sabio:</p>
+        <div style="padding:10px; background:rgba(212,175,55,0.15); border:1px solid #d4af37; border-radius:6px; font-style:italic;">
+          «Quien busque el tesoro sin ser herido, siga la senda de los cuatro símbolos benignos: primero la <strong>🌙 Luna</strong>, luego la <strong>💧 Gota de Agua</strong>, después el <strong>🛡️ Escudo</strong> y finalmente la <strong>🗝️ Salida</strong>.»
+        </div>
+      `,
+      textRight: `
+        <span class="page-badge">Página 8</span>
+        <p><strong>🎯 MINIJUEGO INTERACTIVO:</strong> Pulsa en orden las losas seguras para cruzar el salón ileso.</p>
+        <div id="spikes-grid-container"></div>
+        <p class="decision-prompt">Una vez desactivadas las trampas, el pasillo hacia la Fragua queda expedito.</p>
+      `,
+      choices: [
+        {
+          text: "⚔️ Entrar en la Fragua Secreta para mejorar tu espada",
+          target: "david_armory_cache",
+          pageDisplay: "Págs. 9 - 10",
+          rewardFriend: "Misión 1: Superar Pinchos y Puertas"
+        }
+      ]
+    },
+
+    "david_armory_cache": {
+      id: "david_armory_cache",
+      pageNumbers: [9, 10],
+      title: "La Fragua de los Héroes Dragón",
+      image: "assets/images/medieval_armory_riddle.jpg",
+      isSpread: true,
+      isObjectSearch: true,
+      requiredItems: [
+        { name: "Piedra de Afilar Rúnica", icon: "🪨", x: 26, y: 70, radius: 10, hint: "Junto al yunque de piedra a la izquierda" },
+        { name: "Escudo Reflector de Obsidiana", icon: "🛡️", x: 73, y: 62, radius: 10, hint: "Apoyado contra la armadura dorada a la derecha" },
+        { name: "Gema de Luz Esmeralda", icon: "💎", x: 50, y: 38, radius: 10, hint: "Engarzada en el estandarte central" }
+      ],
+      textLeft: `
+        <span class="page-badge">Página 9</span>
+        <p>Llegas a una forja colosal donde los antiguos caballeros forjaban armas para combatir bestias aladas. En el fuego eterno aún descansan reliquias indispensables.</p>
+        <p>Para que la espada de David pueda resistir las llamaradas de Jaulis y reflejar los rayos de Ojo, necesitas encontrar tres artefactos legendarios ocultos en la imagen.</p>
+        <div class="search-checklist-box">
+          <h4>🔍 OBJETIVOS A LOCALIZAR (Haz clic en la imagen):</h4>
+          <ul id="object-search-checklist" class="search-checklist"></ul>
+        </div>
+      `,
+      textRight: `
+        <span class="page-badge">Página 10</span>
+        <p>Al reunir los tres componentes, David frota la piedra rúnica contra el filo de su acero: <strong>¡la hoja resplandece con un fulgor azul diamantino!</strong></p>
+        <p>El escudo de obsidiana protegerá tu cuerpo de las llamaradas de Jaulis y el tercer ojo de Ojo.</p>
+        <p class="decision-prompt">¿Hacia cuál de los dos dragones decides avanzar primero?</p>
+      `,
+      choices: [
+        {
+          text: "🔥 Enfrentar a Jaulis en el Cráter de Lava Ardiente",
+          target: "david_lair_jaulis",
+          pageDisplay: "Págs. 11 - 12",
+          rewardKey: "Llave de Fuego Carmesí"
+        }
+      ]
+    },
+
+    "david_lair_jaulis": {
+      id: "david_lair_jaulis",
+      pageNumbers: [11, 12],
+      title: "El Cráter Ígneo del Dragón Jaulis",
+      image: "assets/images/medieval_dragon_lair.jpg",
+      isSpread: true,
+      isDiceChallenge: true,
+      diceChallenge: {
+        target: 7,
+        name: "Duelo de Espada contra el Fuego de Jaulis",
+        buttonText: "🎲 ¡ATACAR CON LA ESPADA DE DAVID CONTRA JAULIS!",
+        successTitle: "¡TIRADA DE CAMPEÓN! David esquiva la ola de fuego, corre por la cresta rocosa y con un certero tajo de luz parte la cadena que ataba la furia del dragón. Jaulis se calma y te cede la Llave de Fuego.",
+        failureTitle: "¡Una ola de calor te hace retroceder! Vuelve a concentrar tu valor y tira de nuevo."
+      },
+      textLeft: `
+        <span class="page-badge">Página 11</span>
+        <p>El aire arde como una forja. Sobre una montaña de carbones encendidos reposa <strong>Jaulis</strong>, un colosal dragón carmesí con escamas tan duras como planchas de hierro.</p>
+        <p>Al verte, abre sus inmensas alas y exhala una llamarada de fuego volcánico que derrite las estalagmitas cercanas.</p>
+        <p><em>—¡Nadie perturba el sueño de Jaulis! —ruge con voz de trueno—. ¡Conviértete en ceniza, jovencito!</em></p>
+      `,
+      textRight: `
+        <span class="page-badge">Página 12</span>
+        <div id="generic-dice-box"></div>
+        <p class="decision-prompt">Vencido Jaulis, la senda hacia la cúpula de su hermano Ojo se ilumina con destellos violetas.</p>
+      `,
+      choices: [
+        {
+          text: "👁️ Subir a la Cúpula Eléctrica del Dragón Ojo",
+          target: "david_lair_ojo",
+          pageDisplay: "Págs. 13 - 14",
+          rewardFriend: "Misión 2: Jaulis Vencido"
+        }
+      ]
+    },
+
+    "david_lair_ojo": {
+      id: "david_lair_ojo",
+      pageNumbers: [13, 14],
+      title: "La Cúpula Mística del Dragón Ojo",
+      image: "assets/images/scene_monster.jpg",
+      isSpread: true,
+      isRiddle: true,
+      riddleOptions: [
+        {
+          id: "ojo_sword_reflect",
+          text: "🛡️ Alzar el Escudo de Obsidiana para reflejar su rayo hacia el techo",
+          isCorrect: true,
+          feedback: "¡BRILLANTE! El rayo violeta de Ojo choca contra tu escudo y rebota hacia la estalactita central, haciendo caer una lluvia de polvo que ciega al dragón y lo deja pacificado."
+        },
+        {
+          id: "ojo_run_straight",
+          text: "🏃 Correr de frente en línea recta hacia sus garras",
+          isCorrect: false,
+          feedback: "¡Cuidado! El rayo hipnótico de Ojo te paraliza temporalmente los pies. ¡Usa una táctica con tu escudo!"
+        },
+        {
+          id: "ojo_close_eyes",
+          text: "🙈 Cerrar los ojos y avanzar a tientas sin mirar",
+          isCorrect: false,
+          feedback: "Avanzar a ciegas contra un dragón con rayos eléctricos es peligrosísimo. ¡Usa el reflejo de tu equipo!"
+        }
+      ],
+      textLeft: `
+        <span class="page-badge">Página 13</span>
+        <p>Llegas a la caverna superior iluminada por extraños relámpagos púrpuras. En el centro planea <strong>Ojo</strong>, un dragón de tonalidades amatista y zafiro.</p>
+        <p>En mitad de su frente brilla un tercer ojo gigantesco que gira sin parar emitiendo un zumbido eléctrico hipnótico. Todo lo que mira queda atrapado en una jaula de energía.</p>
+        <p><em>—¡Veo cada uno de tus pensamientos, espadachín David! —resuena en tu mente su voz telepática—. ¡No podrás esquivar mi rayo de la verdad!</em></p>
+      `,
+      textRight: `
+        <span class="page-badge">Página 14</span>
+        <div id="riddle-box" class="riddle-container"></div>
+        <p class="decision-prompt">Cuando derrotes a Ojo, obtendrás la Llave Mística para abrir el Gran Tesoro.</p>
+      `,
+      choices: [
+        {
+          text: "💎 Penetrar en la Cámara del Gran Tesoro de los Dragones",
+          target: "david_treasure_vault",
+          pageDisplay: "Págs. 15 - 16",
+          rewardKey: "Llave Mística de Ojo"
+        }
+      ]
+    },
+
+    "david_treasure_vault": {
+      id: "david_treasure_vault",
+      pageNumbers: [15, 16],
+      title: "La Cámara del Gran Tesoro Prohibido",
+      image: "assets/images/scene_victory.jpg",
+      isSpread: true,
+      textLeft: `
+        <span class="page-badge">Página 15</span>
+        <p>¡Has vencido a las dos puertas vivas con pistolas, has cruzado el suelo de pinchos invisibles y has superado a Jaulis y a Ojo!</p>
+        <p>Ante ti se abre la antecámara del tesoro. Sobre tres pedestales de roca volcánica insertas la <strong>Llave de Fuego Carmesí</strong>, la <strong>Llave Mística Violeta</strong> y la <strong>Llave Maestra Dorada</strong>.</p>
+        <p>Con un crujido monumental, el cofre ancestral de los dragones se abre lentamente...</p>
+      `,
+      textRight: `
+        <span class="page-badge">Página 16</span>
+        <div style="padding:15px; background:rgba(212,175,55,0.25); border:2px solid #d4af37; border-radius:8px; text-align:center;">
+          <h3 style="color:#d4af37; font-family:'Cinzel',serif; font-size:1.5rem;">👑 ¡EL TESORO DE LOS DRAGONES ES TUYO!</h3>
+          <p style="font-size:1.1rem; color:#f5eedc; margin-top:8px;">Dentro brillan la <strong>Corona Solar de los Reyes del Dragón</strong>, el <strong>Diamante Eterno</strong> y cofres repletos de oro pulido.</p>
+        </div>
+        <p class="decision-prompt">Reclama tu recompensa y emprende el regreso triunfal.</p>
+      `,
+      choices: [
+        {
+          text: "🏆 Salir a la luz del sol vitoreado por todo el Reino",
+          target: "david_victory",
+          pageDisplay: "Págs. 17 - 18",
+          rewardFriend: "Misión 3: Tesoro Robado con Honor"
+        }
+      ]
+    },
+
+    "david_victory": {
+      id: "david_victory",
+      pageNumbers: [17, 18],
+      title: "¡David, el Conquistador de Dragones!",
+      image: "assets/images/medieval_victory.jpg",
+      isSpread: true,
+      textLeft: `
+        <span class="page-badge">¡Aventura Completada!</span>
+        <h3 style="color:#27ae60; font-family:'Cinzel',serif; font-size:1.6rem;">¡VICTORIA TOTAL PARA DAVID!</h3>
+        <p>Al salir de la caverna con el tesoro a hombros y tu espada resplandeciente, los dragones Jaulis y Ojo baten sus alas a lo lejos no con furia, ¡sino en señal de respeto ante el espadachín más audaz que jamás pisó su monte!</p>
+        <p>El pueblo entero sale a recibir a David y a su fiel compañera Chispita con trompetas, estandartes y un banquete de gala.</p>
+      `,
+      textRight: `
+        <span class="page-badge">Salón de la Fama</span>
+        <div style="padding:15px; background:rgba(39,174,96,0.2); border:2px solid #27ae60; border-radius:8px; text-align:center;">
+          <div style="font-size:2.8rem; margin-bottom:6px;">🏆🐲🗡️</div>
+          <h4 style="color:#2ecc71;">¡TROFEO CONCEDIDO: MAESTRO DRACONIANO!</h4>
+          <p style="color:#ecd8be; font-size:0.95rem; margin-top:6px;">Has derrotado a Jaulis y a Ojo, esquivado las puertas vivas y cruzado los pinchos sin miedo.</p>
+        </div>
+        <p class="decision-prompt">¡Enhorabuena, David! Puedes volver a la biblioteca para elegir otro libro o volver a jugar esta gesta.</p>
+      `,
+      choices: [
+        {
+          text: "🏛️ Volver a la Biblioteca de Aventuras",
+          target: "library",
+          pageDisplay: "Estantería Mágica"
+        }
+      ]
+    }
+  }
+};
+
+
+// =============================================================================
+// LIBRO 7: EL PARQUE DE LAS CRIATURAS VIVAS Y LAS 9 LLAVES (PARA FRANCISCO)
+// =============================================================================
+const FRANCISCO_DATA = {
+  id: "francisco_parque",
+  title: "El Parque de las Criaturas Vivas y las 9 Llaves",
+  subtitle: "Un parque de atracciones encantado donde cada juego mecánico es un monstruo colosal viviente",
+  tagline: "¡Sube a cada atracción viva, supera sus 9 pruebas sin rendirte y rompe el hechizo del parque!",
+  cover: "assets/images/cover_francisco_park.jpg",
+  difficulty: "⭐⭐⭐⭐",
+  category: "Parque & Criaturas Vivas",
+  themeColor: "#e67e22",
+  badgeIcon: "🎡",
+  companionName: "Boliche el Oso Ferial",
+  companionIcon: "🧸",
+  salvationItemName: "Ticket VIP de Oro de Boliche / Anillo Mágico",
+  salvationItemShort: "Ticket VIP de Oro",
+  objectiveName: "🎢 Retos Vencidos:",
+  keyName: "🗝️ Llaves del Parque:",
+  companionDesc: "Un simpático oso de peluche viviente con chistera y pajarita que conoce todos los trucos de la feria.",
+  mechanics: ["🎢 9 Atracciones Criatura", "🗝️ 9 Llaves Mágicas", "🎲 Pruebas de Habilidad", "🎪 Desactivación del Hechizo", "✨ Fiesta Normal"],
+  totalFriends: 9,
+  totalKeys: 9,
+
+  nodes: {
+    "cover": {
+      id: "cover",
+      type: "cover",
+      pageNumbers: [1, 2],
+      title: "El Parque de las Criaturas Vivas y las 9 Llaves",
+      image: "assets/images/cover_francisco_park.jpg",
+      isSpread: false,
+      textLeft: `
+        <span class="page-badge">Portada & Prólogo</span>
+        <h3 style="margin-top:10px; font-family:'Cinzel',serif; font-size:1.4rem; color:#e67e22;">¡EL HECHIZO DE LA FERIA LUNAR!</h3>
+        <p>Una noche de luna roja, un hechicero envidioso lanzó un maleficio sobre el Parque de Diversiones Fantasía. Al sonar la campana de medianoche, <strong>¡cada una de las 9 atracciones mecánicas cobró vida como una criatura monstruosa colosal!</strong></p>
+        <p>Las puertas del parque se han sellado. Nadie puede escapar hasta que un visitante con verdadero espíritu de diversión consiga subir a cada atracción, disfrutar de su viaje y apaciguar a la criatura ganando su <strong>Llave de Oro</strong>.</p>
+        <p>Francisco, acompañado por <strong>Boliche el Oso Ferial</strong>, acepta el reto de las <strong>9 Llaves</strong> para devolver el parque a la normalidad.</p>
+      `,
+      textRight: `
+        <span class="page-badge">Instrucciones & Consejos</span>
+        <h3 style="margin-top:10px; font-family:'Cinzel',serif; font-size:1.4rem; color:#f39c12;">CONSEJOS DE BOLICHE</h3>
+        <p>🧸 <strong>Tu Aliado de Peluche:</strong> Boliche sabe qué truco le gusta a cada atracción para que no se enfade.</p>
+        <p>🗝️ <strong>Las 9 Llaves:</strong> Cada atracción superada te entrega una llave dorada (0/9). ¡Necesitas las 9 para activar la Fuente de Desencantamiento!</p>
+        <p>💍 <strong>Ticket VIP de Oro:</strong> Si una atracción te marea o caes en un reto, el Ticket te permite reintentar sin perder tu avance.</p>
+      `,
+      choices: [
+        {
+          text: "🎡 Cruzar los tornos y entrar a la primera atracción",
+          target: "park_ride_1",
+          pageDisplay: "Págs. 3 - 4"
+        }
+      ]
+    },
+
+    "park_ride_1": {
+      id: "park_ride_1",
+      pageNumbers: [3, 4],
+      title: "1. El Gusano de Hierro (Montaña Rusa Serpiente)",
+      image: "assets/images/scene_maze.jpg",
+      isSpread: true,
+      isDiceChallenge: true,
+      diceChallenge: {
+        target: 6,
+        name: "Prueba de Vértigo en el Gusano de Hierro",
+        buttonText: "🎲 ¡AGUANTAR EL TRIPLE BUCLE SIN CERRAR LOS OJOS!",
+        successTitle: "¡Tirada genial! Francisco levanta las manos al viento en la bajada de 90 grados riendo a carcajadas. La serpiente de raíles se alegra de tu diversión y te entrega la Llave 1.",
+        failureTitle: "¡El viento casi te despeina el sombrero! Respira hondo y tira de nuevo."
+      },
+      textLeft: `
+        <span class="page-badge">Página 3 • Atracción 1 de 9</span>
+        <p>La gigantesca montaña rusa es ahora un colosal basilisco de raíles de acero que ondea entre las nubes y lanza chispas por los colmillos.</p>
+        <p>Para calmar su furia debes montar en el primer vagón y demostrar que no tienes miedo a las curvas imposibles.</p>
+      `,
+      textRight: `
+        <span class="page-badge">Página 4</span>
+        <div id="generic-dice-box"></div>
+        <p class="decision-prompt">Al superar la montaña rusa ganas la <strong>Llave 1 (Colmillo de Acero)</strong>.</p>
+      `,
+      choices: [
+        {
+          text: "🎡 Avanzar hacia la Noria de las Mil Luces",
+          target: "park_ride_2",
+          pageDisplay: "Págs. 5 - 6",
+          rewardKey: "Llave 1: Colmillo de Acero",
+          rewardFriend: "Atracción 1 Domada"
+        }
+      ]
+    },
+
+    "park_ride_2": {
+      id: "park_ride_2",
+      pageNumbers: [5, 6],
+      title: "2. La Noria de las Mil Luces (El Pulpo Celeste)",
+      image: "assets/images/circus_main_tent.jpg",
+      isSpread: true,
+      isRiddle: true,
+      riddleOptions: [
+        {
+          id: "ride_pulpo_lantern",
+          text: "🏮 Subir a la barquilla con el farol de zafiro azul que brilla al compás del vals",
+          isCorrect: true,
+          feedback: "¡CORRECTO! El pulpo gigante gira suavemente sus tentáculos luminosos al son de la melodía y de su corona brota la Llave 2."
+        },
+        {
+          id: "ride_pulpo_wrong1",
+          text: "🐙 Intentar agarrar el tentáculo que echa tinta negra fosforescente",
+          isCorrect: false,
+          feedback: "¡Uf! Casi te salpica de tinta mágica pegajosa. Busca la barquilla armoniosa."
+        },
+        {
+          id: "ride_pulpo_wrong2",
+          text: "⚡ Tocar los cables eléctricos pelados de la base",
+          isCorrect: false,
+          feedback: "¡Peligro! Hay chispas. Busca el farol de luz azul celestial."
+        }
+      ],
+      textLeft: `
+        <span class="page-badge">Página 5 • Atracción 2 de 9</span>
+        <p>La noria gigante es un pulpo de cristal translúcido que sostiene 12 cabinas con sus tentáculos y las balancea a 40 metros de altura.</p>
+        <p>Boliche te advierte: <em>—Solo una de las cabinas tiene la vibración pacífica que apacigua al pulpo. ¡Elige con buen ojo!</em></p>
+      `,
+      textRight: `
+        <span class="page-badge">Página 6</span>
+        <div id="riddle-box" class="riddle-container"></div>
+        <p class="decision-prompt">Resuelve el enigma para hacerte con la <strong>Llave 2</strong>.</p>
+      `,
+      choices: [
+        {
+          text: "🚗 Dirigirse al Coliseo de los Coches de Choque",
+          target: "park_ride_3",
+          pageDisplay: "Págs. 7 - 8",
+          rewardKey: "Llave 2: Gema del Pulpo",
+          rewardFriend: "Atracción 2 Domada"
+        }
+      ]
+    },
+
+    "park_ride_3": {
+      id: "park_ride_3",
+      pageNumbers: [7, 8],
+      title: "3. El Coliseo de Escarabajos (Coches de Choque)",
+      image: "assets/images/scene_armory.jpg",
+      isSpread: true,
+      isDiceChallenge: true,
+      diceChallenge: {
+        target: 6,
+        name: "Torneo de Conducción en el Coliseo",
+        buttonText: "🎲 ¡PILOTAR EL ESCARABAJO DE ORO ENTRE LA PISTA!",
+        successTitle: "¡Maniobra magistral! Francisco esquiva las pinzas de los coches escarabajo y cruza la meta victorioso recibiendo la Llave 3.",
+        failureTitle: "¡Un escarabajo blindado te ha chocado de costado! Corrige el volante y tira de nuevo."
+      },
+      textLeft: `
+        <span class="page-badge">Página 7 • Atracción 3 de 9</span>
+        <p>La pista de coches de choque se ha convertido en una arena de escarabajos rinoceronte gigantescos con parachoques electrificados.</p>
+        <p>Montas en el único escarabajo con caparazón dorado para superar el circuito de aceleración.</p>
+      `,
+      textRight: `
+        <span class="page-badge">Página 8</span>
+        <div id="generic-dice-box"></div>
+        <p class="decision-prompt">Superada la carrera, obtienes la <strong>Llave 3</strong>.</p>
+      `,
+      choices: [
+        {
+          text: "🎠 Ir al Tiovivo de los Grifos Alados",
+          target: "park_ride_4",
+          pageDisplay: "Págs. 9 - 10",
+          rewardKey: "Llave 3: Coraza de Escarabajo",
+          rewardFriend: "Atracción 3 Domada"
+        }
+      ]
+    },
+
+    "park_ride_4": {
+      id: "park_ride_4",
+      pageNumbers: [9, 10],
+      title: "4. El Tiovivo de los Grifos Alados",
+      image: "assets/images/circus_menagerie.jpg",
+      isSpread: true,
+      isObjectSearch: true,
+      requiredItems: [
+        { name: "Pluma de Oro de Grifo", icon: "🪶", x: 30, y: 55, radius: 10, hint: "En las alas del grifo de la izquierda" },
+        { name: "Cascabel Encantado", icon: "🔔", x: 70, y: 65, radius: 10, hint: "En la montura del león alado" },
+        { name: "Herradura Celestial", icon: "🧲", x: 50, y: 82, radius: 10, hint: "Bajo la peana del carrusel" }
+      ],
+      textLeft: `
+        <span class="page-badge">Página 9 • Atracción 4 de 9</span>
+        <p>El carrusel gira al compás de una música hipnótica mientras sus grifos de madera esculpida mueven las alas con vida propia.</p>
+        <p>Para calmar el vuelo de los grifos debes encontrar los tres objetos perdidos del arnés mágico.</p>
+        <div class="search-checklist-box">
+          <h4>🔍 BUSCA EN LA IMAGEN:</h4>
+          <ul id="object-search-checklist" class="search-checklist"></ul>
+        </div>
+      `,
+      textRight: `
+        <span class="page-badge">Página 10</span>
+        <p>Al reunir los objetos, los grifos emiten un agradable silbido y de la copa del tiovivo cae la <strong>Llave 4</strong>.</p>
+        <p class="decision-prompt">Continúa hacia el lago del barco columpio.</p>
+      `,
+      choices: [
+        {
+          text: "🚢 Embarcar en el Galeón Leviatán",
+          target: "park_ride_5",
+          pageDisplay: "Págs. 11 - 12",
+          rewardKey: "Llave 4: Pluma de Grifo",
+          rewardFriend: "Atracción 4 Domada"
+        }
+      ]
+    },
+
+    "park_ride_5": {
+      id: "park_ride_5",
+      pageNumbers: [11, 12],
+      title: "5. El Galeón Leviatán (Barco Columpio)",
+      image: "assets/images/floating_sky_harbor.jpg",
+      isSpread: true,
+      isDiceChallenge: true,
+      diceChallenge: {
+        target: 6,
+        name: "Balanceo en el Barco Leviatán",
+        buttonText: "🎲 ¡MANTENER EL TIMÓN EN EL OLEAJE DE NIEBLA!",
+        successTitle: "¡Navegación impecable! Francisco toma el timón de roble, surfea la niebla y el gran barco de madera viviente suelta la Llave 5.",
+        failureTitle: "¡La proa se eleva demasiado alto! Sujétate fuerte y repite la tirada."
+      },
+      textLeft: `
+        <span class="page-badge">Página 5 • Atracción 5 de 9</span>
+        <p>Un colosal barco pirata con cabeza de ballena acorazada se mece sobre un estanque de niebla espesa como si flotara sobre nubes.</p>
+        <p>Alcanza el ángulo vertical de 80 grados: solo un auténtico grumete puede mantenerse en la rueda del timón.</p>
+      `,
+      textRight: `
+        <span class="page-badge">Página 12</span>
+        <div id="generic-dice-box"></div>
+        <p class="decision-prompt">Conseguida la <strong>Llave 5</strong>, adéntrate en el pasaje del terror.</p>
+      `,
+      choices: [
+        {
+          text: "🏰 Entrar en la Mansión de las Sombras Risueñas",
+          target: "park_ride_6",
+          pageDisplay: "Págs. 13 - 14",
+          rewardKey: "Llave 5: Timón de Ballena",
+          rewardFriend: "Atracción 5 Domada"
+        }
+      ]
+    },
+
+    "park_ride_6": {
+      id: "park_ride_6",
+      pageNumbers: [13, 14],
+      title: "6. La Mansión de las Sombras Risueñas",
+      image: "assets/images/scene_banquet.jpg",
+      isSpread: true,
+      isObjectSearch: true,
+      requiredItems: [
+        { name: "Bocina de Payaso Cómico", icon: "🎺", x: 25, y: 75, radius: 10, hint: "Sobre la mesa de la izquierda" },
+        { name: "Capa de Bufón Iluminada", icon: "🎭", x: 75, y: 45, radius: 10, hint: "Colgada en la armadura del fondo" },
+        { name: "Caja de Sorpresas con Muelle", icon: "📦", x: 50, y: 65, radius: 10, hint: "En el centro de la alfombra" }
+      ],
+      textLeft: `
+        <span class="page-badge">Página 13 • Atracción 6 de 9</span>
+        <p>La atracción del Pasaje del Terror es ahora una mansión con ojos en las ventanas y una puerta que intenta morder a quien pasa.</p>
+        <p>Boliche te sonríe: <em>—¡A estos monstruos no les gusta que les tengan miedo! Si encontramos tres bromas para hacerles cosquillas, ¡se pondrán a reír y nos dejarán pasar!</em></p>
+      `,
+      textRight: `
+        <span class="page-badge">Página 14</span>
+        <div class="search-checklist-box">
+          <h4>🔍 LOCALIZA LAS 3 BROMAS MÁGICAS:</h4>
+          <ul id="object-search-checklist" class="search-checklist"></ul>
+        </div>
+        <p class="decision-prompt">Las sombras estallan en carcajadas y la <strong>Llave 6</strong> flota hasta tus manos.</p>
+      `,
+      choices: [
+        {
+          text: "🪞 Adentrarse en el Laberinto de los Espejos Deformantes",
+          target: "park_ride_7",
+          pageDisplay: "Págs. 15 - 16",
+          rewardKey: "Llave 6: Antorcha de la Risa",
+          rewardFriend: "Atracción 6 Domada"
+        }
+      ]
+    },
+
+    "park_ride_7": {
+      id: "park_ride_7",
+      pageNumbers: [15, 16],
+      title: "7. El Laberinto de los Espejos Deformantes",
+      image: "assets/images/circus_mirror_maze.jpg",
+      isSpread: true,
+      isRiddle: true,
+      riddleOptions: [
+        {
+          id: "mirror_real_door",
+          text: "🪞 Tocar el espejo con el marco de cristal tallado donde el reflejo guiña un ojo",
+          isCorrect: true,
+          feedback: "¡ACERTASTE! El espejo se disuelve como agua tibia revelando el pasadizo secreto y la Llave 7."
+        },
+        {
+          id: "mirror_wrong_beast",
+          text: "🐺 Ir hacia el reflejo donde apareces con cara de hombre lobo gruñón",
+          isCorrect: false,
+          feedback: "¡Cuidado! Es un reflejo trampa que intenta asustarte. Busca el cristal amigo."
+        },
+        {
+          id: "mirror_wrong_crack",
+          text: "💥 Romper el cristal que tiene grietas oscuras",
+          isCorrect: false,
+          feedback: "Romper espejos atrae 7 años de mala suerte. ¡Usa tu ingenio para cruzar!"
+        }
+      ],
+      textLeft: `
+        <span class="page-badge">Página 15 • Atracción 7 de 9</span>
+        <p>Cientos de cristales curvos deforman tu figura: te ves gigante, diminuto, con tentáculos o flotando.</p>
+        <p>El hechicero escondió la salida detrás del único espejo que posee la magia de la verdad.</p>
+      `,
+      textRight: `
+        <span class="page-badge">Página 16</span>
+        <div id="riddle-box" class="riddle-container"></div>
+        <p class="decision-prompt">Consigue la <strong>Llave 7</strong> y corre hacia los rápidos del río.</p>
+      `,
+      choices: [
+        {
+          text: "🌊 Lanzarse por los Rápidos del Dragón Acuático",
+          target: "park_ride_8",
+          pageDisplay: "Págs. 17 - 18",
+          rewardKey: "Llave 7: Cristal del Reflejo",
+          rewardFriend: "Atracción 7 Domada"
+        }
+      ]
+    },
+
+    "park_ride_8": {
+      id: "park_ride_8",
+      pageNumbers: [17, 18],
+      title: "8. Los Rápidos del Dragón Acuático",
+      image: "assets/images/floating_crystal_mills.jpg",
+      isSpread: true,
+      isDiceChallenge: true,
+      diceChallenge: {
+        target: 7,
+        name: "Descenso por las Cascadas del Dragón",
+        buttonText: "🎲 ¡SORTEAR LOS REMOLINOS CON EL FLOTADOR GIGANTE!",
+        successTitle: "¡Aguas dominadas! Francisco esquiva las olas, salta sobre la cascada y agarra al vuelo la Llave 8 de la cresta del dragón.",
+        failureTitle: "¡Un remolino te hace girar en círculos! Estabiliza el flotador y vuelve a tirar."
+      },
+      textLeft: `
+        <span class="page-badge">Página 17 • Atracción 8 de 9</span>
+        <p>Un canal de agua embravecida en espiral es el cuerpo de un dragón marino viviente que lanza chorros de agua a presión.</p>
+        <p>Montado en un flotador circular gigante con Boliche bien sujeto, desciendes a toda velocidad por la catarata.</p>
+      `,
+      textRight: `
+        <span class="page-badge">Página 18</span>
+        <div id="generic-dice-box"></div>
+        <p class="decision-prompt">Solo te queda una atracción: la gran lanzadera del Fénix.</p>
+      `,
+      choices: [
+        {
+          text: "🚀 Subir a la Lanzadera del Cohete Fénix (Atracción Final)",
+          target: "park_ride_9",
+          pageDisplay: "Págs. 19 - 20",
+          rewardKey: "Llave 8: Escama de Río",
+          rewardFriend: "Atracción 8 Domada"
+        }
+      ]
+    },
+
+    "park_ride_9": {
+      id: "park_ride_9",
+      pageNumbers: [19, 20],
+      title: "9. La Lanzadera del Cohete Fénix",
+      image: "assets/images/floating_cloud_observatory.jpg",
+      isSpread: true,
+      isDiceChallenge: true,
+      diceChallenge: {
+        target: 7,
+        name: "Disparo Vertical a la Cima de las Nubes",
+        buttonText: "🎲 ¡VOLAR HASTA LA CÚPULA Y RECLAMAR LA LLAVE 9!",
+        successTitle: "¡DESPEGUE PERFECTO! La torre se enciende con fuego sagrado, el cohete te eleva hasta tocar las estrellas y atrapas la novena y última llave de oro.",
+        failureTitle: "¡La presión del aire sacude los arneses! Concéntrate para la última tirada."
+      },
+      textLeft: `
+        <span class="page-badge">Página 19 • Atracción 9 de 9</span>
+        <p>La torre de caída libre más alta del mundo ha despertado como un fénix de hierro candente que apunta directo al cielo estrellado.</p>
+        <p>¡Este es el noveno desafío! Si consigues dispararte hasta la cúspide sin desmayarte de la emoción, completarás las <strong>9 Llaves</strong>.</p>
+      `,
+      textRight: `
+        <span class="page-badge">Página 20</span>
+        <div id="generic-dice-box"></div>
+        <p class="decision-prompt">¡Has conseguido las 9 Llaves! Corre a la Fuente Central para romper el hechizo.</p>
+      `,
+      choices: [
+        {
+          text: "🏛️ Ir a la Gran Fuente del Reloj e insertar las 9 Llaves",
+          target: "park_clocktower_fountain",
+          pageDisplay: "Págs. 21 - 22",
+          rewardKey: "Llave 9: Chispa del Fénix",
+          rewardFriend: "Atracción 9 Domada"
+        }
+      ]
+    },
+
+    "park_clocktower_fountain": {
+      id: "park_clocktower_fountain",
+      pageNumbers: [21, 22],
+      title: "La Fuente del Gran Hechizo Roto",
+      image: "assets/images/scene_victory.jpg",
+      isSpread: true,
+      textLeft: `
+        <span class="page-badge">Página 21</span>
+        <p>Francisco llega jadeando a la Gran Plaza Central con Boliche en brazos. En el centro de la fuente de mármol hay un engranaje colosal con <strong>nueve cerraduras de oro</strong> dispuestas en círculo.</p>
+        <p>Una a una, introduces las 9 llaves ganadas con valor en cada atracción: la del Gusano, el Pulpo, el Escarabajo, el Grifo, el Leviatán, la Mansión, el Espejo, el Dragón y el Fénix.</p>
+        <p>Al girar la novena llave... <strong>¡UNA OLA DE LUZ DORADA ESTALLA EN EL CIELO!</strong></p>
+      `,
+      textRight: `
+        <span class="page-badge">Página 22</span>
+        <div style="padding:15px; background:rgba(230,126,34,0.25); border:2px solid #e67e22; border-radius:8px; text-align:center;">
+          <h3 style="color:#f39c12; font-family:'Cinzel',serif; font-size:1.4rem;">🎡 ¡EL PARQUE VUELVE A SER NORMAL!</h3>
+          <p style="color:#f5eedc; font-size:1rem; margin-top:8px;">Las criaturas rugen suavemente mientras su piel de monstruo se convierte en reluciente pintura esmaltada y engranajes mecánicos seguros.</p>
+        </div>
+        <p class="decision-prompt">¡El hechizo se ha quebrado por completo!</p>
+      `,
+      choices: [
+        {
+          text: "🎉 Celebrar la Gran Fiesta de la Feria con Fuegos Artificiales",
+          target: "park_victory",
+          pageDisplay: "Págs. 23 - 24"
+        }
+      ]
+    },
+
+    "park_victory": {
+      id: "park_victory",
+      pageNumbers: [23, 24],
+      title: "¡Francisco, el Gran Libertador del Parque!",
+      image: "assets/images/circus_victory.jpg",
+      isSpread: true,
+      textLeft: `
+        <span class="page-badge">¡Hechizo Roto!</span>
+        <h3 style="color:#e67e22; font-family:'Cinzel',serif; font-size:1.6rem;">¡GRAN FIESTA EN EL PARQUE DE ATRACCIONES!</h3>
+        <p>Las luces de neón se encienden al unísono, la música festiva de los organillos llena el aire y los puestos de algodón de azúcar, manzanas acarameladas y palomitas abren sus puertas.</p>
+        <p>Miles de familias y niños entran al parque aplaudiendo y vitoreando a <strong>Francisco</strong>, a quien el alcalde hace entrega de la <strong>Medalla de Oro de Honor del Parque</strong>.</p>
+      `,
+      textRight: `
+        <span class="page-badge">Trofeo Ferial</span>
+        <div style="padding:15px; background:rgba(230,126,34,0.2); border:2px solid #f39c12; border-radius:8px; text-align:center;">
+          <div style="font-size:2.8rem; margin-bottom:6px;">🏆🎡🧸</div>
+          <h4 style="color:#f39c12;">¡DOMADOR DE LAS 9 CRIATURAS!</h4>
+          <p style="color:#ecd8be; font-size:0.95rem; margin-top:6px;">Has superado los 9 desafíos sin rendirte y has devuelto la alegría a todo el parque.</p>
+        </div>
+        <p class="decision-prompt">¡Enhorabuena, Francisco! Puedes regresar a la biblioteca o volver a disfrutar de la feria.</p>
+      `,
+      choices: [
+        {
+          text: "🏛️ Volver a la Biblioteca de Aventuras",
+          target: "library",
+          pageDisplay: "Estantería Mágica"
+        }
+      ]
+    }
+  }
+};
+
+
+// =============================================================================
+// LIBRO 8: LA LIGA DE SUPERHÉROES: LA FORTALEZA DE LOS VILLANOS (PARA ISAAC)
+// =============================================================================
+const ISAAC_SUPERHEROES_DATA = {
+  id: "isaac_superheroes",
+  title: "La Liga de Superhéroes: La Fortaleza de los Villanos",
+  subtitle: "Superpoderes, artilugios tecnológicos, dados y enigmas contra el Sindicato del Crimen",
+  tagline: "¡Derrota al Doctor Caos con tus dados y astucia, resuelve acertijos y recupera el Núcleo Cuántico!",
+  cover: "assets/images/cover_isaac_superheroes.jpg",
+  difficulty: "⭐⭐⭐",
+  category: "Superhéroes & Sci-Fi",
+  themeColor: "#2980b9",
+  badgeIcon: "🦸",
+  companionName: "Cyber-Drone D-9",
+  companionIcon: "🤖",
+  salvationItemName: "Escudo de Campo de Fuerza de Isaac",
+  salvationItemShort: "Campo de Fuerza",
+  objectiveName: "👥 Héroes Rescatados:",
+  keyName: "💳 Tarjetas de Seguridad:",
+  companionDesc: "Un dron táctico flotante con escáner holográfico de diferencias y propulsores iónicos.",
+  mechanics: ["🦸 Traje de Pulso de Plasma", "🔍 Sala de Hologramas (6 Diferencias)", "🔫 Arsenal de Gadgets", "🧩 Código Cuántico", "🎲 Batalla contra Dr. Caos"],
+  totalFriends: 4,
+  totalKeys: 4,
+
+  nodes: {
+    "cover": {
+      id: "cover",
+      type: "cover",
+      pageNumbers: [1, 2],
+      title: "La Liga de Superhéroes: La Fortaleza de los Villanos",
+      image: "assets/images/cover_isaac_superheroes.jpg",
+      isSpread: false,
+      textLeft: `
+        <span class="page-badge">Portada & Prólogo</span>
+        <h3 style="margin-top:10px; font-family:'Cinzel',serif; font-size:1.4rem; color:#2980b9;">¡ALERTA ROJA EN METRÓPOLIS!</h3>
+        <p>El malvado <strong>Doctor Caos</strong> y sus secuaces han asaltado el Laboratorio Cuántico Central y han robado el <strong>Núcleo de Energía Infinita</strong>. Además, han capturado a tus cuatro compañeros de la Liga de Superhéroes en celdas láser.</p>
+        <p>Solo queda un héroe en pie: <strong>Isaac (Capitán Nova)</strong>, equipado con su armadura de nanofibras de plasma y asistido por su leal <strong>Cyber-Drone D-9</strong>.</p>
+        <ul style="margin: 8px 0 8px 20px; font-size: 0.95rem; line-height: 1.6;">
+          <li>🔍 <strong>La Sala de Hologramas:</strong> Descubre las 6 diferencias entre la ilusión óptica del villano y la consola real.</li>
+          <li>🔫 <strong>El Arsenal de Gadgets:</strong> Localiza el Batarang de Energía, el Guantelete Eléctrico y las Botas Cohete.</li>
+          <li>🧩 <strong>El Enigma de la Computadora:</strong> Descifra los códigos binarios de las celdas láser para liberar a tus 4 amigos.</li>
+          <li>🎲 <strong>El Combate Final con Dados:</strong> Enfréntate al Doctor Caos y sus 4 tentáculos mecánicos de titanio.</li>
+        </ul>
+      `,
+      textRight: `
+        <span class="page-badge">Instrucciones & Consejos</span>
+        <h3 style="margin-top:10px; font-family:'Cinzel',serif; font-size:1.4rem; color:#3498db;">CONSEJOS DEL CYBER-DRONE D-9</h3>
+        <p>🤖 <strong>Escáner Táctico:</strong> Examina con atención las pantallas y consolas; el Doctor Caos siempre comete pequeños errores en sus hologramas trampa.</p>
+        <p>⚡ <strong>Tu Armadura:</strong> Tus rayos de plasma se potencian con tiradas altas de dados.</p>
+        <p>💍 <strong>Campo de Fuerza de Emergencia:</strong> Si caes en una trampa láser, el escudo te salvará <strong>una vez</strong> absorbiendo el impacto.</p>
+      `,
+      choices: [
+        {
+          text: "🚀 Activar propulsores y aterrizar en la azotea de la fortaleza",
+          target: "hero_rooftop",
+          pageDisplay: "Págs. 3 - 4"
+        }
+      ]
+    },
+
+    "hero_rooftop": {
+      id: "hero_rooftop",
+      pageNumbers: [3, 4],
+      title: "Infiltración en la Azotea de Alta Seguridad",
+      image: "assets/images/cave_future_era.jpg",
+      isSpread: true,
+      textLeft: `
+        <span class="page-badge">Página 3</span>
+        <p>Aterrizas en silencio sobre el helipuerto de la torre blindada del Doctor Caos bajo una intensa lluvia de relámpagos. La ciudad de neón se extiende a tus pies.</p>
+        <p>D-9 proyecta el mapa térmico del edificio: <em>—Señor Isaac, las compuertas de ventilación están vigiladas por torretas automáticas, pero la puerta del laboratorio holográfico está abierta.</em></p>
+      `,
+      textRight: `
+        <span class="page-badge">Página 4</span>
+        <p>Para descender a los niveles inferiores necesitas franquear el centro de control holográfico.</p>
+        <p class="decision-prompt">Penetra en la esclusa blindada.</p>
+      `,
+      choices: [
+        {
+          text: "🔍 Entrar en la Sala de Hologramas (Prueba de 6 Diferencias)",
+          target: "hero_differences",
+          pageDisplay: "Págs. 5 - 6"
+        }
+      ]
+    },
+
+    "hero_differences": {
+      id: "hero_differences",
+      pageNumbers: [5, 6],
+      title: "La Sala de Hologramas Trampa (6 Diferencias)",
+      image: "assets/images/scene_differences.jpg",
+      isSpread: true,
+      isDifferences: true,
+      differencesList: [
+        { id: "diff_hero_1", name: "La antena parabólica rota en el panel izquierdo", x: 22, y: 38, radius: 10 },
+        { id: "diff_hero_2", name: "El color del reactor central (azul vs rojo)", x: 78, y: 40, radius: 10 },
+        { id: "diff_hero_3", name: "La palanca de emergencia de la consola", x: 35, y: 72, radius: 10 },
+        { id: "diff_hero_4", name: "El símbolo del Doctor Caos en la pared derecha", x: 88, y: 68, radius: 10 },
+        { id: "diff_hero_5", name: "El robot centinela apagado en la esquina", x: 15, y: 65, radius: 10 },
+        { id: "diff_hero_6", name: "El monitor con el código de acceso secreto", x: 62, y: 25, radius: 10 }
+      ],
+      textLeft: `
+        <span class="page-badge">Página 5</span>
+        <p>¡El Doctor Caos ha proyectado una sala idéntica en un espejo holográfico para confundirte y activar los láseres si tocas el panel falso!</p>
+        <p>D-9 emite un pitido: <em>—¡Capitán Isaac! Compara la imagen de la izquierda con la de la derecha. Hay <strong>6 detalles alterados</strong> que revelan cuál es la consola verdadera.</em></p>
+        <div class="diff-counter-box">
+          <span style="font-size:1.1rem; color:#f5eedc;">Diferencias localizadas:</span>
+          <strong id="differences-count" class="stat-badge" style="background:#2980b9;">0 / 6</strong>
+        </div>
+      `,
+      textRight: `
+        <span class="page-badge">Página 6</span>
+        <p>Haz clic en cada una de las 6 anomalías entre ambos paneles.</p>
+        <p class="decision-prompt">Al descubrirlas todas, la ilusión se desvanece y obtienes la <strong>Tarjeta de Acceso Alfa</strong>.</p>
+      `,
+      choices: [
+        {
+          text: "🔫 Ir a la Armería de Artilugios y Gadgets",
+          target: "hero_armory",
+          pageDisplay: "Págs. 7 - 8",
+          rewardKey: "Tarjeta Alfa"
+        }
+      ]
+    },
+
+    "hero_armory": {
+      id: "hero_armory",
+      pageNumbers: [7, 8],
+      title: "El Arsenal de Artilugios de Superhéroe",
+      image: "assets/images/scene_armory.jpg",
+      isSpread: true,
+      isObjectSearch: true,
+      requiredItems: [
+        { name: "Guantelete de Rayos de Plasma", icon: "🧤", x: 28, y: 65, radius: 10, hint: "En el banco de trabajo de la izquierda" },
+        { name: "Batarang Criogénico de Hielo", icon: "🦇", x: 72, y: 60, radius: 10, hint: "Junto al soporte de armaduras de la derecha" },
+        { name: "Botas de Levitación Antigravedad", icon: "🥾", x: 50, y: 82, radius: 10, hint: "En la caja blindada abierta en el suelo" },
+        { name: "Escudo de Fotones Cuántico", icon: "🛡️", x: 48, y: 35, radius: 10, hint: "En la vitrina de seguridad central" }
+      ],
+      textLeft: `
+        <span class="page-badge">Página 7</span>
+        <p>Llegas a la armería secreta donde el Doctor Caos almacenaba armas experimentales robadas. ¡Es hora de equiparte con la mejor tecnología de combate!</p>
+        <div class="search-checklist-box">
+          <h4>🔍 LOCALIZA TUS 4 ARTILUGIOS EN LA IMAGEN:</h4>
+          <ul id="object-search-checklist" class="search-checklist"></ul>
+        </div>
+      `,
+      textRight: `
+        <span class="page-badge">Página 8</span>
+        <p>Completamente armado con guantelete, botas antigravedad y batarang criogénico, Isaac está listo para cualquier villano.</p>
+        <p class="decision-prompt">Avanza hacia la Computadora Central para descifrar el código de las celdas.</p>
+      `,
+      choices: [
+        {
+          text: "💻 Desbloquear el Código del Núcleo de Computación",
+          target: "hero_riddle",
+          pageDisplay: "Págs. 9 - 10",
+          rewardKey: "Tarjeta Beta"
+        }
+      ]
+    },
+
+    "hero_riddle": {
+      id: "hero_riddle",
+      pageNumbers: [9, 10],
+      title: "El Núcleo de Computación Cuántica",
+      image: "assets/images/scene_riddle.jpg",
+      isSpread: true,
+      isRiddle: true,
+      riddleOptions: [
+        {
+          id: "riddle_cipher_blue",
+          text: "⚡ Conectar el relé azul y activar la frecuencia 1010-GAMMA",
+          isCorrect: true,
+          feedback: "¡ACCESO CONCEDIDO! El cortafuegos del Doctor Caos se colapsa y las cerraduras de las celdas de tus amigos se abren."
+        },
+        {
+          id: "riddle_cipher_wrong1",
+          text: "💥 Cortar todos los cables rojos a lo loco",
+          isCorrect: false,
+          feedback: "¡Alerta de sobrecarga! Cortar cables sin descifrar el código activa las alarmas."
+        },
+        {
+          id: "riddle_cipher_wrong2",
+          text: "🔌 Desenchufar la batería central con los dedos húmedos",
+          isCorrect: false,
+          feedback: "¡Peligro de electrocución! Usa el terminal informático de D-9."
+        }
+      ],
+      textLeft: `
+        <span class="page-badge">Página 9</span>
+        <p>La supercomputadora del villano zumba emitiendo un fulgor rojizo. Un mensaje parpadea en la pantalla:</p>
+        <p style="font-style:italic; color:#e74c3c;">«Para desactivar los campos de fuerza de las prisiones, introduce la frecuencia que neutraliza la radiación del Núcleo Cuántico.»</p>
+        <p>D-9 analiza los esquemas: el relé azul con la frecuencia GAMMA es la clave.</p>
+      `,
+      textRight: `
+        <span class="page-badge">Página 10</span>
+        <div id="riddle-box" class="riddle-container"></div>
+        <p class="decision-prompt">Con el código resuelto, baja a las celdas láser a rescatar a tus camaradas.</p>
+      `,
+      choices: [
+        {
+          text: "👥 Liberar a los 4 Superhéroes en las Mazmorras Láser",
+          target: "hero_dungeon",
+          pageDisplay: "Págs. 11 - 12",
+          rewardKey: "Tarjeta Gamma"
+        }
+      ]
+    },
+
+    "hero_dungeon": {
+      id: "hero_dungeon",
+      pageNumbers: [11, 12],
+      title: "Liberación de la Liga de Superhéroes",
+      image: "assets/images/scene_dungeon_keys.jpg",
+      isSpread: true,
+      textLeft: `
+        <span class="page-badge">Página 11</span>
+        <p>Bajas por el ascensor blindado hasta las celdas subterráneas. ¡Allí están atrapados tus amigos: <strong>Flash-Girl, Titán de Piedra, Águila de Fuego y Rayo Azul</strong>!</p>
+        <p>Insertas las tarjetas de seguridad y desconectas las barreras láser una tras otra.</p>
+        <p><em>—¡Capitán Isaac! —exclama Flash-Girl abrazándote—. ¡Sabíamos que vendrías! El Doctor Caos está en la sala del reactor cargando el Núcleo Cuántico. ¡Debemos detenerlo ya!</em></p>
+      `,
+      textRight: `
+        <span class="page-badge">Página 12</span>
+        <div style="padding:12px; background:rgba(41,128,185,0.25); border:1px solid #2980b9; border-radius:6px; text-align:center;">
+          <h4 style="color:#3498db;">👥 ¡4 SUPERHÉROES RESCATADOS!</h4>
+          <p style="color:#ecd8be; font-size:0.95rem; margin-top:6px;">Tus aliados aseguran el perímetro mientras tú te enfrentas al villano supremo en el tejado del generador.</p>
+        </div>
+        <p class="decision-prompt">Afronta la batalla definitiva contra el Doctor Caos.</p>
+      `,
+      choices: [
+        {
+          text: "🎲 Duelo Épico de Dados contra el Doctor Caos y sus Tentáculos",
+          target: "hero_boss_dice",
+          pageDisplay: "Págs. 13 - 14",
+          rewardKey: "Tarjeta Omega Maestra",
+          rewardFriend: "Flash-Girl, Titán, Águila y Rayo"
+        }
+      ]
+    },
+
+    "hero_boss_dice": {
+      id: "hero_boss_dice",
+      pageNumbers: [13, 14],
+      title: "La Batalla Final contra el Doctor Caos",
+      image: "assets/images/scene_monster.jpg",
+      isSpread: true,
+      isDiceChallenge: true,
+      diceChallenge: {
+        target: 7,
+        name: "Gran Combate contra el Doctor Caos",
+        buttonText: "🎲 ¡DESCARGAR EL RAYO IÓNICO DE ISAAC!",
+        successTitle: "¡IMPACTO CRÍTICO TOTAL! El rayo de plasma de Isaac sobrecarga los tentáculos mecánicos del Doctor Caos, arrojándolo contra las pantallas desactivadas. ¡El Núcleo Cuántico ha sido recuperado!",
+        failureTitle: "¡Un tentáculo metálico desvía tu disparo hacia las vigas! ¡Vuelve a concentrar la energía de tu traje y tira de nuevo!"
+      },
+      textLeft: `
+        <span class="page-badge">Página 13</span>
+        <p>En lo alto de la sala del reactor te espera el <strong>Doctor Caos</strong>, suspendido en el aire gracias a cuatro enormes tentáculos biomecánicos que disparan chispas de plasma.</p>
+        <p><em>—¡Llegas tarde, Capitán Isaac! —brama el villano—. ¡Con el Núcleo Cuántico en mi poder, someteré la ciudad entera!</em></p>
+        <p>Isaac activa sus botas antigravedad y carga el cañón de plasma de su guantelete: <em>—¡No mientras la Liga de Superhéroes siga en pie!</em></p>
+      `,
+      textRight: `
+        <span class="page-badge">Página 14</span>
+        <div id="generic-dice-box"></div>
+        <p class="decision-prompt">Vence al villano para salvar Metrópolis.</p>
+      `,
+      choices: [
+        {
+          text: "🏆 Reclamar la Victoria y salvar Metrópolis",
+          target: "hero_victory",
+          pageDisplay: "Págs. 15 - 16"
+        }
+      ]
+    },
+
+    "hero_victory": {
+      id: "hero_victory",
+      pageNumbers: [15, 16],
+      title: "¡Isaac, el Héroe Supremo de Metrópolis!",
+      image: "assets/images/scene_victory.jpg",
+      isSpread: true,
+      textLeft: `
+        <span class="page-badge">¡Misión Cumplida!</span>
+        <h3 style="color:#2980b9; font-family:'Cinzel',serif; font-size:1.6rem;">¡EL DOCTOR CAOS HA SIDO DERROTADO!</h3>
+        <p>La policía científica custodia al villano esposado con grilletes antimagnéticos. El Núcleo Cuántico es restituido de forma segura en la cámara blindada de la ciudad.</p>
+        <p>El alcalde de Metrópolis sube al estrado ante miles de ciudadanos que corean el nombre de <strong>Isaac</strong> y le hace entrega de la <strong>Medalla de Platino de la Justicia</strong>.</p>
+      `,
+      textRight: `
+        <span class="page-badge">Salón de Héroes</span>
+        <div style="padding:15px; background:rgba(41,128,185,0.2); border:2px solid #2980b9; border-radius:8px; text-align:center;">
+          <div style="font-size:2.8rem; margin-bottom:6px;">🏆🦸⚡</div>
+          <h4 style="color:#3498db;">¡TROFEO: LEYENDA DE LA JUSTICIA!</h4>
+          <p style="color:#ecd8be; font-size:0.95rem; margin-top:6px;">Has salvado a tus 4 camaradas, descifrado los hologramas y vencido al Doctor Caos con tus dados.</p>
+        </div>
+        <p class="decision-prompt">¡Enhorabuena, Isaac! Puedes regresar a la biblioteca para otra gran aventura.</p>
+      `,
+      choices: [
+        {
+          text: "🏛️ Volver a la Biblioteca de Aventuras",
+          target: "library",
+          pageDisplay: "Estantería Mágica"
+        }
+      ]
+    }
+  }
+};
+
+
+// =============================================================================
+// LIBRO 9: ALERTA BIOLÓGICA: EL VIRUS MALVADO Y EL ANTÍDOTO SECRETO (PARA ISAAC)
+// =============================================================================
+const ISAAC_VIRUS_DATA = {
+  id: "isaac_virus",
+  title: "Alerta Biológica: El Virus Malvado y el Antídoto Secreto",
+  subtitle: "Infiltración científica, fórmulas moleculares y contrarreloj",
+  tagline: "¡Penetra en el Complejo Subterráneo, resuelve las fórmulas y sintetiza la cura antes del alba!",
+  cover: "assets/images/cover_isaac_virus.jpg",
+  difficulty: "⭐⭐⭐",
+  category: "Ciencia & Misterio Futurista",
+  themeColor: "#16a085",
+  badgeIcon: "🧪",
+  companionName: "Helix el Nanobot",
+  companionIcon: "🔬",
+  salvationItemName: "Filtro Bio-Regenerador de Helix",
+  salvationItemShort: "Filtro Bio",
+  objectiveName: "👥 Científicos Rescatados:",
+  keyName: "🧪 Viales de la Cura:",
+  companionDesc: "Un nanorobot analizador que escanea reactivos y detecta fugas de toxinas en el aire.",
+  mechanics: ["🥼 Traje de Bioseguridad", "🔍 Búsqueda de Reactivos", "🧬 Secuencia del Genoma", "🌡️ Centrífuga Cuántica", "🎲 Calibración del Sintetizador"],
+  totalFriends: 4,
+  totalKeys: 4,
+
+  nodes: {
+    "cover": {
+      id: "cover",
+      type: "cover",
+      pageNumbers: [1, 2],
+      title: "Alerta Biológica: El Virus Malvado y el Antídoto Secreto",
+      image: "assets/images/cover_isaac_virus.jpg",
+      isSpread: false,
+      textLeft: `
+        <span class="page-badge">Portada & Prólogo</span>
+        <h3 style="margin-top:10px; font-family:'Cinzel',serif; font-size:1.4rem; color:#16a085;">¡CONTENCIÓN NIVEL 4 ACTIVADA!</h3>
+        <p>En el complejo subterráneo Bio-Hex, el perverso <strong>Profesor Toxis</strong> ha desarrollado el <em>Virus Omega</em>, un microorganismo artificial capaz de sumir en un sueño letárgico a toda la población.</p>
+        <p>El <strong>Doctor Isaac</strong>, virólogo prodigio de la Unidad Médica Especial, desciende a las instalaciones presurizadas junto a <strong>Helix</strong>, su robot de análisis molecular.</p>
+        <p>Tu misión: atravesar los 4 laboratorios de aislamiento, encontrar los 4 componentes puros de la fórmula, liberar a los científicos encerrados y calibrar el sintetizador de aerosol para curar la atmósfera antes del amanecer.</p>
+      `,
+      textRight: `
+        <span class="page-badge">Instrucciones & Consejos</span>
+        <h3 style="margin-top:10px; font-family:'Cinzel',serif; font-size:1.4rem; color:#1abc9c;">CONSEJOS DE HELIX</h3>
+        <p>🔬 <strong>Escáner Químico:</strong> Toca los frascos y viales de la escena para identificar reactivos puros.</p>
+        <p>🧪 <strong>Los 4 Viales:</strong> Necesitas reunir la Cepa Inmune, el Solvente Z, el Catalizador Criogénico y el Nanotubo.</p>
+        <p>💍 <strong>Inyección de Emergencia:</strong> Si inhalas gases tóxicos, Helix purificará tu traje <strong>una vez</strong>.</p>
+      `,
+      choices: [
+        {
+          text: "🥼 Cerrar la esclusa de descontaminación y entrar al laboratorio",
+          target: "virus_airlock",
+          pageDisplay: "Págs. 3 - 4"
+        }
+      ]
+    },
+
+    "virus_airlock": {
+      id: "virus_airlock",
+      pageNumbers: [3, 4],
+      title: "La Esclusa de Descontaminación",
+      image: "assets/images/scene_maze.jpg",
+      isSpread: true,
+      textLeft: `
+        <span class="page-badge">Página 3</span>
+        <p>La compuerta hermética de titanio se sella a tu espalda con un silbido de vapor. Duchas de luz ultravioleta esterilizan tu traje de protección biológica.</p>
+        <p>Helix despliega sus sensores: <em>—Doctor Isaac, las alarmas rojas indican que el virus se está filtrando por el conducto norte. Debemos darnos prisa en conseguir los reactivos de la cura.</em></p>
+      `,
+      textRight: `
+        <span class="page-badge">Página 4</span>
+        <p>Frente a ti se abren los pasillos de cristal blindado hacia el Laboratorio de Bioquímica.</p>
+        <p class="decision-prompt">Penetra en la zona de mesas de ensayo.</p>
+      `,
+      choices: [
+        {
+          text: "🔍 Buscar los 4 Reactivos en el Laboratorio de Bioquímica",
+          target: "virus_lab_search",
+          pageDisplay: "Págs. 5 - 6"
+        }
+      ]
+    },
+
+    "virus_lab_search": {
+      id: "virus_lab_search",
+      pageNumbers: [5, 6],
+      title: "El Laboratorio de Fórmulas y Reactivos",
+      image: "assets/images/scene_alchemy.jpg",
+      isSpread: true,
+      isObjectSearch: true,
+      requiredItems: [
+        { name: "Cepa Inmune de Planta Lunar", icon: "🌱", x: 28, y: 72, radius: 10, hint: "En el matraz iluminado en la mesa izquierda" },
+        { name: "Solvente Criogénico Azul", icon: "🧪", x: 70, y: 65, radius: 10, hint: "En la gradilla de tubos de la derecha" },
+        { name: "Enzima Sintética Pura", icon: "💎", x: 50, y: 45, radius: 10, hint: "Dentro del agitador magnético central" },
+        { name: "Nanotubo de Estabilización", icon: "🧬", x: 85, y: 35, radius: 10, hint: "En la estantería superior" }
+      ],
+      textLeft: `
+        <span class="page-badge">Página 5</span>
+        <p>En este laboratorio se investigaban las vacunas antes del ataque de Toxis. Entre decenas de probetas humeantes debes hallar los 4 compuestos activos.</p>
+        <div class="search-checklist-box">
+          <h4>🔍 LOCALIZA LOS 4 COMPONENTES DE LA CURA:</h4>
+          <ul id="object-search-checklist" class="search-checklist"></ul>
+        </div>
+      `,
+      textRight: `
+        <span class="page-badge">Página 6</span>
+        <p>¡Los 4 viales están asegurados en tu maletín térmico! Ahora debes centrifugarlos a la velocidad exacta.</p>
+        <p class="decision-prompt">Avanza a la Cámara de la Centrífuga.</p>
+      `,
+      choices: [
+        {
+          text: "🌡️ Calibrar la Centrífuga Cuántica",
+          target: "virus_centrifuge",
+          pageDisplay: "Págs. 7 - 8",
+          rewardKey: "Cepa Inmune y Solvente"
+        }
+      ]
+    },
+
+    "virus_centrifuge": {
+      id: "virus_centrifuge",
+      pageNumbers: [7, 8],
+      title: "La Centrífuga Cuántica de Precisión",
+      image: "assets/images/scene_riddle.jpg",
+      isSpread: true,
+      isRiddle: true,
+      riddleOptions: [
+        {
+          id: "centrifuge_correct",
+          text: "🌀 Fijar rotación a 12.000 RPM a -4°C con filtro de iones de plata",
+          isCorrect: true,
+          feedback: "¡ÉXITO MOLECULAR! La mezcla se emulsiona en un líquido cian resplandeciente: ¡el antídoto es 100% estable y puro!"
+        },
+        {
+          id: "centrifuge_wrong1",
+          text: "🔥 Poner la máquina a hervir a 300°C",
+          isCorrect: false,
+          feedback: "¡Cuidado! El calor excesivo desnaturaliza las enzimas y arruina la fórmula."
+        },
+        {
+          id: "centrifuge_wrong2",
+          text: "🔨 Golpear la centrífuga con una llave inglesa",
+          isCorrect: false,
+          feedback: "La alta tecnología requiere precisión científica, no golpes mecánicos."
+        }
+      ],
+      textLeft: `
+        <span class="page-badge">Página 7</span>
+        <p>La centrífuga gira zumbando mientras los rotores de levitación magnética esperan los parámetros de temperatura y velocidad.</p>
+        <p>Helix lee la fórmula de Isaac: se requiere frío polar y velocidad supersónica para que el antídoto no pierda su eficacia biológica.</p>
+      `,
+      textRight: `
+        <span class="page-badge">Página 8</span>
+        <div id="riddle-box" class="riddle-container"></div>
+        <p class="decision-prompt">Con la solución estabilizada, acude a liberar a los 4 científicos.</p>
+      `,
+      choices: [
+        {
+          text: "👥 Liberar a los Científicos en Cuarentena Criogénica",
+          target: "virus_quarantine",
+          pageDisplay: "Págs. 9 - 10",
+          rewardKey: "Antídoto Estabilizado"
+        }
+      ]
+    },
+
+    "virus_quarantine": {
+      id: "virus_quarantine",
+      pageNumbers: [9, 10],
+      title: "Las Cápsulas de Cuarentena Criogénica",
+      image: "assets/images/scene_dungeon_keys.jpg",
+      isSpread: true,
+      textLeft: `
+        <span class="page-badge">Página 9</span>
+        <p>En el sector de máxima seguridad, 4 prestigiosos biólogos de tu equipo permanecen encerrados en cámaras de hibernación criogénica para evitar que se contagien.</p>
+        <p>Isaac conecta su terminal portátil e introduce la secuencia de reactivación segura, abriendo las cápsulas una a una.</p>
+        <p><em>—¡Isaac, lo lograste! —dicen al despertar—. Rápido, el nebulizador principal está en la sala del generador. ¡Debemos inyectar la cura antes de que Toxis escape!</em></p>
+      `,
+      textRight: `
+        <span class="page-badge">Página 10</span>
+        <div style="padding:12px; background:rgba(22,160,133,0.25); border:1px solid #16a085; border-radius:6px; text-align:center;">
+          <h4 style="color:#1abc9c;">👥 ¡4 CIENTÍFICOS A SALVO!</h4>
+          <p style="color:#ecd8be; font-size:0.95rem; margin-top:6px;">Tu equipo toma los mandos de los ventiladores mientras tú calibras la inyección de la cura.</p>
+        </div>
+        <p class="decision-prompt">Lanza la síntesis final.</p>
+      `,
+      choices: [
+        {
+          text: "🎲 Calibrar el Sintetizador Molecular contra el Virus",
+          target: "virus_synthesis_dice",
+          pageDisplay: "Págs. 11 - 12",
+          rewardKey: "Vial Maestro de la Cura",
+          rewardFriend: "Dres. Aris, Valeria, Chen y Lucas"
+        }
+      ]
+    },
+
+    "virus_synthesis_dice": {
+      id: "virus_synthesis_dice",
+      pageNumbers: [11, 12],
+      title: "La Inyección de la Cura en el Nebulizador",
+      image: "assets/images/scene_monster.jpg",
+      isSpread: true,
+      isDiceChallenge: true,
+      diceChallenge: {
+        target: 7,
+        name: "Calibración de la Bomba de Aerosol de la Cura",
+        buttonText: "🎲 ¡DISPARAR LA CURA POR LOS CONDUCTOS DE VENTILACIÓN!",
+        successTitle: "¡SÍNTESIS PERFECTA! La presión alcanza el 100%. Una nube de vapor azul purificador se expande a través de las turbinas hacia toda la metrópolis erradicando el virus.",
+        failureTitle: "¡La presión de las válvulas fluctúa! Ajusta la válvula y vuelve a tirar los dados."
+      },
+      textLeft: `
+        <span class="page-badge">Página 11</span>
+        <p>El gigantesco nebulizador de la torre subterránea ruge con vapor a presión. Tienes el vial del antídoto en la mano y el reloj marca los últimos minutos antes de que el virus sea incontrolable.</p>
+        <p>Isaac ajusta los inyectores con pulso de cirujano: <em>—¡Helix, máxima potencia a las bombas de dispersión!</em></p>
+      `,
+      textRight: `
+        <span class="page-badge">Página 12</span>
+        <div id="generic-dice-box"></div>
+        <p class="decision-prompt">La cura se expande erradicando la infección.</p>
+      `,
+      choices: [
+        {
+          text: "🏆 Comprobar la curación de la ciudad y salir a la superficie",
+          target: "virus_victory",
+          pageDisplay: "Págs. 13 - 14"
+        }
+      ]
+    },
+
+    "virus_victory": {
+      id: "virus_victory",
+      pageNumbers: [13, 14],
+      title: "¡Isaac, el Salvador de la Salud Mundial!",
+      image: "assets/images/scene_victory.jpg",
+      isSpread: true,
+      textLeft: `
+        <span class="page-badge">¡Epidemia Neutralizada!</span>
+        <h3 style="color:#16a085; font-family:'Cinzel',serif; font-size:1.6rem;">¡EL ANTÍDOTO ES UN ÉXITO ROTUNDO!</h3>
+        <p>El rocío azulado de la cura neutraliza cada rastro del virus en cuestión de segundos. Los ciudadanos recuperan sus fuerzas y el Profesor Toxis es arrestado sin escape posible.</p>
+        <p>La Organización Mundial de la Ciencia condecora a <strong>Isaac</strong> con la <strong>Insignia de Oro de la Medicina Heroica</strong>.</p>
+      `,
+      textRight: `
+        <span class="page-badge">Reconocimiento</span>
+        <div style="padding:15px; background:rgba(22,160,133,0.2); border:2px solid #16a085; border-radius:8px; text-align:center;">
+          <div style="font-size:2.8rem; margin-bottom:6px;">🏆🧪🔬</div>
+          <h4 style="color:#1abc9c;">¡TROFEO: MAESTRO DEL ANTÍDOTO!</h4>
+          <p style="color:#ecd8be; font-size:0.95rem; margin-top:6px;">Has sintetizado la cura, rescatado a los científicos y salvado la salud de todo el planeta.</p>
+        </div>
+        <p class="decision-prompt">¡Enhorabuena, Isaac! Puedes volver a la biblioteca para otra gran aventura.</p>
+      `,
+      choices: [
+        {
+          text: "🏛️ Volver a la Biblioteca de Aventuras",
+          target: "library",
+          pageDisplay: "Estantería Mágica"
+        }
+      ]
+    }
+  }
+};
+
+
+// =============================================================================
+// LIBRO 10: EL BOSQUE ENCANTADO Y EL ELIXIR DE LA ETERNA JUVENTUD (PARA ISAAC)
+// =============================================================================
+const ISAAC_BOSQUE_DATA = {
+  id: "isaac_bosque",
+  title: "El Bosque Encantado y el Elixir de la Eterna Juventud",
+  subtitle: "Árboles sabios, criaturas místicas, acertijos de hadas y el manantial sagrado",
+  tagline: "¡Cruza el Laberinto de Zarzas, habla con los Ents milenarios y alcanza la Fuente de la Vida!",
+  cover: "assets/images/cover_isaac_forest.jpg",
+  difficulty: "⭐⭐⭐",
+  category: "Fantasía Clásica & Bosques",
+  themeColor: "#27ae60",
+  badgeIcon: "🌲",
+  companionName: "Silfo el Zorro Plateado",
+  companionIcon: "🦊",
+  salvationItemName: "Lágrima del Hada Protectora / Anillo Mágico",
+  salvationItemShort: "Lágrima de Hada",
+  objectiveName: "✨ Santuarios Curados:",
+  keyName: "💎 Gemas Elementales:",
+  companionDesc: "Un zorro místico de tres colas con pelaje resplandeciente que conoce las sendas secretas de los espíritus del bosque.",
+  mechanics: ["🌿 Bastón Rúnico de Isaac", "🌳 Acertijo de RobleViejo el Ent", "🌸 Flores de Luz Estelar", "🦄 Claro de los Unicornios", "🎲 Prueba del Manantial Sagrado"],
+  totalFriends: 4,
+  totalKeys: 4,
+
+  nodes: {
+    "cover": {
+      id: "cover",
+      type: "cover",
+      pageNumbers: [1, 2],
+      title: "El Bosque Encantado y el Elixir de la Eterna Juventud",
+      image: "assets/images/cover_isaac_forest.jpg",
+      isSpread: false,
+      textLeft: `
+        <span class="page-badge">Portada & Prólogo</span>
+        <h3 style="margin-top:10px; font-family:'Cinzel',serif; font-size:1.4rem; color:#27ae60;">¡EL LLANTO DEL ÁRBOL ANCESTRAL!</h3>
+        <p>En el corazón del Bosque Susurrante, el Árbol Madre de la Vida ha comenzado a marchitarse debido a una sombra marchitadora. Sus hojas de esmeralda caen y las criaturas feéricas pierden su magia.</p>
+        <p>Cuenta la leyenda que en la gruta oculta de las cascadas brota el <strong>Manantial del Elixir de la Eterna Juventud</strong>, la única agua capaz de sanar las raíces ancestrales.</p>
+        <p>El joven explorador <strong>Isaac</strong>, portando su <strong>Bastón Rúnico de Roble</strong> y guiado por <strong>Silfo</strong>, el zorro plateado de tres colas, se adentra bajo la espesura en una expedición legendaria.</p>
+      `,
+      textRight: `
+        <span class="page-badge">Instrucciones & Consejos</span>
+        <h3 style="margin-top:10px; font-family:'Cinzel',serif; font-size:1.4rem; color:#2ecc71;">CONSEJOS DE SILFO</h3>
+        <p>🦊 <strong>Tu Guía Feérico:</strong> Silfo huele la pureza de la naturaleza y te avisará cuando un árbol sabio desee hablar.</p>
+        <p>💎 <strong>Las 4 Gemas de los Elementos:</strong> Tierra, Agua, Viento y Luz son necesarias para abrir la caverna del manantial.</p>
+        <p>💍 <strong>Lágrima de Hada:</strong> Si te pierdes en la niebla o caes en un zarzal, la lágrima te rescatará <strong>una vez</strong>.</p>
+      `,
+      choices: [
+        {
+          text: "🌿 Cruzar el arco de ramas y adentrarse en el bosque",
+          target: "forest_entrance",
+          pageDisplay: "Págs. 3 - 4"
+        }
+      ]
+    },
+
+    "forest_entrance": {
+      id: "forest_entrance",
+      pageNumbers: [3, 4],
+      title: "El Sendero de los Hongos Brillantes",
+      image: "assets/images/scene_maze.jpg",
+      isSpread: true,
+      textLeft: `
+        <span class="page-badge">Página 3</span>
+        <p>Te adentras bajo un dosel vegetal tan frondoso que filtra la luz del sol en haces de oro y esmeralda. El camino está marcado por setas bioluminiscentes que tintinean como campanillas de cristal.</p>
+        <p>Silfo trota alegremente unos pasos por delante agitando sus tres colas plateadas: <em>—Isaac, más adelante duerme RobleViejo, el Ent guardián del gran puente de raíces.</em></p>
+      `,
+      textRight: `
+        <span class="page-badge">Página 4</span>
+        <p>El puente levadizo de raíces vivientes solo desciende si respondes al enigma del anciano árbol sabio.</p>
+        <p class="decision-prompt">Acércate al tronco parlante con respeto.</p>
+      `,
+      choices: [
+        {
+          text: "🌳 Escuchar el Acertijo de RobleViejo el Ent",
+          target: "forest_ent_riddle",
+          pageDisplay: "Págs. 5 - 6"
+        }
+      ]
+    },
+
+    "forest_ent_riddle": {
+      id: "forest_ent_riddle",
+      pageNumbers: [5, 6],
+      title: "El Acertijo de RobleViejo el Ent",
+      image: "assets/images/scene_riddle.jpg",
+      isSpread: true,
+      isRiddle: true,
+      riddleOptions: [
+        {
+          id: "ent_correct_answer",
+          text: "🌱 Ofrecerle agua pura de manantial y responder: «El Bosque es el Hogar de Todos»",
+          isCorrect: true,
+          feedback: "¡ROBLEVIEJO SONRÍE! Sus ojos de musgo brillan, estira sus colosales ramas de madera y entrelaza sus raíces formando un puente florido hacia el claro sagrado."
+        },
+        {
+          id: "ent_wrong_axe",
+          text: "🪓 Sacar un hacha de hierro y amenazar con talar una de sus ramas",
+          isCorrect: false,
+          feedback: "¡Los árboles sagrados rechazan la violencia! Guarda el hacha y habla con cariño a la naturaleza."
+        },
+        {
+          id: "ent_wrong_fire",
+          text: "🔥 Encender una fogata grande con hojas secas",
+          isCorrect: false,
+          feedback: "¡Peligro! El fuego asusta a los Ents. Ofrece sabiduría y respeto."
+        }
+      ],
+      textLeft: `
+        <span class="page-badge">Página 5</span>
+        <p>Un colosal roble milenario de corteza arrugada abre dos grandes ojos dorados en el tronco y bosteza con un rumor de hojas mecidas por el viento:</p>
+        <p><em>—Muchos siglos hace que ningún caminante busca el Elixir sin codicia... Dime, joven Isaac: ¿con qué espíritu pretendes cruzar mi puente sagrado?</em></p>
+      `,
+      textRight: `
+        <span class="page-badge">Página 6</span>
+        <div id="riddle-box" class="riddle-container"></div>
+        <p class="decision-prompt">Al ganarte la confianza del Ent, obtienes la <strong>Gema de la Tierra</strong>.</p>
+      `,
+      choices: [
+        {
+          text: "🌸 Buscar las 4 Flores Lunares en el Claro de la Flora Sagrada",
+          target: "forest_flowers_search",
+          pageDisplay: "Págs. 7 - 8",
+          rewardKey: "Gema de la Tierra"
+        }
+      ]
+    },
+
+    "forest_flowers_search": {
+      id: "forest_flowers_search",
+      pageNumbers: [7, 8],
+      title: "El Claro de las Cuatro Flores Sagradas",
+      image: "assets/images/scene_alchemy.jpg",
+      isSpread: true,
+      isObjectSearch: true,
+      requiredItems: [
+        { name: "Orquídea Azul Luminosa", icon: "💙", x: 25, y: 70, radius: 10, hint: "Junto al arroyo de aguas cristalinas a la izquierda" },
+        { name: "Lirio Solar Dorado", icon: "💛", x: 75, y: 65, radius: 10, hint: "En la peña soleada a la derecha" },
+        { name: "Rosa de Escarcha Plateada", icon: "🤍", x: 50, y: 45, radius: 10, hint: "En el pedestal de piedra central" },
+        { name: "Helecho Cantarín de Esmeralda", icon: "🌿", x: 85, y: 40, radius: 10, hint: "Entre las lianas superiores" }
+      ],
+      textLeft: `
+        <span class="page-badge">Página 7</span>
+        <p>Llegas a un claro resplandeciente donde los rayos de luz parecen polvo de estrellas. Aquí crecen las cuatro flores más raras del bosque.</p>
+        <p>Sus pétalos son la llave botánica para que la gruta del Manantial reconozca tus buenas intenciones.</p>
+        <div class="search-checklist-box">
+          <h4>🔍 LOCALIZA LAS 4 FLORES SAGRADAS:</h4>
+          <ul id="object-search-checklist" class="search-checklist"></ul>
+        </div>
+      `,
+      textRight: `
+        <span class="page-badge">Página 8</span>
+        <p>Las 4 flores desprenden un perfume embriagador y se transforman en la <strong>Gema del Agua y la Gema del Viento</strong>.</p>
+        <p class="decision-prompt">Sigue a Silfo hacia el claro de los unicornios.</p>
+      `,
+      choices: [
+        {
+          text: "🦄 Acudir al Santuario de los Unicornios de Cristal",
+          target: "forest_unicorn_glade",
+          pageDisplay: "Págs. 9 - 10",
+          rewardKey: "Gemas de Agua y Viento"
+        }
+      ]
+    },
+
+    "forest_unicorn_glade": {
+      id: "forest_unicorn_glade",
+      pageNumbers: [9, 10],
+      title: "El Santuario de los Unicornios de Cristal",
+      image: "assets/images/floating_cloud_observatory.jpg",
+      isSpread: true,
+      textLeft: `
+        <span class="page-badge">Página 9</span>
+        <p>Entre la niebla perlada emergen dos majestuosos unicornios blancos con cuernos de cristal translúcido que refractan los colores del arcoíris.</p>
+        <p>Los unicornios inclinan sus frentes en reverencia ante el Bastón Rúnico de Isaac y tocan el suelo con sus pezuñas: <strong>¡una cascada de agua dorada se aparta revelando la entrada a la Gruta de la Eterna Juventud!</strong></p>
+      `,
+      textRight: `
+        <span class="page-badge">Página 10</span>
+        <div style="padding:12px; background:rgba(39,174,96,0.25); border:1px solid #27ae60; border-radius:6px; text-align:center;">
+          <h4 style="color:#2ecc71;">🦄 ¡BENDICIÓN DE LOS UNICORNIOS RECIBIDA!</h4>
+          <p style="color:#ecd8be; font-size:0.95rem; margin-top:6px;">Los unicornios te otorgan la <strong>Gema de la Luz</strong> y te acompañan hasta el umbral del manantial.</p>
+        </div>
+        <p class="decision-prompt">Entra en la caverna sagrada para recoger el elixir.</p>
+      `,
+      choices: [
+        {
+          text: "🎲 Superar la Prueba de Armonía de Dados en la Fuente Sagrada",
+          target: "forest_spring_dice",
+          pageDisplay: "Págs. 11 - 12",
+          rewardKey: "Gema de la Luz",
+          rewardFriend: "Santuario de Unicornios Purificado"
+        }
+      ]
+    },
+
+    "forest_spring_dice": {
+      id: "forest_spring_dice",
+      pageNumbers: [11, 12],
+      title: "La Fuente del Manantial de la Eterna Juventud",
+      image: "assets/images/scene_victory.jpg",
+      isSpread: true,
+      isDiceChallenge: true,
+      diceChallenge: {
+        target: 7,
+        name: "Prueba de Armonía ante la Ninfa del Agua",
+        buttonText: "🎲 ¡LANZAR LOS DADOS DE CRISTAL BENDITO!",
+        successTitle: "¡ARMONÍA CELESTIAL! Los dados ruedan formando un 7+. El agua dorada del manantial se eleva formando una esfera pura que llena el ánfora mágica de Isaac. ¡El Elixir es tuyo!",
+        failureTitle: "¡La superficie del agua tiembla con ondas suaves! Concéntrate en el amor a la naturaleza y vuelve a tirar."
+      },
+      textLeft: `
+        <span class="page-badge">Página 11</span>
+        <p>En el centro de la gruta de cristal brota un manantial de aguas doradas que emana una calidez revitalizante. Flotando sobre el estanque, la <strong>Ninfa Guardiana del Lago</strong> te mira con ojos bondadosos.</p>
+        <p><em>—Has demostrado nobleza, Isaac. Ahora, lanza los dados sagrados de madera y cristal para sintonizar tu corazón con el latido de la Fuente de la Vida.</em></p>
+      `,
+      textRight: `
+        <span class="page-badge">Página 12</span>
+        <div id="generic-dice-box"></div>
+        <p class="decision-prompt">¡Llena el ánfora con el Elixir y corre al Árbol Madre!</p>
+      `,
+      choices: [
+        {
+          text: "🌳 Ungir las raíces del Árbol de la Vida y sanar el bosque",
+          target: "forest_victory",
+          pageDisplay: "Págs. 13 - 14",
+          rewardFriend: "Elixir de la Juventud Obtenido"
+        }
+      ]
+    },
+
+    "forest_victory": {
+      id: "forest_victory",
+      pageNumbers: [13, 14],
+      title: "¡Isaac, el Guardián Eterno de la Naturaleza!",
+      image: "assets/images/medieval_victory.jpg",
+      isSpread: true,
+      textLeft: `
+        <span class="page-badge">¡El Bosque Florece!</span>
+        <h3 style="color:#27ae60; font-family:'Cinzel',serif; font-size:1.6rem;">¡EL ÁRBOL MADRE HA SIDO SANADO!</h3>
+        <p>Isaac derrama con cuidado las gotas doradas del Elixir sobre las raíces secas del Gran Árbol. En un instante, <strong>¡una oleada de savia luminosa asciende por el tronco colosal!</strong></p>
+        <p>Miles de hojas de esmeralda brotan en segundos, flores mágicas se abren en todas las ramas y las hadas del bosque danzan en el aire arrojando pétalos dorados sobre Isaac y Silfo.</p>
+      `,
+      textRight: `
+        <span class="page-badge">Corona Floral</span>
+        <div style="padding:15px; background:rgba(39,174,96,0.2); border:2px solid #27ae60; border-radius:8px; text-align:center;">
+          <div style="font-size:2.8rem; margin-bottom:6px;">🏆🌲🦊</div>
+          <h4 style="color:#2ecc71;">¡TROFEO: SEÑOR DE LA ETERNA JUVENTUD!</h4>
+          <p style="color:#ecd8be; font-size:0.95rem; margin-top:6px;">Has hablado con los Ents, guiado a los unicornios y devuelto la inmortalidad al Bosque Sagrado.</p>
+        </div>
+        <p class="decision-prompt">¡Enhorabuena, Isaac! Puedes volver a la biblioteca para disfrutar de todas tus aventuras.</p>
+      `,
+      choices: [
+        {
+          text: "🏛️ Volver a la Biblioteca de Aventuras",
+          target: "library",
+          pageDisplay: "Estantería Mágica"
+        }
+      ]
+    }
+  }
+};
+
+
+// =============================================================================
+// CATÁLOGO COMPLETO DE LOS 10 LIBROS-JUEGO DE LA BIBLIOTECA FANTÁSTICA
+// =============================================================================
 window.LIBRARY_BOOKS = {
   "castillo": CASTILLO_DATA,
   "circo": CIRCO_DATA,
   "cueva": CUEVA_DATA,
   "dragon": DRAGON_DATA,
-  "mundo": MUNDO_DATA
+  "mundo": MUNDO_DATA,
+  "david_dragones": DAVID_DATA,
+  "francisco_parque": FRANCISCO_DATA,
+  "isaac_superheroes": ISAAC_SUPERHEROES_DATA,
+  "isaac_virus": ISAAC_VIRUS_DATA,
+  "isaac_bosque": ISAAC_BOSQUE_DATA
 };
