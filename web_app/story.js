@@ -3346,7 +3346,7 @@ const DAVID_DATA = {
       id: "david_entrance",
       pageNumbers: [3, 4],
       title: "La Garganta de Obsidiana",
-      image: "assets/images/scene_maze.jpg",
+      image: "assets/images/david_scene_entrance.jpg",
       isSpread: true,
       textLeft: `
         <span class="page-badge">Página 3</span>
@@ -3374,7 +3374,7 @@ const DAVID_DATA = {
       id: "david_doors",
       pageNumbers: [5, 6],
       title: "Las Dos Puertas Vivas con Ojos y Pistolas",
-      image: "assets/images/scene_armory.jpg",
+      image: "assets/images/david_scene_doors.jpg",
       isSpread: true,
       isDiceChallenge: true,
       diceChallenge: {
@@ -3410,7 +3410,7 @@ const DAVID_DATA = {
       id: "david_spikes",
       pageNumbers: [7, 8],
       title: "El Suelo de Pinchos Invisibles",
-      image: "assets/images/scene_riddle.jpg",
+      image: "assets/images/david_scene_spikes.jpg",
       isSpread: true,
       isSpikesGrid: true,
       spikesConfig: {
@@ -3456,7 +3456,7 @@ const DAVID_DATA = {
       id: "david_armory_cache",
       pageNumbers: [9, 10],
       title: "La Fragua de los Héroes Dragón",
-      image: "assets/images/medieval_armory_riddle.jpg",
+      image: "assets/images/david_scene_armory.jpg",
       isSpread: true,
       isObjectSearch: true,
       requiredItems: [
@@ -3493,7 +3493,7 @@ const DAVID_DATA = {
       id: "david_lair_jaulis",
       pageNumbers: [11, 12],
       title: "El Cráter Ígneo del Dragón Jaulis",
-      image: "assets/images/medieval_dragon_lair.jpg",
+      image: "assets/images/david_scene_jaulis.jpg",
       isSpread: true,
       isDiceChallenge: true,
       diceChallenge: {
@@ -3528,7 +3528,7 @@ const DAVID_DATA = {
       id: "david_lair_ojo",
       pageNumbers: [13, 14],
       title: "La Cúpula Mística del Dragón Ojo",
-      image: "assets/images/scene_monster.jpg",
+      image: "assets/images/david_scene_ojo.jpg",
       isSpread: true,
       isRiddle: true,
       riddleOptions: [
@@ -3576,7 +3576,7 @@ const DAVID_DATA = {
       id: "david_treasure_vault",
       pageNumbers: [15, 16],
       title: "La Cámara del Gran Tesoro Prohibido",
-      image: "assets/images/scene_victory.jpg",
+      image: "assets/images/david_scene_treasure.jpg",
       isSpread: true,
       textLeft: `
         <span class="page-badge">Página 15</span>
@@ -3602,11 +3602,65 @@ const DAVID_DATA = {
       ]
     },
 
+    
+    "david_gameover_spikes": {
+      id: "david_gameover_spikes",
+      isGameOver: true,
+      title: "¡Caída en la Fosa de Pinchos Volcánicos!",
+      image: "assets/images/david_gameover_spikes.jpg",
+      textLeft: `
+        <span class="page-badge" style="color:var(--accent-red);">¡FINAL FATAL!</span>
+        <h3 style="margin-top:10px; font-family:'Cinzel',serif; font-size:1.4rem; color:var(--accent-red);">¡EL SUELO DE BASALTO SE DERRUMBA!</h3>
+        <p>Un paso en falso sobre una losa maldita acciona el mecanismo secreto. El suelo de roca volcánica se abre bajo tus pies y una densa hilera de pinchos de acero al rojo vivo surge desde la fosa de magma.</p>
+        <div class="enigma-box" style="border-left-color: var(--accent-red);">
+          <strong>⚠️ TRAMPA DE PINCHOS RETRÁCTILES:</strong>
+          <p>Has caído en la trampa del salón. Si portas la <strong>Gema de Chispita / Anillo Mágico</strong>, el talismán creará un campo de sustentación flotante que te salvará de los pinchos.</p>
+        </div>
+      `,
+      textRight: `
+        <span class="page-badge">Destino & Salvación</span>
+        <div class="gameover-box">
+          <p>Quedarías atrapado en la fosa del volcán para siempre... ¡a menos que invoques el poder del Anillo Mágico para regresar sobre tus pasos!</p>
+        </div>
+        <div id="gameover-ring-box" style="margin: 12px 0;"></div>
+        <p class="decision-prompt" id="gameover-prompt">
+          Elige una opción a continuación: usa el <strong>Anillo Mágico de Salvación</strong> o reintenta con calma desde la decisión previa.
+        </p>
+      `,
+      choices: []
+    },
+
+    "david_gameover_fire": {
+      id: "david_gameover_fire",
+      isGameOver: true,
+      title: "¡Envuelto en la Llamarada de Jaulis!",
+      image: "assets/images/david_gameover_fire.jpg",
+      textLeft: `
+        <span class="page-badge" style="color:var(--accent-red);">¡FINAL FATAL!</span>
+        <h3 style="margin-top:10px; font-family:'Cinzel',serif; font-size:1.4rem; color:var(--accent-red);">¡LA FURIA DEL DRAGÓN DE FUEGO!</h3>
+        <p>Cargar a pecho descubierto sin esperar la señal de Chispita fue un grave error. Jaulis inhala profundamente y descarga un torrente colosal de llamas doradas que abrasa la caverna entera.</p>
+        <div class="enigma-box" style="border-left-color: var(--accent-red);">
+          <strong>🔥 LLAMARADA VOLCÁNICA PURA:</strong>
+          <p>El calor es insoportable para cualquier armadura normal. ¡Activa tu <strong>Gema de Fuego / Anillo Mágico</strong> para desviar el torrente ígneo antes de quedar calcinado!</p>
+        </div>
+      `,
+      textRight: `
+        <span class="page-badge">Destino & Salvación</span>
+        <div class="gameover-box">
+          <p>Tu espada se derretiría y el tesoro de los dragones quedaría fuera de tu alcance... ¡a menos que uses tu talismán de salvación!</p>
+        </div>
+        <div id="gameover-ring-box" style="margin: 12px 0;"></div>
+        <p class="decision-prompt" id="gameover-prompt">
+          Usa el <strong>Anillo Mágico</strong> para desplegar un domo protector o reintenta el combate con estrategia.
+        </p>
+      `,
+      choices: []
+    },
     "david_victory": {
       id: "david_victory",
       pageNumbers: [17, 18],
       title: "¡David, el Conquistador de Dragones!",
-      image: "assets/images/medieval_victory.jpg",
+      image: "assets/images/david_scene_victory.jpg",
       isSpread: true,
       textLeft: `
         <span class="page-badge">¡Aventura Completada!</span>
@@ -3694,7 +3748,7 @@ const FRANCISCO_DATA = {
       id: "park_ride_1",
       pageNumbers: [3, 4],
       title: "1. El Gusano de Hierro (Montaña Rusa Serpiente)",
-      image: "assets/images/scene_maze.jpg",
+      image: "assets/images/park_scene_serpent_coaster.jpg",
       isSpread: true,
       isDiceChallenge: true,
       diceChallenge: {
@@ -3729,7 +3783,7 @@ const FRANCISCO_DATA = {
       id: "park_ride_2",
       pageNumbers: [5, 6],
       title: "2. La Noria de las Mil Luces (El Pulpo Celeste)",
-      image: "assets/images/circus_main_tent.jpg",
+      image: "assets/images/park_scene_octopus_wheel.jpg",
       isSpread: true,
       isRiddle: true,
       riddleOptions: [
@@ -3777,7 +3831,7 @@ const FRANCISCO_DATA = {
       id: "park_ride_3",
       pageNumbers: [7, 8],
       title: "3. El Coliseo de Escarabajos (Coches de Choque)",
-      image: "assets/images/scene_armory.jpg",
+      image: "assets/images/park_scene_beetle_cars.jpg",
       isSpread: true,
       isDiceChallenge: true,
       diceChallenge: {
@@ -3812,7 +3866,7 @@ const FRANCISCO_DATA = {
       id: "park_ride_4",
       pageNumbers: [9, 10],
       title: "4. El Tiovivo de los Grifos Alados",
-      image: "assets/images/circus_menagerie.jpg",
+      image: "assets/images/park_scene_griffin_carousel.jpg",
       isSpread: true,
       isObjectSearch: true,
       requiredItems: [
@@ -3849,7 +3903,7 @@ const FRANCISCO_DATA = {
       id: "park_ride_5",
       pageNumbers: [11, 12],
       title: "5. El Galeón Leviatán (Barco Columpio)",
-      image: "assets/images/floating_sky_harbor.jpg",
+      image: "assets/images/park_scene_leviathan_ship.jpg",
       isSpread: true,
       isDiceChallenge: true,
       diceChallenge: {
@@ -3884,7 +3938,7 @@ const FRANCISCO_DATA = {
       id: "park_ride_6",
       pageNumbers: [13, 14],
       title: "6. La Mansión de las Sombras Risueñas",
-      image: "assets/images/scene_banquet.jpg",
+      image: "assets/images/park_scene_haunted_mansion.jpg",
       isSpread: true,
       isObjectSearch: true,
       requiredItems: [
@@ -3920,7 +3974,7 @@ const FRANCISCO_DATA = {
       id: "park_ride_7",
       pageNumbers: [15, 16],
       title: "7. El Laberinto de los Espejos Deformantes",
-      image: "assets/images/circus_mirror_maze.jpg",
+      image: "assets/images/park_scene_mirror_maze.jpg",
       isSpread: true,
       isRiddle: true,
       riddleOptions: [
@@ -3968,7 +4022,7 @@ const FRANCISCO_DATA = {
       id: "park_ride_8",
       pageNumbers: [17, 18],
       title: "8. Los Rápidos del Dragón Acuático",
-      image: "assets/images/floating_crystal_mills.jpg",
+      image: "assets/images/park_scene_water_rapids.jpg",
       isSpread: true,
       isDiceChallenge: true,
       diceChallenge: {
@@ -4003,7 +4057,7 @@ const FRANCISCO_DATA = {
       id: "park_ride_9",
       pageNumbers: [19, 20],
       title: "9. La Lanzadera del Cohete Fénix",
-      image: "assets/images/floating_cloud_observatory.jpg",
+      image: "assets/images/park_scene_phoenix_tower.jpg",
       isSpread: true,
       isDiceChallenge: true,
       diceChallenge: {
@@ -4038,7 +4092,7 @@ const FRANCISCO_DATA = {
       id: "park_clocktower_fountain",
       pageNumbers: [21, 22],
       title: "La Fuente del Gran Hechizo Roto",
-      image: "assets/images/scene_victory.jpg",
+      image: "assets/images/park_scene_fountain.jpg",
       isSpread: true,
       textLeft: `
         <span class="page-badge">Página 21</span>
@@ -4063,11 +4117,65 @@ const FRANCISCO_DATA = {
       ]
     },
 
+    
+    "park_gameover_dizzy": {
+      id: "park_gameover_dizzy",
+      isGameOver: true,
+      title: "¡Atrapado en el Torbellino de Azúcar!",
+      image: "assets/images/park_gameover_dizzy.jpg",
+      textLeft: `
+        <span class="page-badge" style="color:var(--accent-red);">¡FINAL FATAL!</span>
+        <h3 style="margin-top:10px; font-family:'Cinzel',serif; font-size:1.4rem; color:var(--accent-red);">¡EL MAREO DEL ALGODÓN ENCANTADO!</h3>
+        <p>Una densa nube de algodón de azúcar fluorescente empieza a girar a toda velocidad. Los colores se mezclan, las risas de las criaturas vivas resuenan en eco y pierdes completamente el equilibrio.</p>
+        <div class="enigma-box" style="border-left-color: var(--accent-red);">
+          <strong>🌀 VÓRTICE HIPNÓTICO DE LA FERIA:</strong>
+          <p>El hechizo del parque intenta que te unas a sus atracciones para siempre. ¡Usa tu <strong>Ticket VIP Dorado / Anillo Mágico</strong> para cortar el torbellino!</p>
+        </div>
+      `,
+      textRight: `
+        <span class="page-badge">Destino & Salvación</span>
+        <div class="gameover-box">
+          <p>Te quedarías dando vueltas sin fin en la feria encantada... ¡a menos que rompas el hechizo con tu poder mágico!</p>
+        </div>
+        <div id="gameover-ring-box" style="margin: 12px 0;"></div>
+        <p class="decision-prompt" id="gameover-prompt">
+          Usa el <strong>Anillo Mágico</strong> para disipar el mareo o retrocede a la atracción anterior con la ayuda de Boliche.
+        </p>
+      `,
+      choices: []
+    },
+
+    "park_gameover_trap": {
+      id: "park_gameover_trap",
+      isGameOver: true,
+      title: "¡Encerrado en la Jaula Mecánica de Tornos!",
+      image: "assets/images/park_gameover_trap.jpg",
+      textLeft: `
+        <span class="page-badge" style="color:var(--accent-red);">¡FINAL FATAL!</span>
+        <h3 style="margin-top:10px; font-family:'Cinzel',serif; font-size:1.4rem; color:var(--accent-red);">¡BARRICADA DE ACERO Y CANDADOS!</h3>
+        <p>Intentar forzar los tornos de salida sin respetar el orden de las criaturas activó el mecanismo de seguridad del parque. Unos pesados barrotes de hierro caen del techo encerrándote en una jaula impenetrable.</p>
+        <div class="enigma-box" style="border-left-color: var(--accent-red);">
+          <strong>⛓️ ENCIERRO DE AUTÓMATAS:</strong>
+          <p>Los engranajes del candado son mágicos. ¡Solo el destello del <strong>Anillo Mágico de Salvación</strong> puede fundir los barrotes y devolverte a la aventura!</p>
+        </div>
+      `,
+      textRight: `
+        <span class="page-badge">Destino & Salvación</span>
+        <div class="gameover-box">
+          <p>El parque de atracciones se quedaría hechizado para siempre... ¡a menos que actives tu anillo salvador!</p>
+        </div>
+        <div id="gameover-ring-box" style="margin: 12px 0;"></div>
+        <p class="decision-prompt" id="gameover-prompt">
+          Usa el <strong>Anillo Mágico</strong> para derretir la cerradura o reintenta el desafío desde la decisión previa.
+        </p>
+      `,
+      choices: []
+    },
     "park_victory": {
       id: "park_victory",
       pageNumbers: [23, 24],
       title: "¡Francisco, el Gran Libertador del Parque!",
-      image: "assets/images/circus_victory.jpg",
+      image: "assets/images/park_scene_victory.jpg",
       isSpread: true,
       textLeft: `
         <span class="page-badge">¡Hechizo Roto!</span>
@@ -4160,7 +4268,7 @@ const ISAAC_SUPERHEROES_DATA = {
       id: "hero_rooftop",
       pageNumbers: [3, 4],
       title: "Infiltración en la Azotea de Alta Seguridad",
-      image: "assets/images/cave_future_era.jpg",
+      image: "assets/images/hero_scene_rooftop.jpg",
       isSpread: true,
       textLeft: `
         <span class="page-badge">Página 3</span>
@@ -4185,7 +4293,7 @@ const ISAAC_SUPERHEROES_DATA = {
       id: "hero_differences",
       pageNumbers: [5, 6],
       title: "La Sala de Hologramas Trampa (6 Diferencias)",
-      image: "assets/images/scene_differences.jpg",
+      image: "assets/images/hero_scene_differences.jpg",
       isSpread: true,
       isDifferences: true,
       differencesList: [
@@ -4224,7 +4332,7 @@ const ISAAC_SUPERHEROES_DATA = {
       id: "hero_armory",
       pageNumbers: [7, 8],
       title: "El Arsenal de Artilugios de Superhéroe",
-      image: "assets/images/scene_armory.jpg",
+      image: "assets/images/hero_scene_armory.jpg",
       isSpread: true,
       isObjectSearch: true,
       requiredItems: [
@@ -4260,7 +4368,7 @@ const ISAAC_SUPERHEROES_DATA = {
       id: "hero_riddle",
       pageNumbers: [9, 10],
       title: "El Núcleo de Computación Cuántica",
-      image: "assets/images/scene_riddle.jpg",
+      image: "assets/images/hero_scene_riddle.jpg",
       isSpread: true,
       isRiddle: true,
       riddleOptions: [
@@ -4308,7 +4416,7 @@ const ISAAC_SUPERHEROES_DATA = {
       id: "hero_dungeon",
       pageNumbers: [11, 12],
       title: "Liberación de la Liga de Superhéroes",
-      image: "assets/images/scene_dungeon_keys.jpg",
+      image: "assets/images/hero_scene_dungeon.jpg",
       isSpread: true,
       textLeft: `
         <span class="page-badge">Página 11</span>
@@ -4339,7 +4447,7 @@ const ISAAC_SUPERHEROES_DATA = {
       id: "hero_boss_dice",
       pageNumbers: [13, 14],
       title: "La Batalla Final contra el Doctor Caos",
-      image: "assets/images/scene_monster.jpg",
+      image: "assets/images/hero_scene_boss.jpg",
       isSpread: true,
       isDiceChallenge: true,
       diceChallenge: {
@@ -4369,11 +4477,65 @@ const ISAAC_SUPERHEROES_DATA = {
       ]
     },
 
+    
+    "hero_gameover_lasers": {
+      id: "hero_gameover_lasers",
+      isGameOver: true,
+      title: "¡Alarma Roja y Red Láser de Contención!",
+      image: "assets/images/hero_gameover_lasers.jpg",
+      textLeft: `
+        <span class="page-badge" style="color:var(--accent-red);">¡FINAL FATAL!</span>
+        <h3 style="margin-top:10px; font-family:'Cinzel',serif; font-size:1.4rem; color:var(--accent-red);">¡SISTEMA DE SEGURIDAD EN ALERTA MÁXIMA!</h3>
+        <p>Un sensor volumétrico ha detectado tu presencia. Las sirenas aúllan en los rascacielos y una impenetrable red de rayos láser de estasis roja cruza la sala bloqueando cada salida.</p>
+        <div class="enigma-box" style="border-left-color: var(--accent-red);">
+          <strong>🚨 CUADRÍCULA DE LÁSER DE ESTASIS:</strong>
+          <p>Un solo paso hacia los rayos te paralizará al instante. ¡Tu dron D-9 o el <strong>Anillo Mágico Cuántico</strong> pueden emitir una pulsación PEM para reiniciar el sistema!</p>
+        </div>
+      `,
+      textRight: `
+        <span class="page-badge">Destino & Salvación</span>
+        <div class="gameover-box">
+          <p>Los superhéroes aliados quedarían atrapados en las celdas... ¡a menos que uses tu talismán de salvación!</p>
+        </div>
+        <div id="gameover-ring-box" style="margin: 12px 0;"></div>
+        <p class="decision-prompt" id="gameover-prompt">
+          Usa el <strong>Anillo Mágico</strong> para desactivar los sensores con un pulso cuántico o retrocede para actuar con sigilo.
+        </p>
+      `,
+      choices: []
+    },
+
+    "hero_gameover_ambush": {
+      id: "hero_gameover_ambush",
+      isGameOver: true,
+      title: "¡Rodeado por el Enjambre de Robodrones!",
+      image: "assets/images/hero_gameover_ambush.jpg",
+      textLeft: `
+        <span class="page-badge" style="color:var(--accent-red);">¡FINAL FATAL!</span>
+        <h3 style="margin-top:10px; font-family:'Cinzel',serif; font-size:1.4rem; color:var(--accent-red);">¡LA TRAMPA MECÁNICA DE DOCTOR CAOS!</h3>
+        <p>Doctor Caos pulsó el botón de emergencia del reactor. Decenas de drones de combate esféricos con ojos incandescentes emergen de los conductos de ventilación apuntando sus cañones hacia ti.</p>
+        <div class="enigma-box" style="border-left-color: var(--accent-red);">
+          <strong>🤖 ENJAMBRE CIBERNÉTICO HOSTIL:</strong>
+          <p>Te superan en número por diez a uno. ¡Invoca el poder del <strong>Anillo Mágico / Escudo Cuántico</strong> para proyectar una onda de choque expansiva y salir ileso!</p>
+        </div>
+      `,
+      textRight: `
+        <span class="page-badge">Destino & Salvación</span>
+        <div class="gameover-box">
+          <p>Metrópolis caería bajo el control de los villanos... ¡a menos que ejecutes tu maniobra de salvación!</p>
+        </div>
+        <div id="gameover-ring-box" style="margin: 12px 0;"></div>
+        <p class="decision-prompt" id="gameover-prompt">
+          Usa el <strong>Anillo Mágico</strong> para repeler a los drones con una onda electromagnética o reintenta con astucia.
+        </p>
+      `,
+      choices: []
+    },
     "hero_victory": {
       id: "hero_victory",
       pageNumbers: [15, 16],
       title: "¡Isaac, el Héroe Supremo de Metrópolis!",
-      image: "assets/images/scene_victory.jpg",
+      image: "assets/images/hero_scene_victory.jpg",
       isSpread: true,
       textLeft: `
         <span class="page-badge">¡Misión Cumplida!</span>
@@ -4461,7 +4623,7 @@ const ISAAC_VIRUS_DATA = {
       id: "virus_airlock",
       pageNumbers: [3, 4],
       title: "La Esclusa de Descontaminación",
-      image: "assets/images/scene_maze.jpg",
+      image: "assets/images/virus_scene_airlock.jpg",
       isSpread: true,
       textLeft: `
         <span class="page-badge">Página 3</span>
@@ -4486,7 +4648,7 @@ const ISAAC_VIRUS_DATA = {
       id: "virus_lab_search",
       pageNumbers: [5, 6],
       title: "El Laboratorio de Fórmulas y Reactivos",
-      image: "assets/images/scene_alchemy.jpg",
+      image: "assets/images/virus_scene_lab.jpg",
       isSpread: true,
       isObjectSearch: true,
       requiredItems: [
@@ -4522,7 +4684,7 @@ const ISAAC_VIRUS_DATA = {
       id: "virus_centrifuge",
       pageNumbers: [7, 8],
       title: "La Centrífuga Cuántica de Precisión",
-      image: "assets/images/scene_riddle.jpg",
+      image: "assets/images/virus_scene_centrifuge.jpg",
       isSpread: true,
       isRiddle: true,
       riddleOptions: [
@@ -4569,7 +4731,7 @@ const ISAAC_VIRUS_DATA = {
       id: "virus_quarantine",
       pageNumbers: [9, 10],
       title: "Las Cápsulas de Cuarentena Criogénica",
-      image: "assets/images/scene_dungeon_keys.jpg",
+      image: "assets/images/virus_scene_quarantine.jpg",
       isSpread: true,
       textLeft: `
         <span class="page-badge">Página 9</span>
@@ -4600,7 +4762,7 @@ const ISAAC_VIRUS_DATA = {
       id: "virus_synthesis_dice",
       pageNumbers: [11, 12],
       title: "La Inyección de la Cura en el Nebulizador",
-      image: "assets/images/scene_monster.jpg",
+      image: "assets/images/virus_scene_synthesis.jpg",
       isSpread: true,
       isDiceChallenge: true,
       diceChallenge: {
@@ -4629,11 +4791,65 @@ const ISAAC_VIRUS_DATA = {
       ]
     },
 
+    
+    "virus_gameover_breach": {
+      id: "virus_gameover_breach",
+      isGameOver: true,
+      title: "¡Fuga de Contención y Bruma Biológica Tóxica!",
+      image: "assets/images/virus_gameover_breach.jpg",
+      textLeft: `
+        <span class="page-badge" style="color:var(--accent-red);">¡FINAL FATAL!</span>
+        <h3 style="margin-top:10px; font-family:'Cinzel',serif; font-size:1.4rem; color:var(--accent-red);">¡RUPTURA DE AISLAMIENTO NIVEL 4!</h3>
+        <p>Un tubo de ensayo presurizado se ha fracturado contra el suelo. Una densa nube de vapor biológico verde chartreuse se expande rápidamente empañando el cristal de tu escafandra.</p>
+        <div class="enigma-box" style="border-left-color: var(--accent-red);">
+          <strong>☣️ PROTOCOLO DE FUGA TÓXICA:</strong>
+          <p>El virus mutante amenaza con saturar los filtros convencionales. ¡El <strong>Filtro Bio-Protector / Anillo Mágico</strong> puede esterilizar el aire a tu alrededor en microsegundos!</p>
+        </div>
+      `,
+      textRight: `
+        <span class="page-badge">Destino & Salvación</span>
+        <div class="gameover-box">
+          <p>El antídoto no llegaría a tiempo a los hospitales de la ciudad... ¡a menos que actives tu escudo biológico!</p>
+        </div>
+        <div id="gameover-ring-box" style="margin: 12px 0;"></div>
+        <p class="decision-prompt" id="gameover-prompt">
+          Usa el <strong>Anillo Mágico</strong> para desplegar la burbuja estéril de salvación o retrocede para manipular los reactivos con precaución.
+        </p>
+      `,
+      choices: []
+    },
+
+    "virus_gameover_lockdown": {
+      id: "virus_gameover_lockdown",
+      isGameOver: true,
+      title: "¡Cierre Hermético y Cuarentena Total!",
+      image: "assets/images/virus_gameover_lockdown.jpg",
+      textLeft: `
+        <span class="page-badge" style="color:var(--accent-red);">¡FINAL FATAL!</span>
+        <h3 style="margin-top:10px; font-family:'Cinzel',serif; font-size:1.4rem; color:var(--accent-red);">¡COMPUERTAS DE TITANIO BLOQUEADAS!</h3>
+        <p>Una anomalía en la presión de la centrífuga ha disparado el cierre automático de cuarentena. Las compuertas de tres metros de grosor caen sellando el sector y la desinfección térmica comienza en 30 segundos.</p>
+        <div class="enigma-box" style="border-left-color: var(--accent-red);">
+          <strong>🔒 BLOQUEO GENERAL DEL SECTOR:</strong>
+          <p>Los teclados de control están desconectados. ¡Solo el <strong>Anillo Mágico de Anulación / Tarjeta Maestra</strong> puede forzar la apertura de las compuertas!</p>
+        </div>
+      `,
+      textRight: `
+        <span class="page-badge">Destino & Salvación</span>
+        <div class="gameover-box">
+          <p>Quedarías atrapado en el laboratorio subterráneo... ¡a menos que recurras a tu poder de escape!</p>
+        </div>
+        <div id="gameover-ring-box" style="margin: 12px 0;"></div>
+        <p class="decision-prompt" id="gameover-prompt">
+          Usa el <strong>Anillo Mágico</strong> para abrir la compuerta de emergencia o reintenta la calibración del equipo.
+        </p>
+      `,
+      choices: []
+    },
     "virus_victory": {
       id: "virus_victory",
       pageNumbers: [13, 14],
       title: "¡Isaac, el Salvador de la Salud Mundial!",
-      image: "assets/images/scene_victory.jpg",
+      image: "assets/images/virus_scene_victory.jpg",
       isSpread: true,
       textLeft: `
         <span class="page-badge">¡Epidemia Neutralizada!</span>
@@ -4721,7 +4937,7 @@ const ISAAC_BOSQUE_DATA = {
       id: "forest_entrance",
       pageNumbers: [3, 4],
       title: "El Sendero de los Hongos Brillantes",
-      image: "assets/images/scene_maze.jpg",
+      image: "assets/images/forest_scene_entrance.jpg",
       isSpread: true,
       textLeft: `
         <span class="page-badge">Página 3</span>
@@ -4746,7 +4962,7 @@ const ISAAC_BOSQUE_DATA = {
       id: "forest_ent_riddle",
       pageNumbers: [5, 6],
       title: "El Acertijo de RobleViejo el Ent",
-      image: "assets/images/scene_riddle.jpg",
+      image: "assets/images/forest_scene_ent.jpg",
       isSpread: true,
       isRiddle: true,
       riddleOptions: [
@@ -4793,7 +5009,7 @@ const ISAAC_BOSQUE_DATA = {
       id: "forest_flowers_search",
       pageNumbers: [7, 8],
       title: "El Claro de las Cuatro Flores Sagradas",
-      image: "assets/images/scene_alchemy.jpg",
+      image: "assets/images/forest_scene_flowers.jpg",
       isSpread: true,
       isObjectSearch: true,
       requiredItems: [
@@ -4830,7 +5046,7 @@ const ISAAC_BOSQUE_DATA = {
       id: "forest_unicorn_glade",
       pageNumbers: [9, 10],
       title: "El Santuario de los Unicornios de Cristal",
-      image: "assets/images/floating_cloud_observatory.jpg",
+      image: "assets/images/forest_scene_unicorns.jpg",
       isSpread: true,
       textLeft: `
         <span class="page-badge">Página 9</span>
@@ -4860,7 +5076,7 @@ const ISAAC_BOSQUE_DATA = {
       id: "forest_spring_dice",
       pageNumbers: [11, 12],
       title: "La Fuente del Manantial de la Eterna Juventud",
-      image: "assets/images/scene_victory.jpg",
+      image: "assets/images/forest_scene_spring.jpg",
       isSpread: true,
       isDiceChallenge: true,
       diceChallenge: {
@@ -4890,11 +5106,65 @@ const ISAAC_BOSQUE_DATA = {
       ]
     },
 
+    
+    "forest_gameover_thorns": {
+      id: "forest_gameover_thorns",
+      isGameOver: true,
+      title: "¡Atrapado en el Zarzal de Espinas Negras!",
+      image: "assets/images/forest_gameover_thorns.jpg",
+      textLeft: `
+        <span class="page-badge" style="color:var(--accent-red);">¡FINAL FATAL!</span>
+        <h3 style="margin-top:10px; font-family:'Cinzel',serif; font-size:1.4rem; color:var(--accent-red);">¡ENREDADERAS SOMBRÍAS DEL BOSQUE!</h3>
+        <p>Apartarte del sendero de setas luminosas te lleva a una hondonada oscura. De entre la tierra brotan lianas espinosas que se enroscan rápidamente en tus botas impidiéndote mover ni un solo paso.</p>
+        <div class="enigma-box" style="border-left-color: var(--accent-red);">
+          <strong>🌿 ZARZAS DE MAGIA TENEBROSA:</strong>
+          <p>Las espinas absorben la energía vital de quienes no respetan el bosque. ¡Tu <strong>Lámpara de Hadas / Anillo Mágico</strong> puede irradiar luz pura para hacer florecer las zarzas y liberarte!</p>
+        </div>
+      `,
+      textRight: `
+        <span class="page-badge">Destino & Salvación</span>
+        <div class="gameover-box">
+          <p>El Manantial de la Eterna Juventud permanecería oculto para siempre... ¡a menos que invoques la luz salvadora!</p>
+        </div>
+        <div id="gameover-ring-box" style="margin: 12px 0;"></div>
+        <p class="decision-prompt" id="gameover-prompt">
+          Usa el <strong>Anillo Mágico</strong> para bañar el zarzal en luz dorada o reintenta siguiendo el sendero sabio de RobleViejo.
+        </p>
+      `,
+      choices: []
+    },
+
+    "forest_gameover_mist": {
+      id: "forest_gameover_mist",
+      isGameOver: true,
+      title: "¡Adormecido por la Niebla de Sueño Profundo!",
+      image: "assets/images/forest_gameover_mist.jpg",
+      textLeft: `
+        <span class="page-badge" style="color:var(--accent-red);">¡FINAL FATAL!</span>
+        <h3 style="margin-top:10px; font-family:'Cinzel',serif; font-size:1.4rem; color:var(--accent-red);">¡EL CANTO DE BRUMA DEL CLARO!</h3>
+        <p>Una densa niebla púrpura con olor a lavanda y amapolas encantadas brota de la cascada. Tus ojos comienzan a cerrarse, tus miembros se vuelven pesados como plomo y caes en un profundo trance somnoliento.</p>
+        <div class="enigma-box" style="border-left-color: var(--accent-red);">
+          <strong>💤 LETARGO DE CIEN AÑOS:</strong>
+          <p>Quien duerme bajo la bruma del bosque puede no despertar en un siglo. ¡La <strong>Campanilla de RobleViejo / Anillo Mágico</strong> emitirá una nota cristalina que disipará el sueño!</p>
+        </div>
+      `,
+      textRight: `
+        <span class="page-badge">Destino & Salvación</span>
+        <div class="gameover-box">
+          <p>Tu aventura terminaría en un sueño eterno... ¡a menos que hagas sonar tu talismán de salvación!</p>
+        </div>
+        <div id="gameover-ring-box" style="margin: 12px 0;"></div>
+        <p class="decision-prompt" id="gameover-prompt">
+          Usa el <strong>Anillo Mágico</strong> para despertar con su campana mística o retrocede para cruzar con respeto.
+        </p>
+      `,
+      choices: []
+    },
     "forest_victory": {
       id: "forest_victory",
       pageNumbers: [13, 14],
       title: "¡Isaac, el Guardián Eterno de la Naturaleza!",
-      image: "assets/images/medieval_victory.jpg",
+      image: "assets/images/forest_scene_victory.jpg",
       isSpread: true,
       textLeft: `
         <span class="page-badge">¡El Bosque Florece!</span>
