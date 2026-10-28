@@ -3410,7 +3410,7 @@ const DAVID_DATA = {
       id: "david_spikes",
       pageNumbers: [7, 8],
       title: "El Suelo de Pinchos Invisibles",
-      image: "assets/images/david_scene_spikes.jpg",
+      image: "assets/images/gameover_spikepit.jpg",
       isSpread: true,
       isSpikesGrid: true,
       spikesConfig: {
@@ -3456,7 +3456,7 @@ const DAVID_DATA = {
       id: "david_armory_cache",
       pageNumbers: [9, 10],
       title: "La Fragua de los Héroes Dragón",
-      image: "assets/images/david_scene_armory.jpg",
+      image: "assets/images/medieval_armory_riddle.jpg",
       isSpread: true,
       isObjectSearch: true,
       requiredItems: [
@@ -3493,7 +3493,7 @@ const DAVID_DATA = {
       id: "david_lair_jaulis",
       pageNumbers: [11, 12],
       title: "El Cráter Ígneo del Dragón Jaulis",
-      image: "assets/images/david_scene_jaulis.jpg",
+      image: "assets/images/medieval_dragon_lair.jpg",
       isSpread: true,
       isDiceChallenge: true,
       diceChallenge: {
@@ -3528,7 +3528,7 @@ const DAVID_DATA = {
       id: "david_lair_ojo",
       pageNumbers: [13, 14],
       title: "La Cúpula Mística del Dragón Ojo",
-      image: "assets/images/david_scene_ojo.jpg",
+      image: "assets/images/scene_monster.jpg",
       isSpread: true,
       isRiddle: true,
       riddleOptions: [
@@ -3576,7 +3576,7 @@ const DAVID_DATA = {
       id: "david_treasure_vault",
       pageNumbers: [15, 16],
       title: "La Cámara del Gran Tesoro Prohibido",
-      image: "assets/images/david_scene_treasure.jpg",
+      image: "assets/images/scene_victory.jpg",
       isSpread: true,
       textLeft: `
         <span class="page-badge">Página 15</span>
@@ -3607,7 +3607,7 @@ const DAVID_DATA = {
       id: "david_gameover_spikes",
       isGameOver: true,
       title: "¡Caída en la Fosa de Pinchos Volcánicos!",
-      image: "assets/images/david_gameover_spikes.jpg",
+      image: "assets/images/gameover_spikepit.jpg",
       textLeft: `
         <span class="page-badge" style="color:var(--accent-red);">¡FINAL FATAL!</span>
         <h3 style="margin-top:10px; font-family:'Cinzel',serif; font-size:1.4rem; color:var(--accent-red);">¡EL SUELO DE BASALTO SE DERRUMBA!</h3>
@@ -3634,7 +3634,7 @@ const DAVID_DATA = {
       id: "david_gameover_fire",
       isGameOver: true,
       title: "¡Envuelto en la Llamarada de Jaulis!",
-      image: "assets/images/david_gameover_fire.jpg",
+      image: "assets/images/medieval_gameover_dragon.jpg",
       textLeft: `
         <span class="page-badge" style="color:var(--accent-red);">¡FINAL FATAL!</span>
         <h3 style="margin-top:10px; font-family:'Cinzel',serif; font-size:1.4rem; color:var(--accent-red);">¡LA FURIA DEL DRAGÓN DE FUEGO!</h3>
@@ -3660,7 +3660,7 @@ const DAVID_DATA = {
       id: "david_victory",
       pageNumbers: [17, 18],
       title: "¡David, el Conquistador de Dragones!",
-      image: "assets/images/david_scene_victory.jpg",
+      image: "assets/images/medieval_victory.jpg",
       isSpread: true,
       textLeft: `
         <span class="page-badge">¡Aventura Completada!</span>
@@ -3748,7 +3748,7 @@ const FRANCISCO_DATA = {
       id: "park_ride_1",
       pageNumbers: [3, 4],
       title: "1. El Gusano de Hierro (Montaña Rusa Serpiente)",
-      image: "assets/images/park_scene_serpent_coaster.jpg",
+      image: "assets/images/park_scene_entrance.jpg",
       isSpread: true,
       isDiceChallenge: true,
       diceChallenge: {
@@ -3783,7 +3783,7 @@ const FRANCISCO_DATA = {
       id: "park_ride_2",
       pageNumbers: [5, 6],
       title: "2. La Noria de las Mil Luces (El Pulpo Celeste)",
-      image: "assets/images/park_scene_octopus_wheel.jpg",
+      image: "assets/images/circus_menagerie.jpg",
       isSpread: true,
       isRiddle: true,
       riddleOptions: [
@@ -3831,7 +3831,7 @@ const FRANCISCO_DATA = {
       id: "park_ride_3",
       pageNumbers: [7, 8],
       title: "3. El Coliseo de Escarabajos (Coches de Choque)",
-      image: "assets/images/park_scene_beetle_cars.jpg",
+      image: "assets/images/circus_clockwork_cage.jpg",
       isSpread: true,
       isDiceChallenge: true,
       diceChallenge: {
@@ -3866,7 +3866,7 @@ const FRANCISCO_DATA = {
       id: "park_ride_4",
       pageNumbers: [9, 10],
       title: "4. El Tiovivo de los Grifos Alados",
-      image: "assets/images/park_scene_griffin_carousel.jpg",
+      image: "assets/images/floating_sky_harbor.jpg",
       isSpread: true,
       isObjectSearch: true,
       requiredItems: [
@@ -3903,7 +3903,7 @@ const FRANCISCO_DATA = {
       id: "park_ride_5",
       pageNumbers: [11, 12],
       title: "5. El Galeón Leviatán (Barco Columpio)",
-      image: "assets/images/park_scene_leviathan_ship.jpg",
+      image: "assets/images/floating_sky_whale.jpg",
       isSpread: true,
       isDiceChallenge: true,
       diceChallenge: {
@@ -3938,7 +3938,7 @@ const FRANCISCO_DATA = {
       id: "park_ride_6",
       pageNumbers: [13, 14],
       title: "6. La Mansión de las Sombras Risueñas",
-      image: "assets/images/park_scene_haunted_mansion.jpg",
+      image: "assets/images/scene_banquet.jpg",
       isSpread: true,
       isObjectSearch: true,
       requiredItems: [
@@ -3974,7 +3974,7 @@ const FRANCISCO_DATA = {
       id: "park_ride_7",
       pageNumbers: [15, 16],
       title: "7. El Laberinto de los Espejos Deformantes",
-      image: "assets/images/park_scene_mirror_maze.jpg",
+      image: "assets/images/circus_mirror_maze.jpg",
       isSpread: true,
       isRiddle: true,
       riddleOptions: [
@@ -4022,7 +4022,7 @@ const FRANCISCO_DATA = {
       id: "park_ride_8",
       pageNumbers: [17, 18],
       title: "8. Los Rápidos del Dragón Acuático",
-      image: "assets/images/park_scene_water_rapids.jpg",
+      image: "assets/images/floating_crystal_mills.jpg",
       isSpread: true,
       isDiceChallenge: true,
       diceChallenge: {
@@ -4057,7 +4057,7 @@ const FRANCISCO_DATA = {
       id: "park_ride_9",
       pageNumbers: [19, 20],
       title: "9. La Lanzadera del Cohete Fénix",
-      image: "assets/images/park_scene_phoenix_tower.jpg",
+      image: "assets/images/floating_cloud_observatory.jpg",
       isSpread: true,
       isDiceChallenge: true,
       diceChallenge: {
@@ -4092,7 +4092,7 @@ const FRANCISCO_DATA = {
       id: "park_clocktower_fountain",
       pageNumbers: [21, 22],
       title: "La Fuente del Gran Hechizo Roto",
-      image: "assets/images/park_scene_fountain.jpg",
+      image: "assets/images/scene_clockwork.jpg",
       isSpread: true,
       textLeft: `
         <span class="page-badge">Página 21</span>
@@ -4122,7 +4122,7 @@ const FRANCISCO_DATA = {
       id: "park_gameover_dizzy",
       isGameOver: true,
       title: "¡Atrapado en el Torbellino de Azúcar!",
-      image: "assets/images/park_gameover_dizzy.jpg",
+      image: "assets/images/circus_candy_wagon.jpg",
       textLeft: `
         <span class="page-badge" style="color:var(--accent-red);">¡FINAL FATAL!</span>
         <h3 style="margin-top:10px; font-family:'Cinzel',serif; font-size:1.4rem; color:var(--accent-red);">¡EL MAREO DEL ALGODÓN ENCANTADO!</h3>
@@ -4149,7 +4149,7 @@ const FRANCISCO_DATA = {
       id: "park_gameover_trap",
       isGameOver: true,
       title: "¡Encerrado en la Jaula Mecánica de Tornos!",
-      image: "assets/images/park_gameover_trap.jpg",
+      image: "assets/images/circus_gameover_puppet.jpg",
       textLeft: `
         <span class="page-badge" style="color:var(--accent-red);">¡FINAL FATAL!</span>
         <h3 style="margin-top:10px; font-family:'Cinzel',serif; font-size:1.4rem; color:var(--accent-red);">¡BARRICADA DE ACERO Y CANDADOS!</h3>
@@ -4175,7 +4175,7 @@ const FRANCISCO_DATA = {
       id: "park_victory",
       pageNumbers: [23, 24],
       title: "¡Francisco, el Gran Libertador del Parque!",
-      image: "assets/images/park_scene_victory.jpg",
+      image: "assets/images/circus_victory.jpg",
       isSpread: true,
       textLeft: `
         <span class="page-badge">¡Hechizo Roto!</span>
@@ -4268,7 +4268,7 @@ const ISAAC_SUPERHEROES_DATA = {
       id: "hero_rooftop",
       pageNumbers: [3, 4],
       title: "Infiltración en la Azotea de Alta Seguridad",
-      image: "assets/images/hero_scene_rooftop.jpg",
+      image: "assets/images/cave_future_era.jpg",
       isSpread: true,
       textLeft: `
         <span class="page-badge">Página 3</span>
@@ -4293,7 +4293,7 @@ const ISAAC_SUPERHEROES_DATA = {
       id: "hero_differences",
       pageNumbers: [5, 6],
       title: "La Sala de Hologramas Trampa (6 Diferencias)",
-      image: "assets/images/hero_scene_differences.jpg",
+      image: "assets/images/scene_differences.jpg",
       isSpread: true,
       isDifferences: true,
       differencesList: [
@@ -4332,7 +4332,7 @@ const ISAAC_SUPERHEROES_DATA = {
       id: "hero_armory",
       pageNumbers: [7, 8],
       title: "El Arsenal de Artilugios de Superhéroe",
-      image: "assets/images/hero_scene_armory.jpg",
+      image: "assets/images/scene_armory.jpg",
       isSpread: true,
       isObjectSearch: true,
       requiredItems: [
@@ -4368,7 +4368,7 @@ const ISAAC_SUPERHEROES_DATA = {
       id: "hero_riddle",
       pageNumbers: [9, 10],
       title: "El Núcleo de Computación Cuántica",
-      image: "assets/images/hero_scene_riddle.jpg",
+      image: "assets/images/scene_riddle.jpg",
       isSpread: true,
       isRiddle: true,
       riddleOptions: [
@@ -4416,7 +4416,7 @@ const ISAAC_SUPERHEROES_DATA = {
       id: "hero_dungeon",
       pageNumbers: [11, 12],
       title: "Liberación de la Liga de Superhéroes",
-      image: "assets/images/hero_scene_dungeon.jpg",
+      image: "assets/images/scene_dungeon_keys.jpg",
       isSpread: true,
       textLeft: `
         <span class="page-badge">Página 11</span>
@@ -4447,7 +4447,7 @@ const ISAAC_SUPERHEROES_DATA = {
       id: "hero_boss_dice",
       pageNumbers: [13, 14],
       title: "La Batalla Final contra el Doctor Caos",
-      image: "assets/images/hero_scene_boss.jpg",
+      image: "assets/images/cave_future_era.jpg",
       isSpread: true,
       isDiceChallenge: true,
       diceChallenge: {
@@ -4482,7 +4482,7 @@ const ISAAC_SUPERHEROES_DATA = {
       id: "hero_gameover_lasers",
       isGameOver: true,
       title: "¡Alarma Roja y Red Láser de Contención!",
-      image: "assets/images/hero_gameover_lasers.jpg",
+      image: "assets/images/floating_gameover_spikes.jpg",
       textLeft: `
         <span class="page-badge" style="color:var(--accent-red);">¡FINAL FATAL!</span>
         <h3 style="margin-top:10px; font-family:'Cinzel',serif; font-size:1.4rem; color:var(--accent-red);">¡SISTEMA DE SEGURIDAD EN ALERTA MÁXIMA!</h3>
@@ -4509,7 +4509,7 @@ const ISAAC_SUPERHEROES_DATA = {
       id: "hero_gameover_ambush",
       isGameOver: true,
       title: "¡Rodeado por el Enjambre de Robodrones!",
-      image: "assets/images/hero_gameover_ambush.jpg",
+      image: "assets/images/circus_gameover_ambush.jpg",
       textLeft: `
         <span class="page-badge" style="color:var(--accent-red);">¡FINAL FATAL!</span>
         <h3 style="margin-top:10px; font-family:'Cinzel',serif; font-size:1.4rem; color:var(--accent-red);">¡LA TRAMPA MECÁNICA DE DOCTOR CAOS!</h3>
@@ -4535,7 +4535,7 @@ const ISAAC_SUPERHEROES_DATA = {
       id: "hero_victory",
       pageNumbers: [15, 16],
       title: "¡Isaac, el Héroe Supremo de Metrópolis!",
-      image: "assets/images/hero_scene_victory.jpg",
+      image: "assets/images/floating_victory.jpg",
       isSpread: true,
       textLeft: `
         <span class="page-badge">¡Misión Cumplida!</span>
@@ -4623,7 +4623,7 @@ const ISAAC_VIRUS_DATA = {
       id: "virus_airlock",
       pageNumbers: [3, 4],
       title: "La Esclusa de Descontaminación",
-      image: "assets/images/virus_scene_airlock.jpg",
+      image: "assets/images/medieval_courtyard.jpg",
       isSpread: true,
       textLeft: `
         <span class="page-badge">Página 3</span>
@@ -4648,7 +4648,7 @@ const ISAAC_VIRUS_DATA = {
       id: "virus_lab_search",
       pageNumbers: [5, 6],
       title: "El Laboratorio de Fórmulas y Reactivos",
-      image: "assets/images/virus_scene_lab.jpg",
+      image: "assets/images/medieval_alchemy_lab.jpg",
       isSpread: true,
       isObjectSearch: true,
       requiredItems: [
@@ -4684,7 +4684,7 @@ const ISAAC_VIRUS_DATA = {
       id: "virus_centrifuge",
       pageNumbers: [7, 8],
       title: "La Centrífuga Cuántica de Precisión",
-      image: "assets/images/virus_scene_centrifuge.jpg",
+      image: "assets/images/scene_alchemy.jpg",
       isSpread: true,
       isRiddle: true,
       riddleOptions: [
@@ -4731,7 +4731,7 @@ const ISAAC_VIRUS_DATA = {
       id: "virus_quarantine",
       pageNumbers: [9, 10],
       title: "Las Cápsulas de Cuarentena Criogénica",
-      image: "assets/images/virus_scene_quarantine.jpg",
+      image: "assets/images/medieval_dungeon_cells.jpg",
       isSpread: true,
       textLeft: `
         <span class="page-badge">Página 9</span>
@@ -4762,7 +4762,7 @@ const ISAAC_VIRUS_DATA = {
       id: "virus_synthesis_dice",
       pageNumbers: [11, 12],
       title: "La Inyección de la Cura en el Nebulizador",
-      image: "assets/images/virus_scene_synthesis.jpg",
+      image: "assets/images/cave_map_room.jpg",
       isSpread: true,
       isDiceChallenge: true,
       diceChallenge: {
@@ -4796,7 +4796,7 @@ const ISAAC_VIRUS_DATA = {
       id: "virus_gameover_breach",
       isGameOver: true,
       title: "¡Fuga de Contención y Bruma Biológica Tóxica!",
-      image: "assets/images/virus_gameover_breach.jpg",
+      image: "assets/images/gameover_abyss.jpg",
       textLeft: `
         <span class="page-badge" style="color:var(--accent-red);">¡FINAL FATAL!</span>
         <h3 style="margin-top:10px; font-family:'Cinzel',serif; font-size:1.4rem; color:var(--accent-red);">¡RUPTURA DE AISLAMIENTO NIVEL 4!</h3>
@@ -4823,7 +4823,7 @@ const ISAAC_VIRUS_DATA = {
       id: "virus_gameover_lockdown",
       isGameOver: true,
       title: "¡Cierre Hermético y Cuarentena Total!",
-      image: "assets/images/virus_gameover_lockdown.jpg",
+      image: "assets/images/cave_gameover_collapse.jpg",
       textLeft: `
         <span class="page-badge" style="color:var(--accent-red);">¡FINAL FATAL!</span>
         <h3 style="margin-top:10px; font-family:'Cinzel',serif; font-size:1.4rem; color:var(--accent-red);">¡COMPUERTAS DE TITANIO BLOQUEADAS!</h3>
@@ -4849,7 +4849,7 @@ const ISAAC_VIRUS_DATA = {
       id: "virus_victory",
       pageNumbers: [13, 14],
       title: "¡Isaac, el Salvador de la Salud Mundial!",
-      image: "assets/images/virus_scene_victory.jpg",
+      image: "assets/images/cave_victory.jpg",
       isSpread: true,
       textLeft: `
         <span class="page-badge">¡Epidemia Neutralizada!</span>
@@ -4937,7 +4937,7 @@ const ISAAC_BOSQUE_DATA = {
       id: "forest_entrance",
       pageNumbers: [3, 4],
       title: "El Sendero de los Hongos Brillantes",
-      image: "assets/images/forest_scene_entrance.jpg",
+      image: "assets/images/cave_medieval_era.jpg",
       isSpread: true,
       textLeft: `
         <span class="page-badge">Página 3</span>
@@ -4962,7 +4962,7 @@ const ISAAC_BOSQUE_DATA = {
       id: "forest_ent_riddle",
       pageNumbers: [5, 6],
       title: "El Acertijo de RobleViejo el Ent",
-      image: "assets/images/forest_scene_ent.jpg",
+      image: "assets/images/scene_library.jpg",
       isSpread: true,
       isRiddle: true,
       riddleOptions: [
@@ -5009,7 +5009,7 @@ const ISAAC_BOSQUE_DATA = {
       id: "forest_flowers_search",
       pageNumbers: [7, 8],
       title: "El Claro de las Cuatro Flores Sagradas",
-      image: "assets/images/forest_scene_flowers.jpg",
+      image: "assets/images/cave_ice_age.jpg",
       isSpread: true,
       isObjectSearch: true,
       requiredItems: [
@@ -5046,7 +5046,7 @@ const ISAAC_BOSQUE_DATA = {
       id: "forest_unicorn_glade",
       pageNumbers: [9, 10],
       title: "El Santuario de los Unicornios de Cristal",
-      image: "assets/images/forest_scene_unicorns.jpg",
+      image: "assets/images/floating_sky_harbor.jpg",
       isSpread: true,
       textLeft: `
         <span class="page-badge">Página 9</span>
@@ -5076,7 +5076,7 @@ const ISAAC_BOSQUE_DATA = {
       id: "forest_spring_dice",
       pageNumbers: [11, 12],
       title: "La Fuente del Manantial de la Eterna Juventud",
-      image: "assets/images/forest_scene_spring.jpg",
+      image: "assets/images/floating_crystal_mills.jpg",
       isSpread: true,
       isDiceChallenge: true,
       diceChallenge: {
@@ -5111,7 +5111,7 @@ const ISAAC_BOSQUE_DATA = {
       id: "forest_gameover_thorns",
       isGameOver: true,
       title: "¡Atrapado en el Zarzal de Espinas Negras!",
-      image: "assets/images/forest_gameover_thorns.jpg",
+      image: "assets/images/medieval_gameover_petrified.jpg",
       textLeft: `
         <span class="page-badge" style="color:var(--accent-red);">¡FINAL FATAL!</span>
         <h3 style="margin-top:10px; font-family:'Cinzel',serif; font-size:1.4rem; color:var(--accent-red);">¡ENREDADERAS SOMBRÍAS DEL BOSQUE!</h3>
@@ -5138,7 +5138,7 @@ const ISAAC_BOSQUE_DATA = {
       id: "forest_gameover_mist",
       isGameOver: true,
       title: "¡Adormecido por la Niebla de Sueño Profundo!",
-      image: "assets/images/forest_gameover_mist.jpg",
+      image: "assets/images/cave_gameover_void.jpg",
       textLeft: `
         <span class="page-badge" style="color:var(--accent-red);">¡FINAL FATAL!</span>
         <h3 style="margin-top:10px; font-family:'Cinzel',serif; font-size:1.4rem; color:var(--accent-red);">¡EL CANTO DE BRUMA DEL CLARO!</h3>
@@ -5164,7 +5164,7 @@ const ISAAC_BOSQUE_DATA = {
       id: "forest_victory",
       pageNumbers: [13, 14],
       title: "¡Isaac, el Guardián Eterno de la Naturaleza!",
-      image: "assets/images/forest_scene_victory.jpg",
+      image: "assets/images/medieval_victory.jpg",
       isSpread: true,
       textLeft: `
         <span class="page-badge">¡El Bosque Florece!</span>
