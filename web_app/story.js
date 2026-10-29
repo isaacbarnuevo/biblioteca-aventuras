@@ -3461,40 +3461,40 @@ const DAVID_DATA = {
       isObjectSearch: true,
       requiredItems: [
         {
-          id: "david_sharpening_stone",
-          name: "Piedra de Afilar Rúnica",
-          desc: "¡Una piedra mágica junto al yunque de la izquierda!",
-          icon: "🪨",
-          x: 26,
-          y: 70,
-          radius: 12,
-          hint: "Junto al yunque de piedra a la izquierda"
+          id: "david_light_sword",
+          name: "Espada de Luz Resplandeciente",
+          desc: "¡La espada dorada mágica que brilla verticalmente en el armero de la izquierda!",
+          icon: "⚔️",
+          x: 25.5,
+          y: 30.5,
+          radius: 14,
+          hint: "En el armero de la izquierda, resplandeciendo en oro"
         },
         {
           id: "david_mirror_shield",
           name: "Escudo Reflector de Obsidiana",
-          desc: "¡Un escudo pesado apoyado contra la armadura dorada a la derecha!",
+          desc: "¡El escudo negro con grabados dorados apoyado junto a la espada mágica!",
           icon: "🛡️",
-          x: 73,
-          y: 62,
-          radius: 12,
-          hint: "Apoyado contra la armadura dorada a la derecha"
+          x: 32.5,
+          y: 34.0,
+          radius: 14,
+          hint: "Junto a la espada resplandeciente en el armero de la izquierda"
         },
         {
-          id: "david_emerald_gem",
-          name: "Gema de Luz Esmeralda",
-          desc: "¡Una gema brillante engarzada en el estandarte central!",
-          icon: "💎",
-          x: 50,
-          y: 38,
-          radius: 12,
-          hint: "Engarzada en el estandarte central"
+          id: "david_runic_anvil",
+          name: "Yunque de las Runas Doradas",
+          desc: "¡El colosal yunque central con inscripciones rúnicas mágicas incandescentes!",
+          icon: "⚒️",
+          x: 52.5,
+          y: 37.5,
+          radius: 15,
+          hint: "En el centro de la forja, grabado con runas doradas"
         }
       ],
       textLeft: `
         <span class="page-badge">Página 9</span>
         <p>Llegas a una forja colosal donde los antiguos caballeros forjaban armas para combatir bestias aladas. En el fuego eterno aún descansan reliquias indispensables.</p>
-        <p>Para que la espada de David pueda resistir las llamaradas de Jaulis y reflejar los rayos de Ojo, necesitas encontrar tres artefactos legendarios ocultos en la imagen.</p>
+        <p>Para que la espada de David pueda resistir las llamaradas de Jaulis y reflejar los rayos de Ojo, necesitas encontrar tres artefactos legendarios en la forja:</p>
         <div class="search-checklist-box">
           <h4>🔍 OBJETIVOS A LOCALIZAR (Haz clic en la imagen):</h4>
           <ul id="object-search-checklist" class="search-checklist"></ul>
@@ -3507,10 +3507,10 @@ const DAVID_DATA = {
         </div>
         <div id="items-status-box" class="enigma-box" style="margin-bottom:12px;">
           <strong>FRAGUA DE HÉROES:</strong>
-          <p id="items-feedback-text">Localiza la piedra de afilar rúnica, el escudo de obsidiana y la gema esmeralda en la forja.</p>
+          <p id="items-feedback-text">Localiza la espada de luz, el escudo de obsidiana y el yunque rúnico en la forja.</p>
         </div>
         <p class="decision-prompt" id="items-next-prompt">
-          Al reunir los 3 artefactos, la espada de David se ilumina con fulgor diamantino.
+          Al reunir los 3 artefactos, la espada de David se templa con fulgor diamantino para resistir el fuego de los dragones.
         </p>
       `,
       choices: [

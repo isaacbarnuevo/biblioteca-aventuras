@@ -832,7 +832,18 @@ class GameEngine {
       const dx = clickX - item.x;
       const dy = clickY - item.y;
       const dist = Math.sqrt(dx * dx + dy * dy);
-      if (dist <= (item.radius || 12)) {
+      let isHit = dist <= (item.radius || 12);
+      if (!isHit && item.altCoords && Array.isArray(item.altCoords)) {
+        for (const alt of item.altCoords) {
+          const adx = clickX - alt.x;
+          const ady = clickY - alt.y;
+          if (Math.sqrt(adx * adx + ady * ady) <= (alt.radius || item.radius || 12)) {
+            isHit = true;
+            break;
+          }
+        }
+      }
+      if (isHit) {
         hitItem = item;
         hitItemId = itemId;
         break;
@@ -843,7 +854,8 @@ class GameEngine {
       this.foundObjectsPerScene[scene.id].push(hitItemId);
 
       if (this.sound) this.sound.playKeyUnlock();
-      this.showRufoToast(hitItem.icon || "✨", `¡Objeto conseguido! ${hitItem.name}: ${hitItem.desc || hitItem.name}`);
+      const descStr = (hitItem.desc && hitItem.desc !== 'undefined') ? `: ${hitItem.desc}` : '';
+      this.showRufoToast(hitItem.icon || "✨", `¡Objeto conseguido! ${hitItem.name}${descStr}`);
       this.updateObjectSearchUI(scene);
       this.renderFoundObjects(scene);
 
@@ -862,6 +874,8 @@ class GameEngine {
       if (this.sound) this.sound.playDogSniff();
       if (scene.id === 'park_ride_2') {
         this.showRufoToast(companionIcon, `¡${companionName} te susurra: Busca la barquilla más alta en la cúspide de la noria, cerca de las estrellas y los fuegos artificiales!`);
+      } else if (scene.id === 'david_armory_cache') {
+        this.showRufoToast(companionIcon, `¡${companionName} te susurra: Busca la espada dorada a la izquierda, el escudo de obsidiana a su lado y el gran yunque con runas en el centro!`);
       } else {
         this.showRufoToast(companionIcon, `${companionName} busca atentamente... pero aquí no hay ningún objeto clave. ¡Mira en los rincones sospechosos!`);
       }
@@ -937,7 +951,8 @@ class GameEngine {
           pin.style.left = `${item.x}%`;
           pin.style.top = `${item.y}%`;
           pin.innerHTML = item.icon || '✨';
-          pin.title = `${item.name}: ${item.desc || item.name}`;
+          const descStr = (item.desc && item.desc !== 'undefined') ? `: ${item.desc}` : '';
+          pin.title = `${item.name}${descStr}`;
           this.hotspotsOverlayEl.appendChild(pin);
         }
       });
