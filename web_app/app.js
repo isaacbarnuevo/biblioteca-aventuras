@@ -876,6 +876,8 @@ class GameEngine {
         this.showRufoToast(companionIcon, `¡${companionName} te susurra: Busca la barquilla más alta en la cúspide de la noria, cerca de las estrellas y los fuegos artificiales!`);
       } else if (scene.id === 'david_armory_cache') {
         this.showRufoToast(companionIcon, `¡${companionName} te susurra: Busca la espada dorada a la izquierda, el escudo de obsidiana a su lado y el gran yunque con runas en el centro!`);
+      } else if (scene.id === 'hero_armory') {
+        this.showRufoToast(companionIcon, `¡${companionName} emite un pitido: Busca el guantelete eléctrico en el pedestal izquierdo, las botas en el maletín del suelo, la esfera hexagonal en el centro y el bumerán en el pedestal derecho!`);
       } else {
         this.showRufoToast(companionIcon, `${companionName} busca atentamente... pero aquí no hay ningún objeto clave. ¡Mira en los rincones sospechosos!`);
       }

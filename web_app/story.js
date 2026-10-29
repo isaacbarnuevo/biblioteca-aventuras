@@ -4491,42 +4491,42 @@ const ISAAC_SUPERHEROES_DATA = {
         {
           id: "hero_gauntlet",
           name: "Guantelete de Rayos de Plasma",
-          desc: "¡El guantelete tecnológico sobre el banco de trabajo izquierdo!",
+          desc: "¡El guantelete cargado de energía eléctrica azul sobre el pedestal de la izquierda!",
           icon: "🧤",
-          x: 28,
-          y: 65,
-          radius: 12,
-          hint: "En el banco de trabajo de la izquierda"
-        },
-        {
-          id: "hero_batarang",
-          name: "Batarang Criogénico de Hielo",
-          desc: "¡El bumerán de hielo brillante junto al soporte de armaduras derecho!",
-          icon: "🦇",
-          x: 72,
-          y: 60,
-          radius: 12,
-          hint: "Junto al soporte de armaduras de la derecha"
+          x: 21.0,
+          y: 39.0,
+          radius: 13,
+          hint: "Sobre el pedestal tecnológico en el lado izquierdo"
         },
         {
           id: "hero_boots",
           name: "Botas de Levitación Antigravedad",
-          desc: "¡Las botas propulsoras en la caja blindada en el suelo!",
+          desc: "¡Las botas propulsoras con luces de neón dentro del maletín blindado en el suelo!",
           icon: "🥾",
-          x: 50,
-          y: 82,
-          radius: 12,
-          hint: "En la caja blindada abierta en el suelo"
+          x: 36.3,
+          y: 53.8,
+          radius: 13,
+          hint: "Dentro del maletín blindado abierto en el suelo"
         },
         {
           id: "hero_shield",
           name: "Escudo de Fotones Cuántico",
-          desc: "¡El escudo hexagonal de energía en la vitrina central!",
+          desc: "¡La gran esfera de fuerza fotónica con entramado hexagonal en el proyector central!",
           icon: "🛡️",
-          x: 48,
-          y: 35,
-          radius: 12,
-          hint: "En la vitrina de seguridad central"
+          x: 62.0,
+          y: 46.0,
+          radius: 15,
+          hint: "La gran esfera holográfica hexagonal en el proyector central"
+        },
+        {
+          id: "hero_batarang",
+          name: "Batarang Criogénico de Hielo",
+          desc: "¡El bumerán de hielo puro que emana escarcha sobre el pedestal de la derecha!",
+          icon: "🦇",
+          x: 86.0,
+          y: 53.0,
+          radius: 13,
+          hint: "Sobre el pedestal tecnológico en el lado derecho"
         }
       ],
       textLeft: `
