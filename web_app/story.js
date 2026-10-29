@@ -3410,7 +3410,7 @@ const DAVID_DATA = {
       id: "david_spikes",
       pageNumbers: [7, 8],
       title: "El Suelo de Pinchos Invisibles",
-      image: "assets/images/gameover_spikepit.jpg",
+      image: "assets/images/david_scene_spikes.jpg",
       isSpread: true,
       isSpikesGrid: true,
       spikesConfig: {
@@ -3456,7 +3456,7 @@ const DAVID_DATA = {
       id: "david_armory_cache",
       pageNumbers: [9, 10],
       title: "La Fragua de los Héroes Dragón",
-      image: "assets/images/medieval_armory_riddle.jpg",
+      image: "assets/images/david_scene_armory.jpg",
       isSpread: true,
       isObjectSearch: true,
       requiredItems: [
@@ -3493,7 +3493,7 @@ const DAVID_DATA = {
       id: "david_lair_jaulis",
       pageNumbers: [11, 12],
       title: "El Cráter Ígneo del Dragón Jaulis",
-      image: "assets/images/medieval_dragon_lair.jpg",
+      image: "assets/images/david_scene_jaulis.jpg",
       isSpread: true,
       isDiceChallenge: true,
       diceChallenge: {
@@ -3528,7 +3528,7 @@ const DAVID_DATA = {
       id: "david_lair_ojo",
       pageNumbers: [13, 14],
       title: "La Cúpula Mística del Dragón Ojo",
-      image: "assets/images/scene_monster.jpg",
+      image: "assets/images/david_scene_ojo.jpg",
       isSpread: true,
       isRiddle: true,
       riddleOptions: [
@@ -3576,7 +3576,7 @@ const DAVID_DATA = {
       id: "david_treasure_vault",
       pageNumbers: [15, 16],
       title: "La Cámara del Gran Tesoro Prohibido",
-      image: "assets/images/scene_victory.jpg",
+      image: "assets/images/david_scene_treasure.jpg",
       isSpread: true,
       textLeft: `
         <span class="page-badge">Página 15</span>
@@ -3607,7 +3607,7 @@ const DAVID_DATA = {
       id: "david_gameover_spikes",
       isGameOver: true,
       title: "¡Caída en la Fosa de Pinchos Volcánicos!",
-      image: "assets/images/gameover_spikepit.jpg",
+      image: "assets/images/david_gameover_spikes.jpg",
       textLeft: `
         <span class="page-badge" style="color:var(--accent-red);">¡FINAL FATAL!</span>
         <h3 style="margin-top:10px; font-family:'Cinzel',serif; font-size:1.4rem; color:var(--accent-red);">¡EL SUELO DE BASALTO SE DERRUMBA!</h3>
@@ -3634,7 +3634,7 @@ const DAVID_DATA = {
       id: "david_gameover_fire",
       isGameOver: true,
       title: "¡Envuelto en la Llamarada de Jaulis!",
-      image: "assets/images/medieval_gameover_dragon.jpg",
+      image: "assets/images/david_gameover_fire.jpg",
       textLeft: `
         <span class="page-badge" style="color:var(--accent-red);">¡FINAL FATAL!</span>
         <h3 style="margin-top:10px; font-family:'Cinzel',serif; font-size:1.4rem; color:var(--accent-red);">¡LA FURIA DEL DRAGÓN DE FUEGO!</h3>
@@ -3660,7 +3660,7 @@ const DAVID_DATA = {
       id: "david_victory",
       pageNumbers: [17, 18],
       title: "¡David, el Conquistador de Dragones!",
-      image: "assets/images/medieval_victory.jpg",
+      image: "assets/images/david_scene_victory.jpg",
       isSpread: true,
       textLeft: `
         <span class="page-badge">¡Aventura Completada!</span>
@@ -3783,7 +3783,7 @@ const FRANCISCO_DATA = {
       id: "park_ride_2",
       pageNumbers: [5, 6],
       title: "2. La Noria de las Mil Luces (El Pulpo Celeste)",
-      image: "assets/images/circus_menagerie.jpg",
+      image: "assets/images/park_scene_octopus_wheel.jpg",
       isSpread: true,
       isRiddle: true,
       riddleOptions: [
@@ -3831,7 +3831,7 @@ const FRANCISCO_DATA = {
       id: "park_ride_3",
       pageNumbers: [7, 8],
       title: "3. El Coliseo de Escarabajos (Coches de Choque)",
-      image: "assets/images/circus_clockwork_cage.jpg",
+      image: "assets/images/park_scene_beetle_cars.jpg",
       isSpread: true,
       isDiceChallenge: true,
       diceChallenge: {
@@ -3866,7 +3866,7 @@ const FRANCISCO_DATA = {
       id: "park_ride_4",
       pageNumbers: [9, 10],
       title: "4. El Tiovivo de los Grifos Alados",
-      image: "assets/images/floating_sky_harbor.jpg",
+      image: "assets/images/park_scene_griffin_carousel.jpg",
       isSpread: true,
       isObjectSearch: true,
       requiredItems: [
@@ -3903,7 +3903,7 @@ const FRANCISCO_DATA = {
       id: "park_ride_5",
       pageNumbers: [11, 12],
       title: "5. El Galeón Leviatán (Barco Columpio)",
-      image: "assets/images/floating_sky_whale.jpg",
+      image: "assets/images/park_scene_leviathan_ship.jpg",
       isSpread: true,
       isDiceChallenge: true,
       diceChallenge: {
@@ -3938,7 +3938,7 @@ const FRANCISCO_DATA = {
       id: "park_ride_6",
       pageNumbers: [13, 14],
       title: "6. La Mansión de las Sombras Risueñas",
-      image: "assets/images/scene_banquet.jpg",
+      image: "assets/images/park_scene_haunted_mansion.jpg",
       isSpread: true,
       isObjectSearch: true,
       requiredItems: [
