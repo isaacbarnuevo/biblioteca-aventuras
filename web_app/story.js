@@ -3785,36 +3785,35 @@ const FRANCISCO_DATA = {
       title: "2. La Noria de las Mil Luces (El Pulpo Celeste)",
       image: "assets/images/park_scene_octopus_wheel.jpg",
       isSpread: true,
-      isRiddle: true,
-      riddleOptions: [
+      isObjectSearch: true,
+      requiredItems: [
         {
           id: "ride_pulpo_lantern",
-          text: "🏮 Subir a la barquilla con el farol de zafiro azul que brilla al compás del vals",
-          isCorrect: true,
-          feedback: "¡CORRECTO! El pulpo gigante gira suavemente sus tentáculos luminosos al son de la melodía y de su corona brota la Llave 2."
-        },
-        {
-          id: "ride_pulpo_wrong1",
-          text: "🐙 Intentar agarrar el tentáculo que echa tinta negra fosforescente",
-          isCorrect: false,
-          feedback: "¡Uf! Casi te salpica de tinta mágica pegajosa. Busca la barquilla armoniosa."
-        },
-        {
-          id: "ride_pulpo_wrong2",
-          text: "⚡ Tocar los cables eléctricos pelados de la base",
-          isCorrect: false,
-          feedback: "¡Peligro! Hay chispas. Busca el farol de luz azul celestial."
+          name: "Barquilla del Farol de Zafiro Azul",
+          desc: "La cabina pacífica en la cúspide de la noria",
+          icon: "🏮",
+          x: 60.5,
+          y: 10.5,
+          radius: 14,
+          hint: "En lo alto de la noria del pulpo, cerca de las estrellas"
         }
       ],
       textLeft: `
         <span class="page-badge">Página 5 • Atracción 2 de 9</span>
         <p>La noria gigante es un pulpo de cristal translúcido que sostiene 12 cabinas con sus tentáculos y las balancea a 40 metros de altura.</p>
         <p>Boliche te advierte: <em>—Solo una de las cabinas tiene la vibración pacífica que apacigua al pulpo. ¡Elige con buen ojo!</em></p>
+        <div class="search-checklist-box" style="margin-top: 14px; padding: 12px; background: rgba(230,126,34,0.15); border: 1px solid #e67e22; border-radius: 8px;">
+          <h4 style="color: #e67e22; margin-bottom: 6px;">🔍 MISIÓN: BUSCA EN LA ILUSTRACIÓN</h4>
+          <p style="font-size: 0.95rem; color: #f5eedc; margin: 0;"><strong>Haz clic con el ratón directamente sobre la cabina pacífica</strong> en la noria del pulpo para subirte y apaciguar al monstruo con el vals.</p>
+        </div>
       `,
       textRight: `
         <span class="page-badge">Página 6</span>
-        <div id="riddle-box" class="riddle-container"></div>
-        <p class="decision-prompt">Resuelve el enigma para hacerte con la <strong>Llave 2</strong>.</p>
+        <div id="items-feedback-text" style="padding: 14px; background: rgba(230,126,34,0.15); border: 2px dashed #e67e22; border-radius: 8px; margin: 14px 0; text-align: center;">
+          <h4 style="color: #f39c12; margin-bottom: 6px;">🎡 ¡ENCUENTRA LA CABINA EN LA IMAGEN!</h4>
+          <p style="font-size: 0.95rem; color: #f5eedc; margin: 0;">Pincha con el ratón sobre la cabina correcta en la ilustración para conseguir la <strong>Llave 2</strong>.</p>
+        </div>
+        <p class="decision-prompt">Al encontrar la cabina pacífica, el pulpo te entregará la Llave 2.</p>
       `,
       choices: [
         {

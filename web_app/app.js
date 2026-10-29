@@ -751,10 +751,12 @@ class GameEngine {
   }
 
   // ===========================================================================
-  // 3. SALAS DE BÚSQUEDA DE OBJETOS (Armería, Alquimia, Biblioteca)
+  // 3. SALAS DE BÚSQUEDA DE OBJETOS (Armería, Alquimia, Biblioteca, Cabinas)
   // ===========================================================================
   handleObjectSearchClick(clickX, clickY, scene) {
     const found = this.foundObjectsPerScene[scene.id] || [];
+    const companionName = (this.story && this.story.companionName) || 'Tu compañero';
+    const companionIcon = (this.story && this.story.companionIcon) || '🐾';
     let hitItem = null;
 
     for (const item of scene.requiredItems) {
@@ -775,7 +777,7 @@ class GameEngine {
       this.foundObjectsPerScene[scene.id].push(hitItem.id);
 
       if (this.sound) this.sound.playKeyUnlock();
-      this.showRufoToast("✨", `¡Objeto conseguido! ${hitItem.name}: ${hitItem.desc}`);
+      this.showRufoToast(hitItem.icon || "✨", `¡Objeto conseguido! ${hitItem.name}: ${hitItem.desc}`);
       this.updateObjectSearchUI(scene);
       this.renderFoundObjects(scene);
 
@@ -783,12 +785,20 @@ class GameEngine {
         if (this.sound) {
           setTimeout(() => this.sound.playVictoryFanfare(), 300);
         }
-        this.showRufoToast("🏆", "¡Todos los objetos de esta sala han sido reunidos! El paso a la siguiente página queda desbloqueado.");
+        if (scene.id === 'park_ride_2') {
+          this.showRufoToast(companionIcon, `¡${companionName} salta de alegría! Has encontrado la barquilla del farol azul. ¡El camino queda desbloqueado!`);
+        } else {
+          this.showRufoToast("🏆", "¡Todos los objetos de esta sala han sido reunidos! El paso a la siguiente página queda desbloqueado.");
+        }
         this.renderChoices(scene);
       }
     } else {
       if (this.sound) this.sound.playDogSniff();
-      this.showRufoToast("🐕", "Rufo busca atentamente... pero aquí no hay ningún objeto clave. ¡Mira en los rincones sospechosos!");
+      if (scene.id === 'park_ride_2') {
+        this.showRufoToast(companionIcon, `¡${companionName} te susurra: Busca la barquilla más alta en la cúspide de la noria, cerca de las estrellas y los fuegos artificiales!`);
+      } else {
+        this.showRufoToast(companionIcon, `${companionName} busca atentamente... pero aquí no hay ningún objeto clave. ¡Mira en los rincones sospechosos!`);
+      }
     }
   }
 
@@ -804,9 +814,20 @@ class GameEngine {
 
     if (feedbackText) {
       if (found >= total) {
-        feedbackText.innerHTML = `🎉 <strong>¡TODOS LOS OBJETOS ENCONTRADOS!</strong> Tienes todo lo necesario para continuar tu incursión.`;
+        if (scene.id === 'park_ride_2') {
+          feedbackText.innerHTML = `🎉 <strong>¡BARQUILLA PACÍFICA ENCONTRADA!</strong> Subes a la barquilla más alta, el pulpo sonríe apaciguado y de su corona brota la <strong>Llave 2</strong>.`;
+          feedbackText.style.background = 'rgba(39, 174, 96, 0.2)';
+          feedbackText.style.borderColor = '#27ae60';
+          feedbackText.style.borderStyle = 'solid';
+        } else {
+          feedbackText.innerHTML = `🎉 <strong>¡TODOS LOS OBJETOS ENCONTRADOS!</strong> Tienes todo lo necesario para continuar tu incursión.`;
+        }
       } else {
-        feedbackText.innerHTML = `Tienes <strong>${found} de ${total}</strong> objetos. Te faltan <strong>${total - found}</strong> por localizar.`;
+        if (scene.id === 'park_ride_2') {
+          feedbackText.innerHTML = `🎡 <strong>Examina la noria del pulpo</strong> en la ilustración y haz clic directamente sobre la cabina pacífica en lo alto.`;
+        } else {
+          feedbackText.innerHTML = `Tienes <strong>${found} de ${total}</strong> objetos. Te faltan <strong>${total - found}</strong> por localizar.`;
+        }
       }
     }
   }
@@ -821,7 +842,7 @@ class GameEngine {
         pin.className = 'item-found-mark';
         pin.style.left = `${item.x}%`;
         pin.style.top = `${item.y}%`;
-        pin.innerHTML = '⚔️';
+        pin.innerHTML = item.icon || '✨';
         pin.title = `${item.name}: ${item.desc}`;
         this.hotspotsOverlayEl.appendChild(pin);
       }
