@@ -878,6 +878,12 @@ class GameEngine {
         this.showRufoToast(companionIcon, `¡${companionName} te susurra: Busca la espada dorada a la izquierda, el escudo de obsidiana a su lado y el gran yunque con runas en el centro!`);
       } else if (scene.id === 'hero_armory') {
         this.showRufoToast(companionIcon, `¡${companionName} emite un pitido: Busca el guantelete eléctrico en el pedestal izquierdo, las botas en el maletín del suelo, la esfera hexagonal en el centro y el bumerán en el pedestal derecho!`);
+      } else if (scene.id === 'virus_lab_search') {
+        this.showRufoToast(companionIcon, `¡${companionName} analiza el laboratorio: Busca el matraz verde a la izquierda, el frasco violeta en el centro, los tubos azules a la derecha y la cápsula en la vitrina superior!`);
+      } else if (scene.id === 'park_ride_6') {
+        this.showRufoToast(companionIcon, `¡${companionName} busca en la mansión: Busca la bocina a la izquierda, la caja sorpresa en el centro y la capa brillante a la derecha!`);
+      } else if (scene.id === 'forest_flowers_search') {
+        this.showRufoToast(companionIcon, `¡${companionName} olfatea el claro: Busca las cuatro flores luminosas repartidas en los cuadrantes del bosque sagrado!`);
       } else {
         this.showRufoToast(companionIcon, `${companionName} busca atentamente... pero aquí no hay ningún objeto clave. ¡Mira en los rincones sospechosos!`);
       }

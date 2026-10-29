@@ -3824,12 +3824,13 @@ const FRANCISCO_DATA = {
         {
           id: "ride_pulpo_lantern",
           name: "Barquilla del Farol de Zafiro Azul",
-          desc: "La cabina pacífica en la cúspide de la noria",
+          desc: "¡La cabina pacífica con farol azul en la parte superior de la noria!",
           icon: "🏮",
-          x: 60.5,
-          y: 10.5,
-          radius: 14,
-          hint: "En lo alto de la noria del pulpo, cerca de las estrellas"
+          x: 58.2,
+          y: 25.0,
+          radius: 16,
+          altCoords: [{ x: 60.5, y: 15.0, radius: 16 }, { x: 58.0, y: 18.0, radius: 16 }],
+          hint: "En la cabina más alta de la noria del pulpo, brillando con luz azul"
         }
       ],
       textLeft: `
@@ -3908,9 +3909,10 @@ const FRANCISCO_DATA = {
           name: "Grifo Alado de la Izquierda",
           desc: "¡El majestuoso grifo dorado con alas abiertas a la izquierda!",
           icon: "🦅",
-          x: 32,
-          y: 44,
-          radius: 14,
+          x: 27.0,
+          y: 49.0,
+          radius: 16,
+          altCoords: [{ x: 32.0, y: 44.0, radius: 15 }],
           hint: "En el gran grifo dorado con alas abiertas a la izquierda"
         },
         {
@@ -3918,9 +3920,10 @@ const FRANCISCO_DATA = {
           name: "Grifo Alado de la Derecha",
           desc: "¡El segundo grifo dorado con alas y arnés celestial a la derecha!",
           icon: "🦅",
-          x: 68,
-          y: 45,
-          radius: 14,
+          x: 69.0,
+          y: 50.0,
+          radius: 16,
+          altCoords: [{ x: 68.0, y: 45.0, radius: 15 }],
           hint: "En el gran grifo dorado con alas abiertas a la derecha"
         },
         {
@@ -3928,9 +3931,10 @@ const FRANCISCO_DATA = {
           name: "Estela de Notas Musicales Doradas",
           desc: "¡La estela mágica de notas musicales brillantes que flota en el centro del tiovivo!",
           icon: "🎵",
-          x: 50,
-          y: 53,
-          radius: 14,
+          x: 54.0,
+          y: 51.0,
+          radius: 16,
+          altCoords: [{ x: 50.0, y: 53.0, radius: 15 }],
           hint: "En las notas musicales brillantes que flotan en el centro del carrusel"
         }
       ],
@@ -4013,32 +4017,35 @@ const FRANCISCO_DATA = {
         {
           id: "park_horn",
           name: "Bocina de Payaso Cómico",
-          desc: "¡Una divertida bocina de latón sobre la mesa izquierda!",
+          desc: "¡Una divertida bocina de latón sobre la mesa y muebles del lado izquierdo!",
           icon: "🎺",
-          x: 25,
-          y: 75,
-          radius: 12,
-          hint: "Sobre la mesa de la izquierda"
-        },
-        {
-          id: "park_cape",
-          name: "Capa de Bufón Iluminada",
-          desc: "¡Una capa multicolor colgada en la armadura del fondo!",
-          icon: "🎭",
-          x: 75,
-          y: 45,
-          radius: 12,
-          hint: "Colgada en la armadura del fondo"
+          x: 25.0,
+          y: 70.0,
+          radius: 16,
+          altCoords: [{ x: 25.0, y: 35.0, radius: 16 }, { x: 20.0, y: 75.0, radius: 16 }],
+          hint: "Sobre las mesas y muebles en el lado izquierdo"
         },
         {
           id: "park_jackbox",
           name: "Caja de Sorpresas con Muelle",
-          desc: "¡Una caja mágica con sorpresa en el centro de la alfombra!",
+          desc: "¡Una caja mágica con sorpresa en el centro del salón!",
           icon: "📦",
-          x: 50,
-          y: 65,
-          radius: 12,
-          hint: "En el centro de la alfombra"
+          x: 50.0,
+          y: 70.0,
+          radius: 18,
+          altCoords: [{ x: 50.0, y: 60.0, radius: 16 }],
+          hint: "En el centro del salón y la alfombra"
+        },
+        {
+          id: "park_cape",
+          name: "Capa de Bufón Iluminada",
+          desc: "¡Una capa multicolor colgada y brillante en la pared derecha!",
+          icon: "🎭",
+          x: 70.0,
+          y: 45.0,
+          radius: 16,
+          altCoords: [{ x: 65.0, y: 72.0, radius: 16 }, { x: 75.0, y: 35.0, radius: 16 }],
+          hint: "Colgada en la pared y adornos del lado derecho"
         }
       ],
       textLeft: `
@@ -4851,42 +4858,46 @@ const ISAAC_VIRUS_DATA = {
         {
           id: "virus_plant_stem",
           name: "Cepa Inmune de Planta Lunar",
-          desc: "¡El matraz verde resplandeciente en la mesa izquierda!",
+          desc: "¡El matraz con la cepa botánica verde brillante en la mesa izquierda!",
           icon: "🌱",
-          x: 28,
-          y: 72,
-          radius: 12,
-          hint: "En el matraz iluminado en la mesa izquierda"
-        },
-        {
-          id: "virus_blue_solvent",
-          name: "Solvente Criogénico Azul",
-          desc: "¡Los tubos de ensayo azul hielo en la gradilla derecha!",
-          icon: "🧪",
-          x: 70,
-          y: 65,
-          radius: 12,
-          hint: "En la gradilla de tubos de la derecha"
+          x: 14.0,
+          y: 67.5,
+          radius: 15,
+          altCoords: [{ x: 22.0, y: 70.0, radius: 15 }],
+          hint: "En el matraz verde brillante sobre la mesa izquierda"
         },
         {
           id: "virus_pure_enzyme",
           name: "Enzima Sintética Pura",
-          desc: "¡El agitador magnético central con líquido violeta!",
+          desc: "¡El frasco con líquido violeta brillante en el centro de la mesa!",
           icon: "💎",
-          x: 50,
-          y: 45,
-          radius: 12,
-          hint: "Dentro del agitador magnético central"
+          x: 50.7,
+          y: 66.0,
+          radius: 15,
+          altCoords: [{ x: 50.0, y: 55.0, radius: 15 }],
+          hint: "En el frasco con líquido violeta en el centro de la mesa"
+        },
+        {
+          id: "virus_blue_solvent",
+          name: "Solvente Criogénico Azul",
+          desc: "¡La gradilla con tubos de ensayo azul hielo en la mesa derecha!",
+          icon: "🧪",
+          x: 80.2,
+          y: 72.5,
+          radius: 15,
+          altCoords: [{ x: 75.0, y: 68.0, radius: 15 }],
+          hint: "En los tubos de ensayo azul hielo a la derecha"
         },
         {
           id: "virus_nanotube",
           name: "Nanotubo de Estabilización",
-          desc: "¡La cápsula con el cilindro de ADN luminoso en el estante superior!",
+          desc: "¡La cápsula cilíndrica de ADN luminoso en la vitrina superior derecha!",
           icon: "🧬",
-          x: 85,
-          y: 35,
-          radius: 12,
-          hint: "En la estantería superior"
+          x: 85.4,
+          y: 26.5,
+          radius: 15,
+          altCoords: [{ x: 85.0, y: 35.0, radius: 15 }],
+          hint: "En la cápsula iluminada en la vitrina superior derecha"
         }
       ],
       textLeft: `
@@ -5256,42 +5267,46 @@ const ISAAC_BOSQUE_DATA = {
         {
           id: "forest_blue_orchid",
           name: "Orquídea Azul Luminosa",
-          desc: "¡La flor azul brillante junto al arroyo a la izquierda!",
+          desc: "¡La flor azul brillante que ilumina el claro!",
           icon: "💙",
-          x: 25,
-          y: 70,
-          radius: 12,
-          hint: "Junto al arroyo de aguas cristalinas a la izquierda"
-        },
-        {
-          id: "forest_sun_lily",
-          name: "Lirio Solar Dorado",
-          desc: "¡El lirio amarillo sobre la roca soleada a la derecha!",
-          icon: "💛",
-          x: 75,
-          y: 65,
-          radius: 12,
-          hint: "En la peña soleada a la derecha"
+          x: 25.0,
+          y: 65.0,
+          radius: 22,
+          altCoords: [{ x: 20.0, y: 40.0, radius: 20 }],
+          hint: "En el cuadrante izquierdo del claro sagrado"
         },
         {
           id: "forest_frost_rose",
           name: "Rosa de Escarcha Plateada",
-          desc: "¡La rosa blanca brillante en el pedestal central!",
+          desc: "¡La rosa blanca cristalina en el corazón del bosque!",
           icon: "🤍",
-          x: 50,
-          y: 45,
-          radius: 12,
-          hint: "En el pedestal de piedra central"
+          x: 50.0,
+          y: 50.0,
+          radius: 22,
+          altCoords: [{ x: 50.0, y: 70.0, radius: 20 }],
+          hint: "En el cuadrante central del claro sagrado"
+        },
+        {
+          id: "forest_sun_lily",
+          name: "Lirio Solar Dorado",
+          desc: "¡El lirio radiante con reflejos dorados y cálidos!",
+          icon: "💛",
+          x: 75.0,
+          y: 65.0,
+          radius: 22,
+          altCoords: [{ x: 70.0, y: 45.0, radius: 20 }],
+          hint: "En el cuadrante inferior derecho del claro"
         },
         {
           id: "forest_emerald_fern",
           name: "Helecho Cantarín de Esmeralda",
-          desc: "¡El helecho verde esmeralda entre las lianas superiores!",
+          desc: "¡El helecho verde esmeralda con hojas mágicas!",
           icon: "🌿",
-          x: 85,
-          y: 40,
-          radius: 12,
-          hint: "Entre las lianas superiores"
+          x: 82.0,
+          y: 35.0,
+          radius: 22,
+          altCoords: [{ x: 85.0, y: 55.0, radius: 20 }],
+          hint: "En el cuadrante superior derecho del claro"
         }
       ],
       textLeft: `
