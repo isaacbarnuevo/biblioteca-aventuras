@@ -3974,7 +3974,7 @@ const FRANCISCO_DATA = {
       id: "park_ride_7",
       pageNumbers: [15, 16],
       title: "7. El Laberinto de los Espejos Deformantes",
-      image: "assets/images/circus_mirror_maze.jpg",
+      image: "assets/images/park_scene_mirror_maze.jpg",
       isSpread: true,
       isRiddle: true,
       riddleOptions: [
@@ -4022,7 +4022,7 @@ const FRANCISCO_DATA = {
       id: "park_ride_8",
       pageNumbers: [17, 18],
       title: "8. Los Rápidos del Dragón Acuático",
-      image: "assets/images/floating_crystal_mills.jpg",
+      image: "assets/images/park_scene_water_rapids.jpg",
       isSpread: true,
       isDiceChallenge: true,
       diceChallenge: {
@@ -4057,7 +4057,7 @@ const FRANCISCO_DATA = {
       id: "park_ride_9",
       pageNumbers: [19, 20],
       title: "9. La Lanzadera del Cohete Fénix",
-      image: "assets/images/floating_cloud_observatory.jpg",
+      image: "assets/images/park_scene_phoenix_tower.jpg",
       isSpread: true,
       isDiceChallenge: true,
       diceChallenge: {
@@ -4092,7 +4092,7 @@ const FRANCISCO_DATA = {
       id: "park_clocktower_fountain",
       pageNumbers: [21, 22],
       title: "La Fuente del Gran Hechizo Roto",
-      image: "assets/images/scene_clockwork.jpg",
+      image: "assets/images/park_scene_fountain.jpg",
       isSpread: true,
       textLeft: `
         <span class="page-badge">Página 21</span>
@@ -4122,7 +4122,7 @@ const FRANCISCO_DATA = {
       id: "park_gameover_dizzy",
       isGameOver: true,
       title: "¡Atrapado en el Torbellino de Azúcar!",
-      image: "assets/images/circus_candy_wagon.jpg",
+      image: "assets/images/park_gameover_dizzy.jpg",
       textLeft: `
         <span class="page-badge" style="color:var(--accent-red);">¡FINAL FATAL!</span>
         <h3 style="margin-top:10px; font-family:'Cinzel',serif; font-size:1.4rem; color:var(--accent-red);">¡EL MAREO DEL ALGODÓN ENCANTADO!</h3>
@@ -4149,7 +4149,7 @@ const FRANCISCO_DATA = {
       id: "park_gameover_trap",
       isGameOver: true,
       title: "¡Encerrado en la Jaula Mecánica de Tornos!",
-      image: "assets/images/circus_gameover_puppet.jpg",
+      image: "assets/images/park_gameover_trap.jpg",
       textLeft: `
         <span class="page-badge" style="color:var(--accent-red);">¡FINAL FATAL!</span>
         <h3 style="margin-top:10px; font-family:'Cinzel',serif; font-size:1.4rem; color:var(--accent-red);">¡BARRICADA DE ACERO Y CANDADOS!</h3>
@@ -4175,7 +4175,7 @@ const FRANCISCO_DATA = {
       id: "park_victory",
       pageNumbers: [23, 24],
       title: "¡Francisco, el Gran Libertador del Parque!",
-      image: "assets/images/circus_victory.jpg",
+      image: "assets/images/park_scene_victory.jpg",
       isSpread: true,
       textLeft: `
         <span class="page-badge">¡Hechizo Roto!</span>
@@ -4268,7 +4268,7 @@ const ISAAC_SUPERHEROES_DATA = {
       id: "hero_rooftop",
       pageNumbers: [3, 4],
       title: "Infiltración en la Azotea de Alta Seguridad",
-      image: "assets/images/cave_future_era.jpg",
+      image: "assets/images/hero_scene_rooftop.jpg",
       isSpread: true,
       textLeft: `
         <span class="page-badge">Página 3</span>
@@ -4293,7 +4293,7 @@ const ISAAC_SUPERHEROES_DATA = {
       id: "hero_differences",
       pageNumbers: [5, 6],
       title: "La Sala de Hologramas Trampa (6 Diferencias)",
-      image: "assets/images/scene_differences.jpg",
+      image: "assets/images/hero_scene_differences.jpg",
       isSpread: true,
       isDifferences: true,
       differencesList: [
@@ -4332,7 +4332,7 @@ const ISAAC_SUPERHEROES_DATA = {
       id: "hero_armory",
       pageNumbers: [7, 8],
       title: "El Arsenal de Artilugios de Superhéroe",
-      image: "assets/images/scene_armory.jpg",
+      image: "assets/images/hero_scene_armory.jpg",
       isSpread: true,
       isObjectSearch: true,
       requiredItems: [
@@ -4368,7 +4368,7 @@ const ISAAC_SUPERHEROES_DATA = {
       id: "hero_riddle",
       pageNumbers: [9, 10],
       title: "El Núcleo de Computación Cuántica",
-      image: "assets/images/scene_riddle.jpg",
+      image: "assets/images/hero_scene_riddle.jpg",
       isSpread: true,
       isRiddle: true,
       riddleOptions: [
@@ -4416,7 +4416,7 @@ const ISAAC_SUPERHEROES_DATA = {
       id: "hero_dungeon",
       pageNumbers: [11, 12],
       title: "Liberación de la Liga de Superhéroes",
-      image: "assets/images/scene_dungeon_keys.jpg",
+      image: "assets/images/hero_scene_dungeon.jpg",
       isSpread: true,
       textLeft: `
         <span class="page-badge">Página 11</span>
