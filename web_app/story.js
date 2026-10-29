@@ -4446,7 +4446,7 @@ const ISAAC_SUPERHEROES_DATA = {
       id: "hero_boss_dice",
       pageNumbers: [13, 14],
       title: "La Batalla Final contra el Doctor Caos",
-      image: "assets/images/cave_future_era.jpg",
+      image: "assets/images/hero_scene_boss.jpg",
       isSpread: true,
       isDiceChallenge: true,
       diceChallenge: {
@@ -4481,7 +4481,7 @@ const ISAAC_SUPERHEROES_DATA = {
       id: "hero_gameover_lasers",
       isGameOver: true,
       title: "¡Alarma Roja y Red Láser de Contención!",
-      image: "assets/images/floating_gameover_spikes.jpg",
+      image: "assets/images/hero_gameover_lasers.jpg",
       textLeft: `
         <span class="page-badge" style="color:var(--accent-red);">¡FINAL FATAL!</span>
         <h3 style="margin-top:10px; font-family:'Cinzel',serif; font-size:1.4rem; color:var(--accent-red);">¡SISTEMA DE SEGURIDAD EN ALERTA MÁXIMA!</h3>
@@ -4508,7 +4508,7 @@ const ISAAC_SUPERHEROES_DATA = {
       id: "hero_gameover_ambush",
       isGameOver: true,
       title: "¡Rodeado por el Enjambre de Robodrones!",
-      image: "assets/images/circus_gameover_ambush.jpg",
+      image: "assets/images/hero_gameover_ambush.jpg",
       textLeft: `
         <span class="page-badge" style="color:var(--accent-red);">¡FINAL FATAL!</span>
         <h3 style="margin-top:10px; font-family:'Cinzel',serif; font-size:1.4rem; color:var(--accent-red);">¡LA TRAMPA MECÁNICA DE DOCTOR CAOS!</h3>
@@ -4534,7 +4534,7 @@ const ISAAC_SUPERHEROES_DATA = {
       id: "hero_victory",
       pageNumbers: [15, 16],
       title: "¡Isaac, el Héroe Supremo de Metrópolis!",
-      image: "assets/images/floating_victory.jpg",
+      image: "assets/images/hero_scene_victory.jpg",
       isSpread: true,
       textLeft: `
         <span class="page-badge">¡Misión Cumplida!</span>
@@ -4622,7 +4622,7 @@ const ISAAC_VIRUS_DATA = {
       id: "virus_airlock",
       pageNumbers: [3, 4],
       title: "La Esclusa de Descontaminación",
-      image: "assets/images/medieval_courtyard.jpg",
+      image: "assets/images/virus_scene_airlock.jpg",
       isSpread: true,
       textLeft: `
         <span class="page-badge">Página 3</span>
@@ -4647,7 +4647,7 @@ const ISAAC_VIRUS_DATA = {
       id: "virus_lab_search",
       pageNumbers: [5, 6],
       title: "El Laboratorio de Fórmulas y Reactivos",
-      image: "assets/images/medieval_alchemy_lab.jpg",
+      image: "assets/images/virus_scene_lab.jpg",
       isSpread: true,
       isObjectSearch: true,
       requiredItems: [
@@ -4683,7 +4683,7 @@ const ISAAC_VIRUS_DATA = {
       id: "virus_centrifuge",
       pageNumbers: [7, 8],
       title: "La Centrífuga Cuántica de Precisión",
-      image: "assets/images/scene_alchemy.jpg",
+      image: "assets/images/virus_scene_centrifuge.jpg",
       isSpread: true,
       isRiddle: true,
       riddleOptions: [
@@ -4730,7 +4730,7 @@ const ISAAC_VIRUS_DATA = {
       id: "virus_quarantine",
       pageNumbers: [9, 10],
       title: "Las Cápsulas de Cuarentena Criogénica",
-      image: "assets/images/medieval_dungeon_cells.jpg",
+      image: "assets/images/virus_scene_quarantine.jpg",
       isSpread: true,
       textLeft: `
         <span class="page-badge">Página 9</span>
@@ -4795,7 +4795,7 @@ const ISAAC_VIRUS_DATA = {
       id: "virus_gameover_breach",
       isGameOver: true,
       title: "¡Fuga de Contención y Bruma Biológica Tóxica!",
-      image: "assets/images/gameover_abyss.jpg",
+      image: "assets/images/virus_gameover_breach.jpg",
       textLeft: `
         <span class="page-badge" style="color:var(--accent-red);">¡FINAL FATAL!</span>
         <h3 style="margin-top:10px; font-family:'Cinzel',serif; font-size:1.4rem; color:var(--accent-red);">¡RUPTURA DE AISLAMIENTO NIVEL 4!</h3>
@@ -4822,7 +4822,7 @@ const ISAAC_VIRUS_DATA = {
       id: "virus_gameover_lockdown",
       isGameOver: true,
       title: "¡Cierre Hermético y Cuarentena Total!",
-      image: "assets/images/cave_gameover_collapse.jpg",
+      image: "assets/images/virus_gameover_lockdown.jpg",
       textLeft: `
         <span class="page-badge" style="color:var(--accent-red);">¡FINAL FATAL!</span>
         <h3 style="margin-top:10px; font-family:'Cinzel',serif; font-size:1.4rem; color:var(--accent-red);">¡COMPUERTAS DE TITANIO BLOQUEADAS!</h3>
@@ -4848,7 +4848,7 @@ const ISAAC_VIRUS_DATA = {
       id: "virus_victory",
       pageNumbers: [13, 14],
       title: "¡Isaac, el Salvador de la Salud Mundial!",
-      image: "assets/images/cave_victory.jpg",
+      image: "assets/images/virus_scene_victory.jpg",
       isSpread: true,
       textLeft: `
         <span class="page-badge">¡Epidemia Neutralizada!</span>
