@@ -333,7 +333,7 @@ class GameEngine {
       return this.discoveredBanquetTraps.length >= (scene.banquetTrapsList ? scene.banquetTrapsList.length : 11);
     }
     if (scene.isObjectSearch) {
-      const found = this.foundObjectsPerScene[scene.id] || [];
+      const found = (this.foundObjectsPerScene[scene.id] || []).filter(id => id != null);
       return found.length >= (scene.requiredItems ? scene.requiredItems.length : 3);
     }
     if (scene.isDifferences) {
@@ -783,30 +783,36 @@ class GameEngine {
   // 3. SALAS DE BÚSQUEDA DE OBJETOS (Armería, Alquimia, Biblioteca, Cabinas)
   // ===========================================================================
   handleObjectSearchClick(clickX, clickY, scene) {
-    const found = this.foundObjectsPerScene[scene.id] || [];
+    if (!this.foundObjectsPerScene[scene.id]) {
+      this.foundObjectsPerScene[scene.id] = [];
+    }
+    // Limpiar posibles entradas nulas o undefined de intentos previos
+    this.foundObjectsPerScene[scene.id] = this.foundObjectsPerScene[scene.id].filter(id => id != null);
+    const found = this.foundObjectsPerScene[scene.id];
     const companionName = (this.story && this.story.companionName) || 'Tu compañero';
     const companionIcon = (this.story && this.story.companionIcon) || '🐾';
     let hitItem = null;
+    let hitItemId = null;
 
-    for (const item of scene.requiredItems) {
-      if (found.includes(item.id)) continue;
+    for (let i = 0; i < scene.requiredItems.length; i++) {
+      const item = scene.requiredItems[i];
+      const itemId = item.id || `item_${i}_${item.name.replace(/\s+/g, '_')}`;
+      if (found.includes(itemId)) continue;
       const dx = clickX - item.x;
       const dy = clickY - item.y;
       const dist = Math.sqrt(dx * dx + dy * dy);
-      if (dist <= (item.radius || 6.5)) {
+      if (dist <= (item.radius || 12)) {
         hitItem = item;
+        hitItemId = itemId;
         break;
       }
     }
 
-    if (hitItem) {
-      if (!this.foundObjectsPerScene[scene.id]) {
-        this.foundObjectsPerScene[scene.id] = [];
-      }
-      this.foundObjectsPerScene[scene.id].push(hitItem.id);
+    if (hitItem && hitItemId) {
+      this.foundObjectsPerScene[scene.id].push(hitItemId);
 
       if (this.sound) this.sound.playKeyUnlock();
-      this.showRufoToast(hitItem.icon || "✨", `¡Objeto conseguido! ${hitItem.name}: ${hitItem.desc}`);
+      this.showRufoToast(hitItem.icon || "✨", `¡Objeto conseguido! ${hitItem.name}: ${hitItem.desc || hitItem.name}`);
       this.updateObjectSearchUI(scene);
       this.renderFoundObjects(scene);
 
@@ -832,17 +838,39 @@ class GameEngine {
   }
 
   updateObjectSearchUI(scene) {
+    if (!this.foundObjectsPerScene[scene.id]) {
+      this.foundObjectsPerScene[scene.id] = [];
+    }
+    this.foundObjectsPerScene[scene.id] = this.foundObjectsPerScene[scene.id].filter(id => id != null);
+    const found = this.foundObjectsPerScene[scene.id];
+    const total = scene.requiredItems ? scene.requiredItems.length : 3;
+    const foundCount = found.length;
+
     const counterBadge = document.getElementById('items-counter');
     const feedbackText = document.getElementById('items-feedback-text');
-    const total = scene.requiredItems.length;
-    const found = (this.foundObjectsPerScene[scene.id] || []).length;
 
     if (counterBadge) {
-      counterBadge.textContent = `Objetos encontrados: ${found} / ${total}`;
+      counterBadge.textContent = `Objetos encontrados: ${foundCount} / ${total}`;
+    }
+
+    const checklistEl = document.getElementById('object-search-checklist');
+    if (checklistEl && scene.requiredItems) {
+      checklistEl.innerHTML = scene.requiredItems.map((item, i) => {
+        const itemId = item.id || `item_${i}_${item.name.replace(/\s+/g, '_')}`;
+        const isFound = found.includes(itemId);
+        return `
+          <li style="margin: 6px 0; display: flex; align-items: center; gap: 8px; font-size: 0.95rem; color: ${isFound ? '#27ae60' : 'inherit'};">
+            <span style="font-size: 1.1rem;">${isFound ? '✅' : '⚪'}</span>
+            <span style="font-size: 1.2rem;">${item.icon || '🔍'}</span>
+            <strong>${item.name}</strong>
+            ${item.hint ? `<span style="font-size: 0.85rem; opacity: 0.8; font-style: italic;">— ${item.hint}</span>` : ''}
+          </li>
+        `;
+      }).join('');
     }
 
     if (feedbackText) {
-      if (found >= total) {
+      if (foundCount >= total) {
         if (scene.id === 'park_ride_2') {
           feedbackText.innerHTML = `🎉 <strong>¡BARQUILLA PACÍFICA ENCONTRADA!</strong> Subes a la barquilla más alta, el pulpo sonríe apaciguado y de su corona brota la <strong>Llave 2</strong>.`;
           feedbackText.style.background = 'rgba(39, 174, 96, 0.2)';
@@ -855,7 +883,7 @@ class GameEngine {
         if (scene.id === 'park_ride_2') {
           feedbackText.innerHTML = `🎡 <strong>Examina la noria del pulpo</strong> en la ilustración y haz clic directamente sobre la cabina pacífica en lo alto.`;
         } else {
-          feedbackText.innerHTML = `Tienes <strong>${found} de ${total}</strong> objetos. Te faltan <strong>${total - found}</strong> por localizar.`;
+          feedbackText.innerHTML = `Tienes <strong>${foundCount} de ${total}</strong> objetos. Te faltan <strong>${total - foundCount}</strong> por localizar.`;
         }
       }
     }
@@ -863,19 +891,26 @@ class GameEngine {
 
   renderFoundObjects(scene) {
     this.hotspotsOverlayEl.innerHTML = '';
-    const found = this.foundObjectsPerScene[scene.id] || [];
+    if (!this.foundObjectsPerScene[scene.id]) {
+      this.foundObjectsPerScene[scene.id] = [];
+    }
+    this.foundObjectsPerScene[scene.id] = this.foundObjectsPerScene[scene.id].filter(id => id != null);
+    const found = this.foundObjectsPerScene[scene.id];
 
-    scene.requiredItems.forEach(item => {
-      if (found.includes(item.id)) {
-        const pin = document.createElement('div');
-        pin.className = 'item-found-mark';
-        pin.style.left = `${item.x}%`;
-        pin.style.top = `${item.y}%`;
-        pin.innerHTML = item.icon || '✨';
-        pin.title = `${item.name}: ${item.desc}`;
-        this.hotspotsOverlayEl.appendChild(pin);
-      }
-    });
+    if (scene.requiredItems) {
+      scene.requiredItems.forEach((item, i) => {
+        const itemId = item.id || `item_${i}_${item.name.replace(/\s+/g, '_')}`;
+        if (found.includes(itemId)) {
+          const pin = document.createElement('div');
+          pin.className = 'item-found-mark';
+          pin.style.left = `${item.x}%`;
+          pin.style.top = `${item.y}%`;
+          pin.innerHTML = item.icon || '✨';
+          pin.title = `${item.name}: ${item.desc || item.name}`;
+          this.hotspotsOverlayEl.appendChild(pin);
+        }
+      });
+    }
   }
 
   // ===========================================================================
@@ -1392,7 +1427,7 @@ class GameEngine {
 
     if (!this.foundObjectsPerScene) this.foundObjectsPerScene = {};
     if (scene.requiredItems) {
-      this.foundObjectsPerScene[scene.id] = scene.requiredItems.map(it => it.id);
+      this.foundObjectsPerScene[scene.id] = scene.requiredItems.map((it, i) => it.id || `item_${i}_${it.name.replace(/\s+/g, '_')}`);
     } else {
       this.foundObjectsPerScene[scene.id] = ['salvation_found'];
     }
@@ -1403,6 +1438,8 @@ class GameEngine {
     }
 
     this.showRufoToast(companionIcon, `¡El resplandor de ${itemName} localiza todos los objetivos de la búsqueda!`);
+    this.updateObjectSearchUI(scene);
+    this.renderFoundObjects(scene);
     this.renderChoices(scene);
   }
 

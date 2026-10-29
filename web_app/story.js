@@ -3460,9 +3460,36 @@ const DAVID_DATA = {
       isSpread: true,
       isObjectSearch: true,
       requiredItems: [
-        { name: "Piedra de Afilar Rúnica", icon: "🪨", x: 26, y: 70, radius: 10, hint: "Junto al yunque de piedra a la izquierda" },
-        { name: "Escudo Reflector de Obsidiana", icon: "🛡️", x: 73, y: 62, radius: 10, hint: "Apoyado contra la armadura dorada a la derecha" },
-        { name: "Gema de Luz Esmeralda", icon: "💎", x: 50, y: 38, radius: 10, hint: "Engarzada en el estandarte central" }
+        {
+          id: "david_sharpening_stone",
+          name: "Piedra de Afilar Rúnica",
+          desc: "¡Una piedra mágica junto al yunque de la izquierda!",
+          icon: "🪨",
+          x: 26,
+          y: 70,
+          radius: 12,
+          hint: "Junto al yunque de piedra a la izquierda"
+        },
+        {
+          id: "david_mirror_shield",
+          name: "Escudo Reflector de Obsidiana",
+          desc: "¡Un escudo pesado apoyado contra la armadura dorada a la derecha!",
+          icon: "🛡️",
+          x: 73,
+          y: 62,
+          radius: 12,
+          hint: "Apoyado contra la armadura dorada a la derecha"
+        },
+        {
+          id: "david_emerald_gem",
+          name: "Gema de Luz Esmeralda",
+          desc: "¡Una gema brillante engarzada en el estandarte central!",
+          icon: "💎",
+          x: 50,
+          y: 38,
+          radius: 12,
+          hint: "Engarzada en el estandarte central"
+        }
       ],
       textLeft: `
         <span class="page-badge">Página 9</span>
@@ -3475,9 +3502,16 @@ const DAVID_DATA = {
       `,
       textRight: `
         <span class="page-badge">Página 10</span>
-        <p>Al reunir los tres componentes, David frota la piedra rúnica contra el filo de su acero: <strong>¡la hoja resplandece con un fulgor azul diamantino!</strong></p>
-        <p>El escudo de obsidiana protegerá tu cuerpo de las llamaradas de Jaulis y el tercer ojo de Ojo.</p>
-        <p class="decision-prompt">¿Hacia cuál de los dos dragones decides avanzar primero?</p>
+        <div style="text-align:center; margin-bottom:12px;">
+          <span id="items-counter" class="diff-counter-badge" style="border-color:#d4af37; color:#d4af37;">Objetos encontrados: 0 / 3</span>
+        </div>
+        <div id="items-status-box" class="enigma-box" style="margin-bottom:12px;">
+          <strong>FRAGUA DE HÉROES:</strong>
+          <p id="items-feedback-text">Localiza la piedra de afilar rúnica, el escudo de obsidiana y la gema esmeralda en la forja.</p>
+        </div>
+        <p class="decision-prompt" id="items-next-prompt">
+          Al reunir los 3 artefactos, la espada de David se ilumina con fulgor diamantino.
+        </p>
       `,
       choices: [
         {
@@ -3869,23 +3903,58 @@ const FRANCISCO_DATA = {
       isSpread: true,
       isObjectSearch: true,
       requiredItems: [
-        { name: "Pluma de Oro de Grifo", icon: "🪶", x: 30, y: 55, radius: 10, hint: "En las alas del grifo de la izquierda" },
-        { name: "Cascabel Encantado", icon: "🔔", x: 70, y: 65, radius: 10, hint: "En la montura del león alado" },
-        { name: "Herradura Celestial", icon: "🧲", x: 50, y: 82, radius: 10, hint: "Bajo la peana del carrusel" }
+        {
+          id: "item_griffin_left",
+          name: "Grifo Alado de la Izquierda",
+          desc: "¡El majestuoso grifo dorado con alas abiertas a la izquierda!",
+          icon: "🦅",
+          x: 32,
+          y: 44,
+          radius: 14,
+          hint: "En el gran grifo dorado con alas abiertas a la izquierda"
+        },
+        {
+          id: "item_griffin_right",
+          name: "Grifo Alado de la Derecha",
+          desc: "¡El segundo grifo dorado con alas y arnés celestial a la derecha!",
+          icon: "🦅",
+          x: 68,
+          y: 45,
+          radius: 14,
+          hint: "En el gran grifo dorado con alas abiertas a la derecha"
+        },
+        {
+          id: "item_carousel_melody",
+          name: "Estela de Notas Musicales Doradas",
+          desc: "¡La estela mágica de notas musicales brillantes que flota en el centro del tiovivo!",
+          icon: "🎵",
+          x: 50,
+          y: 53,
+          radius: 14,
+          hint: "En las notas musicales brillantes que flotan en el centro del carrusel"
+        }
       ],
       textLeft: `
         <span class="page-badge">Página 9 • Atracción 4 de 9</span>
         <p>El carrusel gira al compás de una música hipnótica mientras sus grifos de madera esculpida mueven las alas con vida propia.</p>
-        <p>Para calmar el vuelo de los grifos debes encontrar los tres objetos perdidos del arnés mágico.</p>
+        <p>Para calmar el vuelo del tiovivo debes encontrar los tres elementos mágicos de la atracción directamente en la imagen:</p>
         <div class="search-checklist-box">
-          <h4>🔍 BUSCA EN LA IMAGEN:</h4>
+          <h4>🔍 LOCALIZA EN LA ILUSTRACIÓN:</h4>
           <ul id="object-search-checklist" class="search-checklist"></ul>
         </div>
       `,
       textRight: `
         <span class="page-badge">Página 10</span>
-        <p>Al reunir los objetos, los grifos emiten un agradable silbido y de la copa del tiovivo cae la <strong>Llave 4</strong>.</p>
-        <p class="decision-prompt">Continúa hacia el lago del barco columpio.</p>
+        <div style="text-align:center; margin-bottom:12px;">
+          <span id="items-counter" class="diff-counter-badge" style="border-color:#d4af37; color:#d4af37;">Objetos encontrados: 0 / 3</span>
+        </div>
+        <div id="items-status-box" class="enigma-box" style="margin-bottom:12px;">
+          <strong>EL TIOVIVO DE LOS GRIFOS:</strong>
+          <p id="items-feedback-text">Haz clic en el grifo de la izquierda, el grifo de la derecha y las notas musicales que flotan en el centro.</p>
+        </div>
+        <p class="decision-prompt" id="items-next-prompt">
+          Al reunir los 3 elementos, los grifos se apaciguan y de la copa del tiovivo cae la <strong>Llave 4</strong>.
+        </p>
       `,
       choices: [
         {
@@ -3941,22 +4010,58 @@ const FRANCISCO_DATA = {
       isSpread: true,
       isObjectSearch: true,
       requiredItems: [
-        { name: "Bocina de Payaso Cómico", icon: "🎺", x: 25, y: 75, radius: 10, hint: "Sobre la mesa de la izquierda" },
-        { name: "Capa de Bufón Iluminada", icon: "🎭", x: 75, y: 45, radius: 10, hint: "Colgada en la armadura del fondo" },
-        { name: "Caja de Sorpresas con Muelle", icon: "📦", x: 50, y: 65, radius: 10, hint: "En el centro de la alfombra" }
+        {
+          id: "park_horn",
+          name: "Bocina de Payaso Cómico",
+          desc: "¡Una divertida bocina de latón sobre la mesa izquierda!",
+          icon: "🎺",
+          x: 25,
+          y: 75,
+          radius: 12,
+          hint: "Sobre la mesa de la izquierda"
+        },
+        {
+          id: "park_cape",
+          name: "Capa de Bufón Iluminada",
+          desc: "¡Una capa multicolor colgada en la armadura del fondo!",
+          icon: "🎭",
+          x: 75,
+          y: 45,
+          radius: 12,
+          hint: "Colgada en la armadura del fondo"
+        },
+        {
+          id: "park_jackbox",
+          name: "Caja de Sorpresas con Muelle",
+          desc: "¡Una caja mágica con sorpresa en el centro de la alfombra!",
+          icon: "📦",
+          x: 50,
+          y: 65,
+          radius: 12,
+          hint: "En el centro de la alfombra"
+        }
       ],
       textLeft: `
         <span class="page-badge">Página 13 • Atracción 6 de 9</span>
         <p>La atracción del Pasaje del Terror es ahora una mansión con ojos en las ventanas y una puerta que intenta morder a quien pasa.</p>
         <p>Boliche te sonríe: <em>—¡A estos monstruos no les gusta que les tengan miedo! Si encontramos tres bromas para hacerles cosquillas, ¡se pondrán a reír y nos dejarán pasar!</em></p>
-      `,
-      textRight: `
-        <span class="page-badge">Página 14</span>
         <div class="search-checklist-box">
           <h4>🔍 LOCALIZA LAS 3 BROMAS MÁGICAS:</h4>
           <ul id="object-search-checklist" class="search-checklist"></ul>
         </div>
-        <p class="decision-prompt">Las sombras estallan en carcajadas y la <strong>Llave 6</strong> flota hasta tus manos.</p>
+      `,
+      textRight: `
+        <span class="page-badge">Página 14</span>
+        <div style="text-align:center; margin-bottom:12px;">
+          <span id="items-counter" class="diff-counter-badge" style="border-color:#8e44ad; color:#8e44ad;">Objetos encontrados: 0 / 3</span>
+        </div>
+        <div id="items-status-box" class="enigma-box" style="margin-bottom:12px;">
+          <strong>MANSIÓN DE LAS SOMBRAS:</strong>
+          <p id="items-feedback-text">Haz clic en la bocina, la capa de bufón y la caja de sorpresas.</p>
+        </div>
+        <p class="decision-prompt" id="items-next-prompt">
+          Las sombras estallan en carcajadas y la <strong>Llave 6</strong> flota hasta tus manos.
+        </p>
       `,
       choices: [
         {
@@ -4335,10 +4440,46 @@ const ISAAC_SUPERHEROES_DATA = {
       isSpread: true,
       isObjectSearch: true,
       requiredItems: [
-        { name: "Guantelete de Rayos de Plasma", icon: "🧤", x: 28, y: 65, radius: 10, hint: "En el banco de trabajo de la izquierda" },
-        { name: "Batarang Criogénico de Hielo", icon: "🦇", x: 72, y: 60, radius: 10, hint: "Junto al soporte de armaduras de la derecha" },
-        { name: "Botas de Levitación Antigravedad", icon: "🥾", x: 50, y: 82, radius: 10, hint: "En la caja blindada abierta en el suelo" },
-        { name: "Escudo de Fotones Cuántico", icon: "🛡️", x: 48, y: 35, radius: 10, hint: "En la vitrina de seguridad central" }
+        {
+          id: "hero_gauntlet",
+          name: "Guantelete de Rayos de Plasma",
+          desc: "¡El guantelete tecnológico sobre el banco de trabajo izquierdo!",
+          icon: "🧤",
+          x: 28,
+          y: 65,
+          radius: 12,
+          hint: "En el banco de trabajo de la izquierda"
+        },
+        {
+          id: "hero_batarang",
+          name: "Batarang Criogénico de Hielo",
+          desc: "¡El bumerán de hielo brillante junto al soporte de armaduras derecho!",
+          icon: "🦇",
+          x: 72,
+          y: 60,
+          radius: 12,
+          hint: "Junto al soporte de armaduras de la derecha"
+        },
+        {
+          id: "hero_boots",
+          name: "Botas de Levitación Antigravedad",
+          desc: "¡Las botas propulsoras en la caja blindada en el suelo!",
+          icon: "🥾",
+          x: 50,
+          y: 82,
+          radius: 12,
+          hint: "En la caja blindada abierta en el suelo"
+        },
+        {
+          id: "hero_shield",
+          name: "Escudo de Fotones Cuántico",
+          desc: "¡El escudo hexagonal de energía en la vitrina central!",
+          icon: "🛡️",
+          x: 48,
+          y: 35,
+          radius: 12,
+          hint: "En la vitrina de seguridad central"
+        }
       ],
       textLeft: `
         <span class="page-badge">Página 7</span>
@@ -4350,8 +4491,16 @@ const ISAAC_SUPERHEROES_DATA = {
       `,
       textRight: `
         <span class="page-badge">Página 8</span>
-        <p>Completamente armado con guantelete, botas antigravedad y batarang criogénico, Isaac está listo para cualquier villano.</p>
-        <p class="decision-prompt">Avanza hacia la Computadora Central para descifrar el código de las celdas.</p>
+        <div style="text-align:center; margin-bottom:12px;">
+          <span id="items-counter" class="diff-counter-badge" style="border-color:#2980b9; color:#2980b9;">Objetos encontrados: 0 / 4</span>
+        </div>
+        <div id="items-status-box" class="enigma-box" style="margin-bottom:12px;">
+          <strong>ARSENAL DE SUPERHÉROE:</strong>
+          <p id="items-feedback-text">Haz clic en el guantelete, el batarang de hielo, las botas antigravedad y el escudo fotónico.</p>
+        </div>
+        <p class="decision-prompt" id="items-next-prompt">
+          Completamente armado, Isaac está listo para cualquier villano.
+        </p>
       `,
       choices: [
         {
@@ -4651,10 +4800,46 @@ const ISAAC_VIRUS_DATA = {
       isSpread: true,
       isObjectSearch: true,
       requiredItems: [
-        { name: "Cepa Inmune de Planta Lunar", icon: "🌱", x: 28, y: 72, radius: 10, hint: "En el matraz iluminado en la mesa izquierda" },
-        { name: "Solvente Criogénico Azul", icon: "🧪", x: 70, y: 65, radius: 10, hint: "En la gradilla de tubos de la derecha" },
-        { name: "Enzima Sintética Pura", icon: "💎", x: 50, y: 45, radius: 10, hint: "Dentro del agitador magnético central" },
-        { name: "Nanotubo de Estabilización", icon: "🧬", x: 85, y: 35, radius: 10, hint: "En la estantería superior" }
+        {
+          id: "virus_plant_stem",
+          name: "Cepa Inmune de Planta Lunar",
+          desc: "¡El matraz verde resplandeciente en la mesa izquierda!",
+          icon: "🌱",
+          x: 28,
+          y: 72,
+          radius: 12,
+          hint: "En el matraz iluminado en la mesa izquierda"
+        },
+        {
+          id: "virus_blue_solvent",
+          name: "Solvente Criogénico Azul",
+          desc: "¡Los tubos de ensayo azul hielo en la gradilla derecha!",
+          icon: "🧪",
+          x: 70,
+          y: 65,
+          radius: 12,
+          hint: "En la gradilla de tubos de la derecha"
+        },
+        {
+          id: "virus_pure_enzyme",
+          name: "Enzima Sintética Pura",
+          desc: "¡El agitador magnético central con líquido violeta!",
+          icon: "💎",
+          x: 50,
+          y: 45,
+          radius: 12,
+          hint: "Dentro del agitador magnético central"
+        },
+        {
+          id: "virus_nanotube",
+          name: "Nanotubo de Estabilización",
+          desc: "¡La cápsula con el cilindro de ADN luminoso en el estante superior!",
+          icon: "🧬",
+          x: 85,
+          y: 35,
+          radius: 12,
+          hint: "En la estantería superior"
+        }
       ],
       textLeft: `
         <span class="page-badge">Página 5</span>
@@ -4666,8 +4851,16 @@ const ISAAC_VIRUS_DATA = {
       `,
       textRight: `
         <span class="page-badge">Página 6</span>
-        <p>¡Los 4 viales están asegurados en tu maletín térmico! Ahora debes centrifugarlos a la velocidad exacta.</p>
-        <p class="decision-prompt">Avanza a la Cámara de la Centrífuga.</p>
+        <div style="text-align:center; margin-bottom:12px;">
+          <span id="items-counter" class="diff-counter-badge" style="border-color:#16a085; color:#16a085;">Objetos encontrados: 0 / 4</span>
+        </div>
+        <div id="items-status-box" class="enigma-box" style="margin-bottom:12px;">
+          <strong>REACTIVOS DEL ANTÍDOTO:</strong>
+          <p id="items-feedback-text">Haz clic en la cepa lunar, el solvente azul, la enzima pura y el nanotubo.</p>
+        </div>
+        <p class="decision-prompt" id="items-next-prompt">
+          ¡Los 4 viales están asegurados en tu maletín térmico! Ahora debes centrifugarlos a la velocidad exacta.
+        </p>
       `,
       choices: [
         {
@@ -5012,10 +5205,46 @@ const ISAAC_BOSQUE_DATA = {
       isSpread: true,
       isObjectSearch: true,
       requiredItems: [
-        { name: "Orquídea Azul Luminosa", icon: "💙", x: 25, y: 70, radius: 10, hint: "Junto al arroyo de aguas cristalinas a la izquierda" },
-        { name: "Lirio Solar Dorado", icon: "💛", x: 75, y: 65, radius: 10, hint: "En la peña soleada a la derecha" },
-        { name: "Rosa de Escarcha Plateada", icon: "🤍", x: 50, y: 45, radius: 10, hint: "En el pedestal de piedra central" },
-        { name: "Helecho Cantarín de Esmeralda", icon: "🌿", x: 85, y: 40, radius: 10, hint: "Entre las lianas superiores" }
+        {
+          id: "forest_blue_orchid",
+          name: "Orquídea Azul Luminosa",
+          desc: "¡La flor azul brillante junto al arroyo a la izquierda!",
+          icon: "💙",
+          x: 25,
+          y: 70,
+          radius: 12,
+          hint: "Junto al arroyo de aguas cristalinas a la izquierda"
+        },
+        {
+          id: "forest_sun_lily",
+          name: "Lirio Solar Dorado",
+          desc: "¡El lirio amarillo sobre la roca soleada a la derecha!",
+          icon: "💛",
+          x: 75,
+          y: 65,
+          radius: 12,
+          hint: "En la peña soleada a la derecha"
+        },
+        {
+          id: "forest_frost_rose",
+          name: "Rosa de Escarcha Plateada",
+          desc: "¡La rosa blanca brillante en el pedestal central!",
+          icon: "🤍",
+          x: 50,
+          y: 45,
+          radius: 12,
+          hint: "En el pedestal de piedra central"
+        },
+        {
+          id: "forest_emerald_fern",
+          name: "Helecho Cantarín de Esmeralda",
+          desc: "¡El helecho verde esmeralda entre las lianas superiores!",
+          icon: "🌿",
+          x: 85,
+          y: 40,
+          radius: 12,
+          hint: "Entre las lianas superiores"
+        }
       ],
       textLeft: `
         <span class="page-badge">Página 7</span>
@@ -5028,8 +5257,16 @@ const ISAAC_BOSQUE_DATA = {
       `,
       textRight: `
         <span class="page-badge">Página 8</span>
-        <p>Las 4 flores desprenden un perfume embriagador y se transforman en la <strong>Gema del Agua y la Gema del Viento</strong>.</p>
-        <p class="decision-prompt">Sigue a Silfo hacia el claro de los unicornios.</p>
+        <div style="text-align:center; margin-bottom:12px;">
+          <span id="items-counter" class="diff-counter-badge" style="border-color:#27ae60; color:#27ae60;">Flores encontradas: 0 / 4</span>
+        </div>
+        <div id="items-status-box" class="enigma-box" style="margin-bottom:12px;">
+          <strong>FLORA SAGRADA:</strong>
+          <p id="items-feedback-text">Haz clic en la orquídea azul, el lirio solar, la rosa de escarcha y el helecho cantarín.</p>
+        </div>
+        <p class="decision-prompt" id="items-next-prompt">
+          Las 4 flores se transforman en la <strong>Gema del Agua y la Gema del Viento</strong>.
+        </p>
       `,
       choices: [
         {
