@@ -1269,3 +1269,24 @@ body {
   color: #9c8973;
   font-size: 1.05rem;
 }
+
+/* Estilos para botones de opciones de enigmas y acertijos interactivos */
+.riddle-option-btn {
+  transition: all 0.25s ease;
+  border-left: 4px solid var(--accent-gold);
+}
+
+.riddle-option-btn:hover {
+  transform: translateX(4px);
+  border-left-color: #f39c12;
+  box-shadow: 0 4px 12px rgba(243, 156, 18, 0.25);
+}
+
+.riddle-option-btn.active-correct {
+  border-color: #27ae60 !important;
+  border-left: 6px solid #27ae60 !important;
+  background: rgba(39, 174, 96, 0.18) !important;
+  color: #1e824c !important;
+  font-weight: 700;
+  box-shadow: 0 0 15px rgba(39, 174, 96, 0.4);
+}

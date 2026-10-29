@@ -23,6 +23,7 @@ class GameEngine {
     this.foundObjectsPerScene = {};
     this.foundGameOverItems = {};
     this.riddleSolved = false;
+    this.solvedRiddles = {};
     this.clockworkSolved = false;
     this.magicRingAvailable = true;
     this.monsterDefeated = false;
@@ -310,7 +311,7 @@ class GameEngine {
       return this.discoveredDifferences.length >= (scene.differencesList ? scene.differencesList.length : 6);
     }
     if (scene.isRiddle) {
-      return this.riddleSolved === true;
+      return !!((this.solvedRiddles && this.solvedRiddles[scene.id]) || (scene.id === 'scene_riddle' && this.riddleSolved));
     }
     if (scene.isClockwork) {
       return this.clockworkSolved === true;
@@ -916,55 +917,150 @@ class GameEngine {
   }
 
   // ===========================================================================
-  // 5. ACERTIJO DE LA ESFINGE
+  // 5. ACERTIJOS Y ENIGMAS (GENÉRICOS Y ESFINGE)
   // ===========================================================================
   setupRiddleUI(scene) {
+    this.solvedRiddles = this.solvedRiddles || {};
+    const isSolved = !!((this.solvedRiddles && this.solvedRiddles[scene.id]) || (scene.id === 'scene_riddle' && this.riddleSolved));
+
+    // Si la escena define opciones de enigma genéricas (como en los 5 libros nuevos)
+    if (scene.riddleOptions && scene.riddleOptions.length > 0) {
+      const riddleBox = document.getElementById('riddle-box') || document.querySelector('.riddle-container');
+      if (riddleBox) {
+        let html = `
+          <div class="riddle-options-wrapper" style="display:flex; flex-direction:column; gap:10px; margin:14px 0;">
+        `;
+        scene.riddleOptions.forEach((opt, idx) => {
+          const isCorrect = opt.isCorrect;
+          const activeClass = isSolved && isCorrect ? 'active-correct' : '';
+          html += `
+            <button class="choice-btn riddle-option-btn ${activeClass}" data-opt-id="${opt.id || idx}" style="text-align:left; justify-content:flex-start; padding:12px 16px; font-size:0.95rem; line-height:1.4; width:100%;">
+              ${opt.text}
+            </button>
+          `;
+        });
+        html += `
+          </div>
+          <div id="riddle-feedback" class="riddle-feedback-box" style="margin-top:10px; padding:12px 14px; border-radius:8px; font-size:0.95rem; line-height:1.4; display:${isSolved ? 'block' : 'none'}; background:rgba(39,174,96,0.18); border:1px solid #27ae60; color:#1e824c;">
+            ${isSolved ? '✅ <strong>¡Enigma resuelto!</strong> El camino hacia la siguiente atracción queda completamente abierto.' : ''}
+          </div>
+        `;
+        riddleBox.innerHTML = html;
+
+        const feedbackBox = document.getElementById('riddle-feedback');
+        const optionButtons = riddleBox.querySelectorAll('.riddle-option-btn');
+        optionButtons.forEach(btn => {
+          btn.onclick = () => {
+            const optId = btn.dataset.optId;
+            const option = scene.riddleOptions.find((o, i) => (o.id || i.toString()) === optId);
+            if (option) {
+              this.submitGenericRiddleAnswer(option, btn, feedbackBox, scene);
+            }
+          };
+        });
+      }
+      return;
+    }
+
+    // Comportamiento clásico para el acertijo de la Esfinge con pedestales
     const buttons = document.querySelectorAll('.pedestal-btn');
     const feedbackBox = document.getElementById('riddle-feedback');
 
     buttons.forEach(btn => {
       btn.onclick = () => {
         const pedId = btn.dataset.pedestal;
-        const pedestal = scene.pedestals.find(p => p.id === pedId);
+        const pedestal = scene.pedestals && scene.pedestals.find(p => p.id === pedId);
         if (pedestal) {
           this.submitRiddleAnswer(pedestal, feedbackBox, scene);
         }
       };
     });
 
-    if (this.riddleSolved) {
+    if (isSolved) {
       if (feedbackBox) {
-        feedbackBox.innerHTML = `✅ <strong>¡Acertijo ya resuelto!</strong> El gran portón de la Esfinge permanece abierto.`;
+        feedbackBox.innerHTML = `✅ <strong>¡Acertijo ya resuelto!</strong> El gran portón permanece abierto.`;
       }
     }
   }
 
   handleRiddleClick(clickX, clickY, scene) {
-    for (const ped of scene.pedestals) {
-      const dx = clickX - ped.x;
-      const dy = clickY - ped.y;
-      const dist = Math.sqrt(dx * dx + dy * dy);
-      if (dist <= (ped.radius || 8)) {
-        const feedbackBox = document.getElementById('riddle-feedback');
-        this.submitRiddleAnswer(ped, feedbackBox, scene);
-        return;
+    const companionName = (this.story && this.story.companionName) || 'Tu compañero';
+    const companionIcon = (this.story && this.story.companionIcon) || '🐾';
+    const feedbackBox = document.getElementById('riddle-feedback');
+
+    // 1. Zonas interactivas con pedestales explícitos
+    if (scene.pedestals && Array.isArray(scene.pedestals) && scene.pedestals.length > 0) {
+      for (const ped of scene.pedestals) {
+        const dx = clickX - ped.x;
+        const dy = clickY - ped.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist <= (ped.radius || 8)) {
+          this.submitRiddleAnswer(ped, feedbackBox, scene);
+          return;
+        }
       }
     }
 
+    // 2. Interacción al pinchar directamente sobre las cabinas de la noria del pulpo (park_ride_2)
+    if (scene.id === 'park_ride_2' && scene.riddleOptions) {
+      // Las cabinas de la gran noria del pulpo abarcan x: 44% a 82%, y: 5% a 54%
+      if (clickX >= 44 && clickX <= 82 && clickY >= 5 && clickY <= 54) {
+        const correctOpt = scene.riddleOptions.find(o => o.isCorrect);
+        if (correctOpt) {
+          const btn = document.querySelector(`.riddle-option-btn[data-opt-id="${correctOpt.id || '0'}"]`);
+          this.submitGenericRiddleAnswer(correctOpt, btn, feedbackBox, scene);
+          return;
+        }
+      } else if (clickX >= 44 && clickX <= 82 && clickY > 54 && clickY <= 75) {
+        // Tentáculos de la base
+        const wrongOpt = scene.riddleOptions.find(o => !o.isCorrect);
+        if (wrongOpt) {
+          this.submitGenericRiddleAnswer(wrongOpt, null, feedbackBox, scene);
+          return;
+        }
+      }
+
+      if (this.sound) this.sound.playDogSniff();
+      this.showRufoToast(companionIcon, `¡${companionName} te señala las cabinas iluminadas de la noria del pulpo, o pulsa una opción en la Página 6!`);
+      return;
+    }
+
+    // 3. Soporte genérico para escenas con riddleOptions al hacer clic en la imagen
+    if (scene.riddleOptions && scene.riddleOptions.length > 0) {
+      // Si el clic es en el área central destacada
+      if (clickX >= 35 && clickX <= 75 && clickY >= 15 && clickY <= 75) {
+        const correctOpt = scene.riddleOptions.find(o => o.isCorrect);
+        if (correctOpt) {
+          const btn = document.querySelector(`.riddle-option-btn[data-opt-id="${correctOpt.id || '0'}"]`);
+          this.submitGenericRiddleAnswer(correctOpt, btn, feedbackBox, scene);
+          return;
+        }
+      }
+      if (this.sound) this.sound.playDogSniff();
+      this.showRufoToast(companionIcon, `${companionName} examina la escena: ¡Elige tu respuesta en la lista de opciones de la página!`);
+      return;
+    }
+
     if (this.sound) this.sound.playDogSniff();
-    this.showRufoToast("🐕", "Rufo te empuja hacia los tres pedestales de ofrenda frente a la Esfinge.");
+    this.showRufoToast(companionIcon, `${companionName} te anima a resolver el enigma para abrir el camino.`);
   }
 
   submitRiddleAnswer(pedestal, feedbackBox, scene) {
+    this.solvedRiddles = this.solvedRiddles || {};
+    const companionName = (this.story && this.story.companionName) || 'Tu compañero';
+    const companionIcon = (this.story && this.story.companionIcon) || '🐾';
+
     if (pedestal.isCorrect) {
+      this.solvedRiddles[scene.id] = true;
       this.riddleSolved = true;
       if (this.sound) {
         this.sound.playStoneDoorOpen();
         setTimeout(() => this.sound.playVictoryFanfare(), 300);
       }
-      this.showRufoToast("🔥", pedestal.feedback);
+      this.showRufoToast(companionIcon, pedestal.feedback);
       if (feedbackBox) {
-        feedbackBox.innerHTML = `🎉 <strong>${pedestal.name}:</strong> ${pedestal.feedback}`;
+        feedbackBox.style.display = 'block';
+        feedbackBox.innerHTML = `🎉 <strong>${pedestal.name || '¡Correcto!'}:</strong> ${pedestal.feedback}`;
       }
 
       document.querySelectorAll('.pedestal-btn').forEach(b => {
@@ -976,7 +1072,54 @@ class GameEngine {
       if (this.sound) this.sound.playDogSniff();
       this.showRufoToast("❌", pedestal.feedback);
       if (feedbackBox) {
-        feedbackBox.innerHTML = `⚠️ <strong>${pedestal.name}:</strong> ${pedestal.feedback}`;
+        feedbackBox.style.display = 'block';
+        feedbackBox.innerHTML = `⚠️ <strong>${pedestal.name || 'Atención'}:</strong> ${pedestal.feedback}`;
+      }
+    }
+  }
+
+  submitGenericRiddleAnswer(option, buttonEl, feedbackBox, scene) {
+    this.solvedRiddles = this.solvedRiddles || {};
+    const companionIcon = (this.story && this.story.companionIcon) || '✨';
+
+    if (option.isCorrect) {
+      this.solvedRiddles[scene.id] = true;
+      this.riddleSolved = true;
+
+      if (this.sound) {
+        this.sound.playStoneDoorOpen();
+        setTimeout(() => this.sound.playVictoryFanfare(), 300);
+      }
+      this.showRufoToast(companionIcon, option.feedback || "¡Respuesta correcta! El camino queda abierto.");
+
+      if (feedbackBox) {
+        feedbackBox.style.display = 'block';
+        feedbackBox.style.background = 'rgba(39,174,96,0.18)';
+        feedbackBox.style.borderColor = '#27ae60';
+        feedbackBox.style.color = '#1e824c';
+        feedbackBox.innerHTML = `🎉 <strong>¡CORRECTO!</strong> ${option.feedback}`;
+      }
+
+      const allBtns = document.querySelectorAll('.riddle-option-btn');
+      allBtns.forEach(b => {
+        if (b.dataset.optId === (option.id || '0') || b === buttonEl) {
+          b.classList.add('active-correct');
+          b.style.borderColor = '#27ae60';
+          b.style.background = 'rgba(39,174,96,0.2)';
+        }
+      });
+
+      this.renderChoices(scene);
+    } else {
+      if (this.sound) this.sound.playDogSniff();
+      this.showRufoToast("⚠️", option.feedback || "¡Opción incorrecta! Inténtalo de nuevo.");
+
+      if (feedbackBox) {
+        feedbackBox.style.display = 'block';
+        feedbackBox.style.background = 'rgba(192,57,43,0.18)';
+        feedbackBox.style.borderColor = '#c0392b';
+        feedbackBox.style.color = '#c0392b';
+        feedbackBox.innerHTML = `⚠️ <strong>¡Cuidado!</strong> ${option.feedback}`;
       }
     }
   }
@@ -1811,9 +1954,11 @@ class GameEngine {
     this.foundObjectsPerScene = {};
     this.foundGameOverItems = {};
     this.riddleSolved = false;
+    this.solvedRiddles = {};
     this.clockworkSolved = false;
     this.monsterDefeated = false;
     this.magicRingAvailable = true;
+    this.solvedRiddles = {};
     this.solvedDiceChallenges = {};
     this.solvedSpikesGrids = {};
     this.history = [];
