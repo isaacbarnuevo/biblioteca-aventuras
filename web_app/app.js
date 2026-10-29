@@ -98,14 +98,43 @@ class GameEngine {
       this.btnRing.addEventListener('click', () => {
         const scene = this.story.nodes[this.currentSceneId];
         const itemName = (this.story && this.story.salvationItemName) || 'El Anillo Mágico de Salvación';
+        const itemIcon = (this.story && this.story.badgeIcon) || '✨';
         if (this.magicRingAvailable) {
           if (scene && scene.isGameOver) {
             this.useMagicRingRevive(scene);
+          } else if (scene && scene.isRiddle && !this.isConditionMet(scene)) {
+            if (confirm(`¿Deseas invocar ${itemName} para resolver este acertijo inmediatamente?`)) {
+              this.useSalvationOnRiddle(scene);
+            }
+          } else if (scene && scene.isDiceChallenge && !this.isConditionMet(scene)) {
+            if (confirm(`¿Deseas invocar ${itemName} para superar esta tirada con una puntuación perfecta de 12?`)) {
+              this.useSalvationOnDice(scene);
+            }
+          } else if (scene && scene.isSpikesGrid && !this.isConditionMet(scene)) {
+            if (confirm(`¿Deseas invocar ${itemName} para desactivar los pinchos y cruzar la sala sin peligro?`)) {
+              this.useSalvationOnSpikes(scene);
+            }
+          } else if (scene && scene.isDifferences && !this.isConditionMet(scene)) {
+            if (confirm(`¿Deseas invocar ${itemName} para descubrir todas las diferencias ocultas al instante?`)) {
+              this.useSalvationOnDifferences(scene);
+            }
+          } else if (scene && scene.isClockwork && !this.isConditionMet(scene)) {
+            if (confirm(`¿Deseas invocar ${itemName} para sincronizar los engranajes mecánicos?`)) {
+              this.useSalvationOnClockwork(scene);
+            }
+          } else if (scene && scene.isObjectSearch && !this.isConditionMet(scene)) {
+            if (confirm(`¿Deseas invocar ${itemName} para encontrar los objetos ocultos de la búsqueda?`)) {
+              this.useSalvationOnObjectSearch(scene);
+            }
+          } else if (scene && scene.id === 'scene_monster' && !this.isConditionMet(scene)) {
+            if (confirm(`¿Deseas invocar ${itemName} para neutralizar al monstruo eléctrico?`)) {
+              this.useSalvationOnMonster(scene);
+            }
           } else {
-            alert(`💍 ${itemName} está cargado y listo (1 disponible).\n\nSi caes en una trampa mortal o fracaso en tu aventura, podrás activarlo para salvar tu vida y deshacer tu error fatal.`);
+            alert(`${itemIcon} ${itemName} está cargado y listo (1 disponible).\n\nPuedes invocarlo en cualquier momento si fallas en un acertijo, tirada de dados o caes en una trampa mortal.`);
           }
         } else {
-          alert(`💍 ${itemName} ya ha sido consumido en esta partida.`);
+          alert(`⚠️ ${itemName} ya ha sido consumido en esta partida.`);
         }
       });
     }
@@ -1066,22 +1095,32 @@ class GameEngine {
     this.showRufoToast(companionIcon, `${companionName} te anima a resolver el enigma para abrir el camino.`);
   }
 
-  submitRiddleAnswer(pedestal, feedbackBox, scene) {
+  submitRiddleAnswer(pedestal, feedbackBox, scene, isMagic = false) {
     this.solvedRiddles = this.solvedRiddles || {};
     const companionName = (this.story && this.story.companionName) || 'Tu compañero';
     const companionIcon = (this.story && this.story.companionIcon) || '🐾';
+    const itemName = (this.story && this.story.salvationItemName) || 'el Objeto Mágico de Salvación';
+    const itemIcon = (this.story && this.story.badgeIcon) || '✨';
 
     if (pedestal.isCorrect) {
       this.solvedRiddles[scene.id] = true;
       this.riddleSolved = true;
       if (this.sound) {
-        this.sound.playStoneDoorOpen();
-        setTimeout(() => this.sound.playVictoryFanfare(), 300);
+        if (isMagic) {
+          this.sound.playMagicWish();
+          setTimeout(() => this.sound.playVictoryFanfare(), 300);
+        } else {
+          this.sound.playStoneDoorOpen();
+          setTimeout(() => this.sound.playVictoryFanfare(), 300);
+        }
       }
-      this.showRufoToast(companionIcon, pedestal.feedback);
+      this.showRufoToast(companionIcon, isMagic ? `¡${companionName} celebra! El poder de ${itemName} abre el portal sagrado.` : pedestal.feedback);
       if (feedbackBox) {
         feedbackBox.style.display = 'block';
-        feedbackBox.innerHTML = `🎉 <strong>${pedestal.name || '¡Correcto!'}:</strong> ${pedestal.feedback}`;
+        feedbackBox.style.background = 'rgba(39,174,96,0.18)';
+        feedbackBox.style.borderColor = '#27ae60';
+        feedbackBox.style.color = '#1e824c';
+        feedbackBox.innerHTML = `🎉 <strong>${isMagic ? 'ENIGMA RESUELTO CON MAGIA' : (pedestal.name || '¡Correcto!')}:</strong> ${pedestal.feedback}`;
       }
 
       document.querySelectorAll('.pedestal-btn').forEach(b => {
@@ -1094,31 +1133,61 @@ class GameEngine {
       this.showRufoToast("❌", pedestal.feedback);
       if (feedbackBox) {
         feedbackBox.style.display = 'block';
-        feedbackBox.innerHTML = `⚠️ <strong>${pedestal.name || 'Atención'}:</strong> ${pedestal.feedback}`;
+        feedbackBox.style.background = 'rgba(192,57,43,0.18)';
+        feedbackBox.style.borderColor = '#c0392b';
+        feedbackBox.style.color = '#e74c3c';
+
+        let failHtml = `<div>⚠️ <strong>${pedestal.name || 'Atención'}:</strong> ${pedestal.feedback}</div>`;
+        if (this.magicRingAvailable) {
+          failHtml += `
+            <div style="margin-top: 12px; padding-top: 10px; border-top: 1px dashed rgba(255,255,255,0.25); text-align: center;">
+              <p style="font-size: 0.9rem; margin-bottom: 8px; color: #f5eedc;">¿La Esfinge te confunde? Invoca tu objeto sagrado:</p>
+              <button id="btn-salvation-riddle-ped" class="choice-btn ring-revive-btn" style="width: 100%; justify-content: center; font-weight: 700;">
+                ${itemIcon} ¡USAR ${itemName.toUpperCase()}! (Resolver el acertijo al instante)
+              </button>
+            </div>
+          `;
+        }
+        feedbackBox.innerHTML = failHtml;
+
+        const salvBtn = document.getElementById('btn-salvation-riddle-ped');
+        if (salvBtn) {
+          salvBtn.onclick = () => {
+            this.useSalvationOnRiddle(scene);
+          };
+        }
       }
     }
   }
 
-  submitGenericRiddleAnswer(option, buttonEl, feedbackBox, scene) {
+  submitGenericRiddleAnswer(option, buttonEl, feedbackBox, scene, isMagic = false) {
     this.solvedRiddles = this.solvedRiddles || {};
     const companionIcon = (this.story && this.story.companionIcon) || '✨';
+    const companionName = (this.story && this.story.companionName) || 'Tu compañero';
+    const itemName = (this.story && this.story.salvationItemName) || 'el Objeto Mágico de Salvación';
+    const itemIcon = (this.story && this.story.badgeIcon) || '✨';
 
     if (option.isCorrect) {
       this.solvedRiddles[scene.id] = true;
       this.riddleSolved = true;
 
       if (this.sound) {
-        this.sound.playStoneDoorOpen();
-        setTimeout(() => this.sound.playVictoryFanfare(), 300);
+        if (isMagic) {
+          this.sound.playMagicWish();
+          setTimeout(() => this.sound.playVictoryFanfare(), 300);
+        } else {
+          this.sound.playStoneDoorOpen();
+          setTimeout(() => this.sound.playVictoryFanfare(), 300);
+        }
       }
-      this.showRufoToast(companionIcon, option.feedback || "¡Respuesta correcta! El camino queda abierto.");
+      this.showRufoToast(companionIcon, isMagic ? `¡${companionName} celebra! El poder de ${itemName} resuelve el enigma.` : (option.feedback || "¡Respuesta correcta! El camino queda abierto."));
 
       if (feedbackBox) {
         feedbackBox.style.display = 'block';
         feedbackBox.style.background = 'rgba(39,174,96,0.18)';
         feedbackBox.style.borderColor = '#27ae60';
         feedbackBox.style.color = '#1e824c';
-        feedbackBox.innerHTML = `🎉 <strong>¡CORRECTO!</strong> ${option.feedback}`;
+        feedbackBox.innerHTML = `🎉 <strong>¡${isMagic ? 'ENIGMA RESUELTO CON MAGIA' : 'CORRECTO'}!</strong> ${option.feedback}`;
       }
 
       const allBtns = document.querySelectorAll('.riddle-option-btn');
@@ -1139,10 +1208,231 @@ class GameEngine {
         feedbackBox.style.display = 'block';
         feedbackBox.style.background = 'rgba(192,57,43,0.18)';
         feedbackBox.style.borderColor = '#c0392b';
-        feedbackBox.style.color = '#c0392b';
-        feedbackBox.innerHTML = `⚠️ <strong>¡Cuidado!</strong> ${option.feedback}`;
+        feedbackBox.style.color = '#e74c3c';
+
+        let failHtml = `<div>⚠️ <strong>¡Cuidado!</strong> ${option.feedback}</div>`;
+        if (this.magicRingAvailable) {
+          failHtml += `
+            <div style="margin-top: 12px; padding-top: 10px; border-top: 1px dashed rgba(255,255,255,0.25); text-align: center;">
+              <p style="font-size: 0.9rem; margin-bottom: 8px; color: #f5eedc;">¿Te has atascado en este enigma? Puedes invocar tu salvación mística:</p>
+              <button id="btn-salvation-riddle-gen" class="choice-btn ring-revive-btn" style="width: 100%; justify-content: center; font-weight: 700;">
+                ${itemIcon} ¡USAR ${itemName.toUpperCase()}! (Resolver el acertijo al instante)
+              </button>
+            </div>
+          `;
+        }
+        feedbackBox.innerHTML = failHtml;
+
+        const salvBtn = document.getElementById('btn-salvation-riddle-gen');
+        if (salvBtn) {
+          salvBtn.onclick = () => {
+            this.useSalvationOnRiddle(scene);
+          };
+        }
       }
     }
+  }
+
+  useSalvationOnRiddle(scene) {
+    if (!this.magicRingAvailable) return;
+    this.magicRingAvailable = false;
+    this.updateStats();
+
+    const companionName = (this.story && this.story.companionName) || 'tu compañero';
+    const companionIcon = (this.story && this.story.companionIcon) || '✨';
+    const itemName = (this.story && this.story.salvationItemName) || 'el Objeto Mágico de Salvación';
+
+    if (scene.riddleOptions && scene.riddleOptions.length > 0) {
+      const correctOpt = scene.riddleOptions.find(o => o.isCorrect);
+      const feedbackBox = document.getElementById('riddle-feedback');
+      const btn = correctOpt ? document.querySelector(`.riddle-option-btn[data-opt-id="${correctOpt.id || '0'}"]`) : null;
+      if (correctOpt) {
+        this.submitGenericRiddleAnswer(correctOpt, btn, feedbackBox, scene, true);
+      }
+    } else if (scene.pedestals && scene.pedestals.length > 0) {
+      const correctPed = scene.pedestals.find(p => p.isCorrect);
+      const feedbackBox = document.getElementById('riddle-feedback');
+      if (correctPed) {
+        this.submitRiddleAnswer(correctPed, feedbackBox, scene, true);
+      }
+    } else {
+      this.solvedRiddles = this.solvedRiddles || {};
+      this.solvedRiddles[scene.id] = true;
+      this.riddleSolved = true;
+      if (this.sound) {
+        this.sound.playMagicWish();
+        setTimeout(() => this.sound.playVictoryFanfare(), 300);
+      }
+      this.showRufoToast(companionIcon, `¡${companionName} celebra! El poder de ${itemName} resuelve el enigma.`);
+      this.renderChoices(scene);
+    }
+  }
+
+  useSalvationOnDice(scene) {
+    if (!this.magicRingAvailable) return;
+    this.magicRingAvailable = false;
+    this.updateStats();
+    if (!this.solvedDiceChallenges) this.solvedDiceChallenges = {};
+    this.solvedDiceChallenges[scene.id] = true;
+
+    const companionName = (this.story && this.story.companionName) || 'tu compañero';
+    const companionIcon = (this.story && this.story.companionIcon) || '🐾';
+    const itemName = (this.story && this.story.salvationItemName) || 'el Objeto Mágico de Salvación';
+    const challenge = scene.diceChallenge || {};
+
+    if (this.sound) {
+      this.sound.playMagicWish();
+      setTimeout(() => this.sound.playVictoryFanfare(), 350);
+    }
+
+    const die1 = document.getElementById('gen-die-1');
+    const die2 = document.getElementById('gen-die-2');
+    const resultEl = document.getElementById('gen-dice-result');
+    const btnRoll = document.getElementById('btn-roll-gen-dice');
+    const failureBox = document.getElementById('gen-dice-failure-box');
+
+    if (die1) die1.textContent = "⚅";
+    if (die2) die2.textContent = "⚅";
+    if (resultEl) resultEl.innerHTML = `✨ <strong>¡EL PODER DE ${itemName.toUpperCase()} RESPLANDECE!</strong> Los dados se transforman en una tirada perfecta de 12. ¡${challenge.successTitle || '¡Desafío superado con éxito!'}!`;
+    if (btnRoll) {
+      btnRoll.textContent = "✅ ¡DESAFÍO SUPERADO CON MAGIA!";
+      btnRoll.disabled = true;
+    }
+    if (failureBox) failureBox.innerHTML = '';
+
+    this.showRufoToast(companionIcon, `¡${companionName} celebra el milagro! El poder de ${itemName} te ha otorgado la victoria.`);
+    this.renderChoices(scene);
+  }
+
+  useSalvationOnSpikes(scene) {
+    if (!this.magicRingAvailable) return;
+    this.magicRingAvailable = false;
+    this.updateStats();
+    if (!this.solvedSpikesGrids) this.solvedSpikesGrids = {};
+    this.solvedSpikesGrids[scene.id] = true;
+
+    const companionName = (this.story && this.story.companionName) || 'tu compañero';
+    const companionIcon = (this.story && this.story.companionIcon) || '✨';
+    const itemName = (this.story && this.story.salvationItemName) || 'el Objeto Mágico de Salvación';
+
+    if (this.sound) {
+      this.sound.playMagicWish();
+      setTimeout(() => this.sound.playVictoryFanfare(), 350);
+    }
+
+    const gridContainer = document.getElementById('spikes-grid-container');
+    if (gridContainer) {
+      gridContainer.innerHTML = `
+        <div style="padding: 14px; background: rgba(44,110,73,0.3); border: 2px solid #52b788; border-radius: 8px; text-align: center; color: #d8f3dc; font-weight: 700;">
+          ✨ ¡EL PODER DE ${itemName.toUpperCase()} DESACTIVA TODOS LOS PINCHOS! El suelo se ilumina con luz esmeralda y el camino queda seguro.
+        </div>
+      `;
+    }
+    this.showRufoToast(companionIcon, `¡${companionName} respira aliviado! Las trampas de pinchos se han retraído para siempre.`);
+    this.renderChoices(scene);
+  }
+
+  useSalvationOnDifferences(scene) {
+    if (!this.magicRingAvailable) return;
+    this.magicRingAvailable = false;
+    this.updateStats();
+
+    const companionName = (this.story && this.story.companionName) || 'tu compañero';
+    const companionIcon = (this.story && this.story.companionIcon) || '🪞';
+    const itemName = (this.story && this.story.salvationItemName) || 'el Objeto Mágico de Salvación';
+
+    if (scene.differencesList) {
+      this.discoveredDifferences = scene.differencesList.map(d => d.id);
+    }
+    if (this.sound) {
+      this.sound.playMagicWish();
+      setTimeout(() => this.sound.playVictoryFanfare(), 350);
+    }
+    this.updateDifferencesUI(scene);
+    this.renderDiscoveredDifferences();
+    this.showRufoToast(companionIcon, `¡El resplandor de ${itemName} revela todas las ilusiones y diferencias al instante!`);
+    this.renderChoices(scene);
+  }
+
+  useSalvationOnClockwork(scene) {
+    if (!this.magicRingAvailable) return;
+    this.magicRingAvailable = false;
+    this.updateStats();
+    this.clockworkSolved = true;
+
+    const companionName = (this.story && this.story.companionName) || 'tu compañero';
+    const companionIcon = (this.story && this.story.companionIcon) || '⚙️';
+    const itemName = (this.story && this.story.salvationItemName) || 'el Objeto Mágico de Salvación';
+
+    if (this.sound) {
+      this.sound.playMagicWish();
+      setTimeout(() => this.sound.playVictoryFanfare(), 350);
+    }
+
+    const feedback = document.getElementById('clockwork-feedback');
+    const prompt = document.getElementById('clockwork-prompt');
+    if (feedback) {
+      feedback.innerHTML = `✨ <strong>¡ENGRANAJES AJUSTADOS POR MAGIA!</strong> El poder de ${itemName} sincroniza la maquinaria.`;
+    }
+    if (prompt) {
+      prompt.textContent = "¡Rastrillo alzado! El camino hacia los calabozos está expedito.";
+    }
+    this.showRufoToast(companionIcon, `¡${companionName} se maravilla! La magia ha alineado los engranajes sin esfuerzo.`);
+    this.renderChoices(scene);
+  }
+
+  useSalvationOnObjectSearch(scene) {
+    if (!this.magicRingAvailable) return;
+    this.magicRingAvailable = false;
+    this.updateStats();
+
+    const companionName = (this.story && this.story.companionName) || 'tu compañero';
+    const companionIcon = (this.story && this.story.companionIcon) || '✨';
+    const itemName = (this.story && this.story.salvationItemName) || 'el Objeto Mágico de Salvación';
+
+    if (!this.foundObjectsPerScene) this.foundObjectsPerScene = {};
+    if (scene.requiredItems) {
+      this.foundObjectsPerScene[scene.id] = scene.requiredItems.map(it => it.id);
+    } else {
+      this.foundObjectsPerScene[scene.id] = ['salvation_found'];
+    }
+
+    if (this.sound) {
+      this.sound.playMagicWish();
+      setTimeout(() => this.sound.playVictoryFanfare(), 350);
+    }
+
+    this.showRufoToast(companionIcon, `¡El resplandor de ${itemName} localiza todos los objetivos de la búsqueda!`);
+    this.renderChoices(scene);
+  }
+
+  useSalvationOnMonster(scene) {
+    if (!this.magicRingAvailable) return;
+    this.magicRingAvailable = false;
+    this.updateStats();
+    this.monsterDefeated = true;
+
+    const companionName = (this.story && this.story.companionName) || 'tu compañero';
+    const companionIcon = (this.story && this.story.companionIcon) || '🐾';
+    const itemName = (this.story && this.story.salvationItemName) || 'el Objeto Mágico de Salvación';
+
+    if (this.sound) {
+      this.sound.playMagicWish();
+      setTimeout(() => this.sound.playVictoryFanfare(), 350);
+    }
+
+    const resultEl = document.getElementById('dice-result');
+    const btnRoll = document.getElementById('btn-roll-dice');
+    const failureActions = document.getElementById('monster-failure-actions');
+    if (resultEl) resultEl.innerHTML = `✨ <strong>¡EL PODER DE ${itemName.toUpperCase()} DESCARGA SU LUZ!</strong> El monstruo queda desconectado y pacificado.`;
+    if (btnRoll) {
+      btnRoll.textContent = "✅ ¡MONSTRUO DERROTADO CON ÉXITO!";
+      btnRoll.disabled = true;
+    }
+    if (failureActions) failureActions.remove();
+
+    this.showRufoToast(companionIcon, `¡${companionName} salta de alegría! El poder de ${itemName} ha triunfado.`);
+    this.renderChoices(scene);
   }
 
   // ===========================================================================
@@ -1494,22 +1784,51 @@ class GameEngine {
             this.renderChoices(scene);
           } else {
             resultEl.innerHTML = `⚠️ <strong>¡TIRADA DE ${total} (necesitabas ${challenge.target}+)!</strong> ${challenge.failureTitle}`;
-            if (this.sound) this.sound.playTrapAlarm();
+            if (this.sound && this.sound.playTrapAlarm) this.sound.playTrapAlarm();
 
-            failureBox.innerHTML = `
-              <div style="margin-top: 12px; padding: 10px; background: rgba(143,40,40,0.25); border: 1px solid #8f2828; border-radius: 6px;">
-                <p style="font-size: 0.9rem; margin-bottom: 8px;">¡No te rindas! Puedes concentrar tus fuerzas o usar el comodín de salvación para volver a tirar.</p>
-                <button id="btn-retry-gen-dice" class="choice-btn" style="width: 100%; justify-content: center; background: #6b2222; color: #fff;">
+            const companionName = (this.story && this.story.companionName) || 'tu compañero';
+            const companionIcon = (this.story && this.story.companionIcon) || '🐾';
+            const itemName = (this.story && this.story.salvationItemName) || 'el Objeto Mágico de Salvación';
+            const itemIcon = (this.story && this.story.badgeIcon) || '✨';
+
+            let failureHtml = `
+              <div style="margin-top: 14px; padding: 12px; background: rgba(143,40,40,0.25); border: 2px dashed #8f2828; border-radius: 8px; text-align: center;">
+                <p style="font-size: 0.95rem; margin-bottom: 10px; color: #f5eedc;">¡La tirada no ha sido suficiente! Puedes volver a tirar los dados o invocar tu objeto mágico de salvación:</p>
+                <button id="btn-retry-gen-dice" class="choice-btn" style="width: 100%; justify-content: center; background: #6b2222; color: #fff; margin-bottom: 8px;">
                   🔄 VOLVER A TIRAR LOS DADOS
                 </button>
-              </div>
             `;
+
+            if (this.magicRingAvailable) {
+              failureHtml += `
+                <button id="btn-salvation-gen-dice" class="choice-btn ring-revive-btn" style="width: 100%; justify-content: center; font-weight: 700; margin-top: 4px;">
+                  ${itemIcon} ¡USAR ${itemName.toUpperCase()}! (Superar la prueba al instante)
+                </button>
+              `;
+            } else {
+              failureHtml += `
+                <div style="margin-top: 6px; font-size: 0.85rem; color: #e74c3c;">
+                  ⚠️ ${itemName} ya fue utilizado en esta aventura.
+                </div>
+              `;
+            }
+
+            failureHtml += `</div>`;
+            failureBox.innerHTML = failureHtml;
+
             const retryBtn = document.getElementById('btn-retry-gen-dice');
             if (retryBtn) {
               retryBtn.onclick = () => {
                 btnRoll.disabled = false;
                 failureBox.innerHTML = '';
                 resultEl.textContent = "Preparado para una nueva tirada...";
+              };
+            }
+
+            const salvationBtn = document.getElementById('btn-salvation-gen-dice');
+            if (salvationBtn) {
+              salvationBtn.onclick = () => {
+                this.useSalvationOnDice(scene);
               };
             }
           }
@@ -1604,6 +1923,26 @@ class GameEngine {
       };
       tilesBox.appendChild(btn);
     });
+
+    if (this.magicRingAvailable) {
+      const itemName = (this.story && this.story.salvationItemName) || 'el Objeto Mágico de Salvación';
+      const itemIcon = (this.story && this.story.badgeIcon) || '✨';
+      const salvBox = document.createElement('div');
+      salvBox.style.cssText = 'margin-top: 10px; text-align: center;';
+      salvBox.innerHTML = `
+        <button id="btn-salvation-spikes-grid" class="choice-btn ring-revive-btn" style="width: 100%; justify-content: center; font-weight: 700;">
+          ${itemIcon} ¡USAR ${itemName.toUpperCase()}! (Desactivar pinchos y pasar seguro)
+        </button>
+      `;
+      const wrapper = gridContainer.querySelector('div');
+      if (wrapper) wrapper.appendChild(salvBox);
+      const salvSpikesBtn = document.getElementById('btn-salvation-spikes-grid');
+      if (salvSpikesBtn) {
+        salvSpikesBtn.onclick = () => {
+          this.useSalvationOnSpikes(scene);
+        };
+      }
+    }
   }
 
   // ===========================================================================

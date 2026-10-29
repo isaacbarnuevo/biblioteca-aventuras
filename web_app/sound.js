@@ -232,6 +232,29 @@ class SoundEngine {
     }
   }
 
+  // Alarma de trampa o fallo
+  playTrapAlarm() {
+    if (this.isMuted || !this.ctx) return;
+    try {
+      const now = this.ctx.currentTime;
+      const osc = this.ctx.createOscillator();
+      const gain = this.ctx.createGain();
+      osc.type = 'triangle';
+      osc.frequency.setValueAtTime(440, now);
+      osc.frequency.linearRampToValueAtTime(220, now + 0.3);
+
+      gain.gain.setValueAtTime(0.3, now);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.35);
+
+      osc.connect(gain);
+      gain.connect(this.ctx.destination);
+      osc.start(now);
+      osc.stop(now + 0.4);
+    } catch (e) {
+      console.warn("Audio error:", e);
+    }
+  }
+
   // Sonido de rescate exitoso de amigo / Fanfarria
   playVictoryFanfare() {
     if (this.isMuted || !this.ctx) return;
