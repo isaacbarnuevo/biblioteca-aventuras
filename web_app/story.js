@@ -4401,12 +4401,54 @@ const ISAAC_SUPERHEROES_DATA = {
       isSpread: true,
       isDifferences: true,
       differencesList: [
-        { id: "diff_hero_1", name: "La antena parabólica rota en el panel izquierdo", x: 22, y: 38, radius: 10 },
-        { id: "diff_hero_2", name: "El color del reactor central (azul vs rojo)", x: 78, y: 40, radius: 10 },
-        { id: "diff_hero_3", name: "La palanca de emergencia de la consola", x: 35, y: 72, radius: 10 },
-        { id: "diff_hero_4", name: "El símbolo del Doctor Caos en la pared derecha", x: 88, y: 68, radius: 10 },
-        { id: "diff_hero_5", name: "El robot centinela apagado en la esquina", x: 15, y: 65, radius: 10 },
-        { id: "diff_hero_6", name: "El monitor con el código de acceso secreto", x: 62, y: 25, radius: 10 }
+        {
+          id: "diff_hero_skull",
+          name: "Emblema del Doctor Caos vs Esquema Técnico",
+          desc: "¡En la pantalla derecha aparece el cráneo del Doctor Caos, mientras que en la izquierda hay un plano técnico!",
+          left: { x: 21.0, y: 31.0 },
+          right: { x: 79.5, y: 31.0 },
+          radius: 14
+        },
+        {
+          id: "diff_hero_dish",
+          name: "Antena Parabólica en la Consola",
+          desc: "¡Una pequeña antena parabólica plateada descansa en la mesa derecha, pero no está en la izquierda!",
+          left: { x: 35.0, y: 35.0 },
+          right: { x: 65.0, y: 35.0 },
+          radius: 14
+        },
+        {
+          id: "diff_hero_lights",
+          name: "Barra de Luz Superior (Cian vs Ámbar)",
+          desc: "¡La barra de luz sobre los monitores es cian a la izquierda y ámbar a la derecha!",
+          left: { x: 33.0, y: 18.0 },
+          right: { x: 67.0, y: 18.0 },
+          radius: 14
+        },
+        {
+          id: "diff_hero_beam",
+          name: "Haces de Luz del Orbe Central",
+          desc: "¡El orbe flotante dispara rayos azules hacia la izquierda y rayos dorados hacia la derecha!",
+          left: { x: 47.0, y: 35.0 },
+          right: { x: 53.0, y: 35.0 },
+          radius: 12
+        },
+        {
+          id: "diff_hero_grid",
+          name: "Rejilla Holográfica en el Suelo",
+          desc: "¡El suelo izquierdo tiene una rejilla circular azul y el derecho un abanico naranja!",
+          left: { x: 43.0, y: 54.0 },
+          right: { x: 57.0, y: 54.0 },
+          radius: 14
+        },
+        {
+          id: "diff_hero_keypad",
+          name: "Botones del Teclado de Control",
+          desc: "¡La botonera de la consola es amarilla en la mesa izquierda y roja en la mesa derecha!",
+          left: { x: 23.0, y: 42.0 },
+          right: { x: 77.0, y: 42.0 },
+          radius: 14
+        }
       ],
       textLeft: `
         <span class="page-badge">Página 5</span>
@@ -4419,8 +4461,14 @@ const ISAAC_SUPERHEROES_DATA = {
       `,
       textRight: `
         <span class="page-badge">Página 6</span>
-        <p>Haz clic en cada una de las 6 anomalías entre ambos paneles.</p>
-        <p class="decision-prompt">Al descubrirlas todas, la ilusión se desvanece y obtienes la <strong>Tarjeta de Acceso Alfa</strong>.</p>
+        <div style="text-align:center; margin-bottom:12px;">
+          <span id="diff-counter" class="diff-counter-badge" style="border-color:#2980b9; color:#2980b9;">Diferencias encontradas: 0 / 6</span>
+        </div>
+        <div id="diff-status-box" class="enigma-box" style="margin-bottom:12px;">
+          <strong>ESPEJO HOLOGRÁFICO:</strong>
+          <p id="diff-status-text">Compara ambos lados: pantalla del cráneo, antena parabólica, barra de luces, haces del orbe, rejilla del suelo y botonera.</p>
+        </div>
+        <p class="decision-prompt" id="diff-prompt">Al descubrir las 6 diferencias, la ilusión se desvanece y obtienes la <strong>Tarjeta de Acceso Alfa</strong>.</p>
       `,
       choices: [
         {

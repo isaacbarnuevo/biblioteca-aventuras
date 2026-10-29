@@ -361,6 +361,27 @@ class GameEngine {
   }
 
   // ===========================================================================
+  // RECOMPENSAS Y ESTADÍSTICAS POR SALA
+  // ===========================================================================
+  awardSceneRewards(scene) {
+    if (!scene || !scene.choices) return;
+    let updated = false;
+    scene.choices.forEach(ch => {
+      if (ch.rewardKey && !this.collectedKeys.includes(ch.rewardKey)) {
+        this.collectedKeys.push(ch.rewardKey);
+        updated = true;
+      }
+      if (ch.rewardFriend && !this.rescuedFriends.includes(ch.rewardFriend)) {
+        this.rescuedFriends.push(ch.rewardFriend);
+        updated = true;
+      }
+    });
+    if (updated) {
+      this.updateStats();
+    }
+  }
+
+  // ===========================================================================
   // OPCIONES DE SALTO DE PÁGINA (BLOQUEADAS HASTA RESOLVER)
   // ===========================================================================
   renderChoices(scene) {
@@ -383,6 +404,9 @@ class GameEngine {
       return;
     }
 
+    // Al estar resuelto, otorgar las recompensas de llave/amigo asociadas a la sala
+    this.awardSceneRewards(scene);
+
     // Si está resuelto, mostrar botones de continuación
     const choices = scene.choices || [];
     choices.forEach(choice => {
@@ -395,6 +419,13 @@ class GameEngine {
       `;
 
       btn.addEventListener('click', () => {
+        if (choice.rewardKey && !this.collectedKeys.includes(choice.rewardKey)) {
+          this.collectedKeys.push(choice.rewardKey);
+        }
+        if (choice.rewardFriend && !this.rescuedFriends.includes(choice.rewardFriend)) {
+          this.rescuedFriends.push(choice.rewardFriend);
+        }
+        this.updateStats();
         this.renderScene(choice.target);
       });
 
@@ -922,15 +953,18 @@ class GameEngine {
     for (const diff of scene.differencesList) {
       if (this.discoveredDifferences.includes(diff.id)) continue;
 
-      const dxL = clickX - diff.left.x;
-      const dyL = clickY - diff.left.y;
+      const leftCoords = diff.left || { x: diff.x, y: diff.y };
+      const rightCoords = diff.right || { x: diff.x > 50 ? diff.x : diff.x + 50, y: diff.y };
+
+      const dxL = clickX - leftCoords.x;
+      const dyL = clickY - leftCoords.y;
       const distL = Math.sqrt(dxL * dxL + dyL * dyL);
 
-      const dxR = clickX - diff.right.x;
-      const dyR = clickY - diff.right.y;
+      const dxR = clickX - rightCoords.x;
+      const dyR = clickY - rightCoords.y;
       const distR = Math.sqrt(dxR * dxR + dyR * dyR);
 
-      const rad = diff.radius || 7;
+      const rad = diff.radius || 12;
       if (distL <= rad || distR <= rad) {
         foundDiff = diff;
         break;
@@ -940,7 +974,7 @@ class GameEngine {
     if (foundDiff) {
       this.discoveredDifferences.push(foundDiff.id);
       if (this.sound) this.sound.playClueFound();
-      this.showRufoToast("🪞", `¡Diferencia hallada! ${foundDiff.name}: ${foundDiff.desc}`);
+      this.showRufoToast("🪞", `¡Diferencia hallada! ${foundDiff.name}: ${foundDiff.desc || foundDiff.name}`);
       this.updateDifferencesUI(scene);
       this.renderDiscoveredDifferences();
 
@@ -949,29 +983,36 @@ class GameEngine {
           setTimeout(() => this.sound.playVictoryFanfare(), 400);
         }
         this.showRufoToast("🏆", "¡Has descubierto las 6 diferencias! El encantamiento se ha disipado.");
+        this.awardSceneRewards(scene);
         this.renderChoices(scene);
       }
     } else {
       if (this.sound) this.sound.playDogSniff();
-      this.showRufoToast("🐕", "Rufo mira atentamente... pero aquí ambos lados son idénticos. ¡Sigue comparando!");
+      const companionName = (this.story && this.story.companionName) || 'Tu compañero';
+      const companionIcon = (this.story && this.story.companionIcon) || '🐾';
+      this.showRufoToast(companionIcon, `${companionName} observa atentamente... pero aquí ambos lados son idénticos. ¡Sigue comparando!`);
     }
   }
 
   updateDifferencesUI(scene) {
-    const counterBadge = document.getElementById('diff-counter');
+    const counterBadge = document.getElementById('diff-counter') || document.getElementById('differences-count');
     const statusText = document.getElementById('diff-status-text');
-    const total = scene.differencesList.length;
+    const total = scene.differencesList ? scene.differencesList.length : 6;
     const found = this.discoveredDifferences.length;
 
     if (counterBadge) {
-      counterBadge.textContent = `Diferencias encontradas: ${found} / ${total}`;
+      if (counterBadge.tagName === 'STRONG') {
+        counterBadge.textContent = `${found} / ${total}`;
+      } else {
+        counterBadge.textContent = `Diferencias encontradas: ${found} / ${total}`;
+      }
     }
 
     if (statusText) {
       if (found >= total) {
-        statusText.innerHTML = `🎉 <strong>¡TODAS LAS DIFERENCIAS ENCONTRADAS!</strong> El espejo ha perdido su poder engañoso y los accesos quedan expeditos.`;
+        statusText.innerHTML = `🎉 <strong>¡TODAS LAS DIFERENCIAS ENCONTRADAS!</strong> El espejo holográfico se desactiva y el camino queda despejado.`;
       } else {
-        statusText.innerHTML = `Te faltan <strong>${total - found}</strong> diferencias por hallar. Fíjate en los detalles minuciosos.`;
+        statusText.innerHTML = `Te faltan <strong>${total - found}</strong> diferencias por hallar. Fíjate en ambos paneles.`;
       }
     }
   }
@@ -984,17 +1025,20 @@ class GameEngine {
 
     scene.differencesList.forEach(diff => {
       if (this.discoveredDifferences.includes(diff.id)) {
+        const leftCoords = diff.left || { x: diff.x, y: diff.y };
+        const rightCoords = diff.right || { x: diff.x > 50 ? diff.x : diff.x + 50, y: diff.y };
+
         const ringL = document.createElement('div');
         ringL.className = 'difference-ring';
-        ringL.style.left = `${diff.left.x}%`;
-        ringL.style.top = `${diff.left.y}%`;
+        ringL.style.left = `${leftCoords.x}%`;
+        ringL.style.top = `${leftCoords.y}%`;
         ringL.title = diff.name;
         this.hotspotsOverlayEl.appendChild(ringL);
 
         const ringR = document.createElement('div');
         ringR.className = 'difference-ring';
-        ringR.style.left = `${diff.right.x}%`;
-        ringR.style.top = `${diff.right.y}%`;
+        ringR.style.left = `${rightCoords.x}%`;
+        ringR.style.top = `${rightCoords.y}%`;
         ringR.title = diff.name;
         this.hotspotsOverlayEl.appendChild(ringR);
       }
