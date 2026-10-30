@@ -5013,7 +5013,7 @@ const ISAAC_VIRUS_DATA = {
       id: "virus_synthesis_dice",
       pageNumbers: [11, 12],
       title: "La Inyección de la Cura en el Nebulizador",
-      image: "assets/images/cave_map_room.jpg",
+      image: "assets/images/virus_scene_synthesis.jpg",
       isSpread: true,
       isDiceChallenge: true,
       diceChallenge: {
@@ -5188,7 +5188,7 @@ const ISAAC_BOSQUE_DATA = {
       id: "forest_entrance",
       pageNumbers: [3, 4],
       title: "El Sendero de los Hongos Brillantes",
-      image: "assets/images/cave_medieval_era.jpg",
+      image: "assets/images/forest_scene_entrance.jpg",
       isSpread: true,
       textLeft: `
         <span class="page-badge">Página 3</span>
@@ -5213,7 +5213,7 @@ const ISAAC_BOSQUE_DATA = {
       id: "forest_ent_riddle",
       pageNumbers: [5, 6],
       title: "El Acertijo de RobleViejo el Ent",
-      image: "assets/images/scene_library.jpg",
+      image: "assets/images/forest_scene_ent.jpg",
       isSpread: true,
       isRiddle: true,
       riddleOptions: [
@@ -5260,7 +5260,7 @@ const ISAAC_BOSQUE_DATA = {
       id: "forest_flowers_search",
       pageNumbers: [7, 8],
       title: "El Claro de las Cuatro Flores Sagradas",
-      image: "assets/images/cave_ice_age.jpg",
+      image: "assets/images/forest_scene_flowers.jpg",
       isSpread: true,
       isObjectSearch: true,
       requiredItems: [
@@ -5345,7 +5345,7 @@ const ISAAC_BOSQUE_DATA = {
       id: "forest_unicorn_glade",
       pageNumbers: [9, 10],
       title: "El Santuario de los Unicornios de Cristal",
-      image: "assets/images/floating_sky_harbor.jpg",
+      image: "assets/images/forest_scene_unicorns.jpg",
       isSpread: true,
       textLeft: `
         <span class="page-badge">Página 9</span>
@@ -5375,7 +5375,7 @@ const ISAAC_BOSQUE_DATA = {
       id: "forest_spring_dice",
       pageNumbers: [11, 12],
       title: "La Fuente del Manantial de la Eterna Juventud",
-      image: "assets/images/floating_crystal_mills.jpg",
+      image: "assets/images/forest_scene_spring.jpg",
       isSpread: true,
       isDiceChallenge: true,
       diceChallenge: {
@@ -5410,7 +5410,7 @@ const ISAAC_BOSQUE_DATA = {
       id: "forest_gameover_thorns",
       isGameOver: true,
       title: "¡Atrapado en el Zarzal de Espinas Negras!",
-      image: "assets/images/medieval_gameover_petrified.jpg",
+      image: "assets/images/forest_gameover_thorns.jpg",
       textLeft: `
         <span class="page-badge" style="color:var(--accent-red);">¡FINAL FATAL!</span>
         <h3 style="margin-top:10px; font-family:'Cinzel',serif; font-size:1.4rem; color:var(--accent-red);">¡ENREDADERAS SOMBRÍAS DEL BOSQUE!</h3>
@@ -5437,7 +5437,7 @@ const ISAAC_BOSQUE_DATA = {
       id: "forest_gameover_mist",
       isGameOver: true,
       title: "¡Adormecido por la Niebla de Sueño Profundo!",
-      image: "assets/images/cave_gameover_void.jpg",
+      image: "assets/images/forest_gameover_mist.jpg",
       textLeft: `
         <span class="page-badge" style="color:var(--accent-red);">¡FINAL FATAL!</span>
         <h3 style="margin-top:10px; font-family:'Cinzel',serif; font-size:1.4rem; color:var(--accent-red);">¡EL CANTO DE BRUMA DEL CLARO!</h3>
@@ -5463,7 +5463,7 @@ const ISAAC_BOSQUE_DATA = {
       id: "forest_victory",
       pageNumbers: [13, 14],
       title: "¡Isaac, el Guardián Eterno de la Naturaleza!",
-      image: "assets/images/medieval_victory.jpg",
+      image: "assets/images/forest_scene_victory.jpg",
       isSpread: true,
       textLeft: `
         <span class="page-badge">¡El Bosque Florece!</span>
